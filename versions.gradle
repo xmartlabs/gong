@@ -18,6 +18,7 @@ versions.androidXCardView = "1.0.0"
 versions.androidXCore = "1.2.0"
 versions.androidXExifinterface = "1.2.0"
 versions.androidXLegacy = "1.0.0"
+versions.androidXLifecycle = "2.2.0"
 versions.androidXMaterial = "1.2.0-alpha06" // The non stable version adds functionalities to TextInputLayout
 versions.androidXPercentLayout = "1.0.0"
 versions.androidXPreferences = "1.1.1"
@@ -58,6 +59,7 @@ versions.rxAndroid = "2.1.1"
 versions.rxKotlin = "2.4.0"
 versions.snapshotPublisher = "2.1.0"
 versions.stetho = "1b2c025a14"
+versions.timber = "4.7.1"
 versions.tooLargeTool = "915ad99e83"
 ext.versions = versions
 
@@ -74,6 +76,7 @@ deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
 deps.okIo = "com.squareup.okio:okio:$versions.okIo"
 deps.once = "com.jonathanfinerty.once:once:$versions.once"
 deps.stetho = "com.github.mathroule.stetho:stetho:$versions.stetho" // https://github.com/facebook/stetho/issues/652
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tooLargeTool = "com.github.xmartlabs:toolargetool:$versions.tooLargeTool"
 
 
@@ -89,7 +92,19 @@ def androidXTest = [:]
 androidXTest.espresso = "androidx.test.espresso:espresso-core:$versions.androidXTestEspresso"
 androidXTest.junit = "androidx.test.ext:junit:$versions.androidXTestJunit"
 
+def androidXLifecycle = [:]
+androidXLifecycle.livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidXLifecycle"
+androidXLifecycle.runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidXLifecycle"
+androidXLifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidXLifecycle"
+androidXLifecycle.saveState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.archLifecycle"
+
+def androidXNavigation = [:]
+androidXNavigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.archNavigationArchComponent"
+androidXNavigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.archNavigationArchComponent"
+
 def androidX = [:]
+androidX.lifecycle = androidXLifecycle
+androidX.navigation = androidXNavigation
 androidX.test = androidXTest
 androidX.appcompat = "androidx.appcompat:appcompat:$versions.androidXAppCompact"
 androidX.cardview = "androidx.cardview:cardview:$versions.androidXCardView"
@@ -99,25 +114,13 @@ androidX.browser = "androidx.browser:browser:$versions.androidXBrowser"
 androidX.design = "com.google.android.material:material:$versions.androidXMaterial"
 androidX.exifinterface = "androidx.exifinterface:exifinterface:$versions.androidXExifinterface"
 androidX.preference = "androidx.preference:preference:$versions.androidXPreferences"
-androidX.legacy_preference = "androidx.legacy:legacy-preference-v14:$versions.androidXLegacy"
 androidX.percentlayout = "androidx.percentlayout:percentlayout:$versions.androidXPercentLayout"
 androidX.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerView"
+androidX.workManager = "androidx.work:work-runtime-ktx:$versions.archWorkManager"
 androidX.transition = "androidx.transition:transition:$versions.androidXTransition"
-androidX.viewPager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
+androidX.viewPager2 = "androidx.viewpager2:viewpager2:$versions.androidXViewPager2"
 deps.androidX = androidX
 
-
-def arch = [:]
-arch.workManager = "androidx.work:work-runtime-ktx:$versions.archWorkManager"
-def navigation = [:]
-navigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.archNavigationArchComponent"
-navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.archNavigationArchComponent"
-arch.navigation = navigation
-def viewmodel = [:]
-viewmodel.core = "androidx.lifecycle:lifecycle-viewmodel:$versions.archLifecycle"
-viewmodel.saveState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.archLifecycle"
-arch.viewmodel = viewmodel
-deps.arch = arch
 
 def playServices = [:]
 playServices.location = "com.google.android.gms:play-services-location:$versions.playServicesLocation"
