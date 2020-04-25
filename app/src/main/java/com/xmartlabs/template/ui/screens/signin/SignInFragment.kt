@@ -7,9 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.xmartlabs.template.R
 import com.xmartlabs.template.databinding.FragmentSigninBinding
+import com.xmartlabs.template.device.common.Result
+import com.xmartlabs.template.device.common.getOrThrow
+import com.xmartlabs.template.device.common.isSuccess
 import com.xmartlabs.template.ui.common.BaseFragment
 import com.xmartlabs.template.ui.common.extensions.navigateSafe
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -34,7 +36,7 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
         result.isSuccess -> requireActivity().findNavController(R.id.fragment_container).navigateSafe(
           SignInFragmentDirections.actionSignInFragmentToWelcomeFragment(result.getOrThrow().id)
         )
-        result.exceptionOrNull() is SecurityException ->
+        result is Result.Failure && result.exception is SecurityException ->
           Toast.makeText(
             requireContext(),
             "password or username is wrong, try with userUd = 'xmartlabs', password 'xmartlabs'",
