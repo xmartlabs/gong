@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
- android: circleci/android@0.2.0
+  android: circleci/android@0.2.0
 
 jobs:
   build:
@@ -9,4 +9,17 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./gradlew build lintDevDebug detekt
+          name: Run detekt
+          command: ./gradlew detekt
+      - run:
+          name: Lints
+          command: ./gradlew lintDevDebug
+      - run:
+          name: Compile
+          command: ./gradlew assembleDevDebug
+      - store_artifacts:
+          path: build/reports
+          destination: reports
+      - store_artifacts:
+          path: app/build/reports
+          destination: app-reports
