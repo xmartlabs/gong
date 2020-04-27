@@ -47,6 +47,7 @@ class AppBase : Application() {
       androidContext(this@AppBase)
       modules(
         RepositoryDiModuleProvider.repositories,
+        RepositoryDiModuleProvider.sources,
         UseCaseDiModule.useCases,
         ViewModelDiModule.viewModels
       )
@@ -60,7 +61,6 @@ class AppBase : Application() {
     Coil.setImageLoader(imageLoader)
   }
 
-  @SuppressWarnings("MagicNumber")
   private fun setupStrictMode() {
     val builder = StrictMode.ThreadPolicy.Builder()
       .detectDiskReads()
@@ -74,10 +74,10 @@ class AppBase : Application() {
       detectLeakedClosableObjects()
       detectLeakedRegistrationObjects()
       detectLeakedSqlLiteObjects()
-      if (Build.VERSION.SDK_INT >= 23) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         detectCleartextNetwork()
       }
-      if (Build.VERSION.SDK_INT >= 26) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         detectContentUriWithoutPermission()
       }
       penaltyLog()

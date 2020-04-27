@@ -9,7 +9,11 @@ import org.koin.dsl.module
  * Created by mirland on 25/04/20.
  */
 object RepositoryDiModuleProvider {
+  val sources = module {
+    single { UserLocalSource() }
+    single { UserRemoteSource() }
+  }
   val repositories = module {
-    single { UserRepository(UserLocalSource(), UserRemoteSource()) }
+    single { UserRepository(get(), get()) }
   }
 }

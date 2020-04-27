@@ -82,17 +82,21 @@ android {
         fatal 'StopShip'
         warningsAsErrors true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     androidExtensions {
         experimental = true
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
     }
+
     viewBinding.enabled = true
 }
 
@@ -136,8 +140,6 @@ dependencies {
     implementation deps.retrofit2.core
     implementation deps.retrofit2.gsonAdapter
     implementation deps.retrofit2.rxJavaAdapter
-    implementation deps.rxJava2.android
-    implementation deps.rxJava2.kotlin
     implementation deps.timber
 
 

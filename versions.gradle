@@ -133,12 +133,6 @@ firebase.config = "com.google.firebase:firebase-config-ktx:$versions.firebase_co
 firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
 deps.firebase = firebase
 
-
-def rxJava2 = [:]
-rxJava2.android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
-rxJava2.kotlin = "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
-deps.rxJava2 = rxJava2
-
 def okhttp3 = [:]
 okhttp3.core = "com.squareup.okhttp3:okhttp:$versions.okhttp3"
 okhttp3.loggingIntercepror = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3"
@@ -150,7 +144,6 @@ deps.okhttp3 = okhttp3
 def retrofit2 = [:]
 retrofit2.core = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
 retrofit2.gsonAdapter = "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
-retrofit2.rxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit2"
 deps.retrofit2 = retrofit2
 
 
