@@ -139,9 +139,7 @@ dependencies {
     implementation deps.once
     implementation deps.retrofit2.core
     implementation deps.retrofit2.gsonAdapter
-    implementation deps.retrofit2.rxJavaAdapter
     implementation deps.timber
-
 
     testImplementation deps.junit
     androidTestImplementation deps.androidX.test.junit

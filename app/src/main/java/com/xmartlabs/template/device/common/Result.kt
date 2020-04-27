@@ -20,10 +20,10 @@ sealed class Result<out R> {
 }
 
 /**
- * `true` if [Result] is of type [Success] & holds non-null [Success.data].
+ * `true` if [Result] is of type [Success]
  */
 val Result<*>.isSuccess
-  get() = this is Result.Success && data != null
+  get() = this is Result.Success
 
 fun <T> Result<T>.getOrThrow() = (this as Result.Success<T>).data
 
