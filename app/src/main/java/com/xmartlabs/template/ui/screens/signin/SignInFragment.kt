@@ -1,5 +1,6 @@
 package com.xmartlabs.template.ui.screens.signin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.xmartlabs.template.device.common.isSuccess
 import com.xmartlabs.template.ui.common.BaseFragment
 import com.xmartlabs.template.ui.common.extensions.navigateSafe
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.time.ExperimentalTime
 
 /**
  * Created by mirland on 25/04/20.
@@ -29,8 +31,15 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
     setupViewModelCallbacks()
   }
 
-  private fun setupViewModelCallbacks() {
-    viewModel.signIn.observe(viewLifecycleOwner, Observer { result ->
+  @SuppressLint("SetTextI18n")
+  @OptIn(ExperimentalTime::class)
+  private fun setupViewModelCallbacks() = with(viewModel) {
+    viewModelTime.observe(viewLifecycleOwner, Observer { result ->
+      if (result.isSuccess) {
+        viewBinding.viewModelTimeTextView.text = "View model time, ${result.getOrThrow().inSeconds} seconds"
+      }
+    })
+    signIn.observe(viewLifecycleOwner, Observer { result ->
       when {
         // TODO: Refactor the navigation
         result.isSuccess -> requireActivity().findNavController(R.id.fragment_container).navigateSafe(

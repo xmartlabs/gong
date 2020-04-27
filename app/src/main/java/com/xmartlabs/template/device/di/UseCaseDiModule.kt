@@ -4,6 +4,8 @@ import com.xmartlabs.template.domain.usecase.LoadUserUseCase
 import com.xmartlabs.template.domain.usecase.LoadUserUseCaseImpl
 import com.xmartlabs.template.domain.usecase.SignInUseCase
 import com.xmartlabs.template.domain.usecase.SignInUseCaseImpl
+import com.xmartlabs.template.domain.usecase.TimeTrackerUseCase
+import com.xmartlabs.template.domain.usecase.TimeTrackerUseCaseImpl
 import org.koin.dsl.module
 
 /**
@@ -13,5 +15,6 @@ object UseCaseDiModule {
   val useCases = module {
     factory<SignInUseCase> { SignInUseCaseImpl(get()) }
     factory<LoadUserUseCase> { LoadUserUseCaseImpl(get()) }
+    factory<TimeTrackerUseCase> { TimeTrackerUseCaseImpl() }
   }
 }

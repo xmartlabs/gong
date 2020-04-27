@@ -7,7 +7,7 @@ import com.xmartlabs.template.device.common.Result
 /**
  * Created by mirland on 25/04/20.
  */
-interface BaseCoroutineUseCase<in P, R> {
+interface CoroutineUseCase<in P, R> {
   operator fun invoke(params: P): LiveData<Result<R>> = liveData {
     emit(Result.Loading)
     emit(
