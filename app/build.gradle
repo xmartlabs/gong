@@ -1,0 +1,169 @@
+buildscript {
+    addRepos(repositories)
+    dependencies {
+        classpath buildscriptDeps.fabric
+        classpath buildscriptDeps.snapshotPublisher
+        classpath buildscriptDeps.navigationSafeArgPlugin
+    }
+}
+
+apply plugin: 'com.android.application'
+apply from: rootProject.file('scripts/versioning.gradle')
+apply from: rootProject.file('scripts/read_properties.gradle')
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'io.fabric'
+apply plugin: 'com.xmartlabs.snapshot-publisher'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+android {
+    compileSdkVersion androidVersions.compileSdk
+    buildToolsVersion androidVersions.buildTools
+
+    defaultConfig {
+        applicationId "com.xmartlabs.baseproject"
+        minSdkVersion androidVersions.minSdk
+        targetSdkVersion androidVersions.targetSdk
+        versionCode 1
+        versionName ""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        release {
+            storeFile getEnvVariable('KEYSTORE_FILE') == null ? null : file(getEnvVariable('KEYSTORE_FILE'))
+            storePassword getEnvVariable('KEYSTORE_PASSWORD')
+            keyAlias getEnvVariable('KEYSTORE_KEY_ALIAS')
+            keyPassword getEnvVariable('KEYSTORE_KEY_PASSWORD')
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (getEnvVariable('KEYSTORE_FILE') != null) {
+                signingConfig signingConfigs.release
+            }
+        }
+        debug {
+            minifyEnabled getEnvVariable('MINIFY_CODE', false) as Boolean
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ext.enableCrashlytics = false
+        }
+    }
+
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+            ext.buildTypeCode = 0
+            applicationIdSuffix '.dev'
+        }
+        prod {
+            dimension "env"
+            ext.buildTypeCode = 4
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
+    }
+
+    lintOptions {
+        baseline file("lint-baseline.xml")
+        lintConfig file("lint.xml")
+        fatal 'StopShip'
+        warningsAsErrors true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+    }
+
+    viewBinding.enabled = true
+}
+
+dependencies {
+    debugImplementation deps.debugDb
+    debugImplementation deps.leakcanary
+
+    devImplementation deps.tooLargeTool
+
+    implementation deps.androidX.appcompat
+    implementation deps.androidX.browser
+    implementation deps.androidX.cardview
+    implementation deps.androidX.constraint_layout
+    implementation deps.androidX.design
+    implementation deps.androidX.lifecycle.livedata
+    implementation deps.androidX.lifecycle.runtime
+    implementation deps.androidX.lifecycle.saveState
+    implementation deps.androidX.lifecycle.viewmodel
+    implementation deps.androidX.navigation.fragment
+    implementation deps.androidX.navigation.ui
+    implementation deps.androidX.recyclerview
+    implementation deps.androidX.transition
+    implementation deps.androidX.viewPager2
+    implementation(deps.crashlytics) { transitive = true }
+    implementation deps.coil
+    implementation deps.firebase.analytics
+    implementation deps.firebase.config
+    implementation deps.firebase.messaging
+    implementation deps.koin
+    implementation deps.kotlin.core
+    implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.reflect
+    implementation deps.lottie // Animation Library, check if needed
+    implementation deps.okhttp3.core
+    implementation deps.okhttp3.loggingIntercepror
+    implementation deps.okhttp3.ok2CurlInterceptor
+    implementation deps.okhttp3.stetho
+    implementation deps.okhttp3.urlconnection
+    implementation deps.okIo
+    implementation deps.once
+    implementation deps.retrofit2.core
+    implementation deps.retrofit2.gsonAdapter
+    implementation deps.timber
+
+    testImplementation deps.junit
+    androidTestImplementation deps.androidX.test.junit
+    androidTestImplementation deps.androidX.test.espresso
+}
+
+snapshotPublisher {
+    version {
+        versionNameFormat = getEnvVariable('SNAPSHOT_VERSION_NAME_FORMAT', '{currentVersionName}-{commitHash}')
+    }
+    releaseNotes {
+        commitHistoryFormat = '• %s'
+        headerFormat = getEnvVariable('SNAPSHOT_HEADER_FORMAT', '%s%n%nAuthor: %an <%ae>')
+        includeHistorySinceLastTag = true
+        includeLastCommitInHistory = getEnvVariable('SNAPSHOT_INCLUDE_LAST_COMMIT_IN_HISTORY', false) as Boolean
+        includeMergeCommitsInHistory = false
+        maxCommitHistoryLines = getEnvVariable('SNAPSHOT_MAX_COMMIT_HISTORY_LINES', 10) as Integer
+    }
+    firebaseAppDistribution {
+        serviceAccountCredentials = getEnvVariable('FIREBASE_SERVICE_ACCOUNT_CREDENTIALS_FILE')
+        distributionEmails = getEnvVariable('BETA_DISTRIBUTION_EMAILS')
+        distributionGroupAliases = getEnvVariable('BETA_DISTRIBUTION_GROUP_ALIASES')
+    }
+}
+
+// Enable when the services json is added
+// apply plugin: 'com.google.gms.google-services'

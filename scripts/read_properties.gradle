@@ -1,0 +1,18 @@
+final def PROPERTY_FILE = file(rootProject.file('app/keys.properties'))
+final def PROPERTIES = new Properties()
+if (PROPERTY_FILE.exists()) {
+    PROPERTY_FILE.withInputStream { PROPERTIES.load(it) }
+}
+
+ext.getEnvVariable = { key, defaultValue = null ->
+    def value = PROPERTIES[key]
+    if (value != null) {
+        return value
+    }
+    value = project.hasProperty(key) ? project.getProperty(key) : System.getenv(key)
+    value = value?.trim() ? value : null
+    if (value == null && defaultValue == null) {
+        logger.warn("Variable '$key' is not defined.")
+    }
+    return value ?: defaultValue
+}

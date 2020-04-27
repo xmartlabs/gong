@@ -1,0 +1,88 @@
+final def (versionMajorString, versionMinorString, versionPatchString) = rootProject.versionName.tokenize('.')
+
+def versionMajor = versionMajorString.toInteger()
+def versionMinor = versionMinorString.toInteger()
+def versionPatch = versionPatchString.toInteger()
+
+final def MAX_NUMBER_OF_PATCH_VERSIONS = 100
+final def MAX_NUMBER_OF_MINOR_VERSIONS = 100
+final def MAX_NUMBER_OF_MAJOR_VERSIONS = 100
+
+if (versionMajor > MAX_NUMBER_OF_MAJOR_VERSIONS) {
+    throw new IllegalStateException("The version's mayor number has to be smaller than " + MAX_NUMBER_OF_MAJOR_VERSIONS)
+}
+if (versionMinor > MAX_NUMBER_OF_MINOR_VERSIONS) {
+    throw new IllegalStateException("The version's minor number has to be smaller than " + MAX_NUMBER_OF_MINOR_VERSIONS)
+}
+if (versionPatch > MAX_NUMBER_OF_PATCH_VERSIONS) {
+    throw new IllegalStateException("The version's patch number has to be smaller than " + MAX_NUMBER_OF_PATCH_VERSIONS)
+}
+println("Version $versionMajor.$versionMinor.$versionPatch")
+
+def workingBranchIdentifier = getWorkingBranchIdentifier()
+def workingBranchPostfix = (workingBranchIdentifier.length() > 0) ? "-${workingBranchIdentifier}" : ""
+android.applicationVariants.all { variant ->
+    def versionName = rootProject.versionName
+
+    variant.outputs.each { output ->
+        for (flavor in variant.productFlavors) {
+            def apk = output.outputFileName
+            if (apk.endsWith(".apk") && !apk.contains("unaligned")) {
+                def project = rootProject.projectName
+                def separator = "-"
+                def buildType = variant.variantData.variantConfiguration.buildType.name
+                def flavorName = flavor.name
+
+                def basePatchNumber = MAX_NUMBER_OF_PATCH_VERSIONS
+                def baseMinorNumber = MAX_NUMBER_OF_MINOR_VERSIONS * basePatchNumber
+                def baseMayorNumber = MAX_NUMBER_OF_MAJOR_VERSIONS * baseMinorNumber
+
+                def versionCode = baseMayorNumber * versionMajor +
+                        baseMinorNumber * versionMinor +
+                        basePatchNumber * versionPatch + flavor.ext.buildTypeCode
+
+                def versionNameFull
+                if (variant.buildType.isDebuggable()) {
+                    versionNameFull = "$versionName($versionCode)$workingBranchPostfix"
+                } else {
+                    versionNameFull = versionName
+                }
+
+                def newApkName = project + separator + versionName + "($versionCode)" + "+" + flavorName + "." + buildType + ".apk"
+                output.outputFileName = newApkName
+
+                output.versionCodeOverride = versionCode
+                output.versionNameOverride = versionNameFull
+            }
+        }
+    }
+}
+
+/*
+ * Here implemented the logic of detecting branch identifier which will be added to the applications's
+ * versionName.
+ */
+
+def getWorkingBranchIdentifier() {
+    try {
+        def workingBranch = "git name-rev --name-only HEAD".execute().text.trim().replace("remotes/origin/", "")
+        def committerDate = "git show --quiet --pretty=%cd --date=format:%Y-%m-%d_%H:%M:%S".execute().text.trim()
+        def workingBranchParts = workingBranch.split("/")
+        def workingBranchPartsCount = workingBranchParts.size()
+
+        println("Working branch identifier: working branch: '$workingBranch', committer date: '$committerDate'")
+
+        if (workingBranch == "master") {
+            return ""
+        } else if (workingBranch == "develop") {
+            return "develop"
+        } else if (workingBranchPartsCount > 1 && workingBranchParts[workingBranchPartsCount - 2] == "release") {
+            return ""
+        } else if (workingBranch.contains("/")) {
+            if (workingBranchPartsCount >= 2) return "${workingBranchParts[workingBranchPartsCount - 2]}_${workingBranchParts[workingBranchPartsCount - 1]}_${committerDate}"
+            else return "${workingBranchParts[0]}_${committerDate}"
+        } else return "${workingBranch}_${committerDate}"
+    } catch (Throwable ignored) {
+        return ""
+    }
+}

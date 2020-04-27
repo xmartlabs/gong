@@ -1,0 +1,61 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        // App version
+        versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
+        projectName = "XmartlabsTemplate"
+    }
+    apply from: 'versions.gradle'
+    addRepos(repositories)
+    dependencies {
+        classpath buildscriptDeps.dependencyUpdates
+        classpath buildscriptDeps.gradle
+        classpath buildscriptDeps.detekt
+        classpath buildscriptDeps.googleServices
+        classpath buildscriptDeps.kotlin
+        classpath buildscriptDeps.kotlinExtensions
+    }
+}
+
+apply from: rootProject.file('versions.gradle')
+apply from: rootProject.file('scripts/dependency_updates.gradle')
+apply from: rootProject.file('scripts/stop_ship_check_xmls.gradle.kts')
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+dependencies {
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$versions.detekt"
+}
+
+detekt {
+    autoCorrect = true
+    config = files("$rootDir/.detekt/detekt-config.yml")
+    input = files("app/src")
+    parallel = true
+    toolVersion = "$versions.detekt"
+}
+
+allprojects {
+    apply from: rootProject.file('versions.gradle')
+    addRepos(repositories)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task check() {
+    dependsOn("checkStopShipXmls")
+}
+
+repositories {
+    maven {
+        url 'http://www.idescout.com/maven/repo/'
+        name 'IDEScout, Inc.'
+    }
+}
+
+// `./gradlew wrapper --gradle-version=[version]` uses the distribution type all
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
