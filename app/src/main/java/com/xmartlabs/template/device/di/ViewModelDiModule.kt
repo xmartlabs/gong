@@ -11,7 +11,7 @@ import org.koin.dsl.module
 object ViewModelDiModule {
   val viewModels = module {
     // TODO: Review the scope
-    viewModel { SignInFragmentViewModel(get()) }
+    viewModel { SignInFragmentViewModel(get(), get()) }
     viewModel { WelcomeFragmentViewModel(get()) }
   }
 }
