@@ -20,10 +20,21 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel.loadUser(args.userid)
-    viewModel.userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
-      @SuppressLint("SetTextI18n")
+    setupViewModel()
+  }
+
+  @SuppressLint("SetTextI18n")
+  private fun setupViewModel() = with(viewModel) {
+    loadUser(args.userid)
+    userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
       viewBinding.titleTextView.text = "Hi ${user.name}"
+    }
+    locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
+      val locationName = listOfNotNull(location.city, location.country)
+        .joinToString(", ")
+      if (locationName.isNotBlank()) {
+        viewBinding.locationTextView.text = "You signed in from $locationName!"
+      }
     }
   }
 }

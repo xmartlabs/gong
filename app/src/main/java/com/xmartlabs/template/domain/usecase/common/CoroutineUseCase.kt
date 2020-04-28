@@ -3,6 +3,7 @@ package com.xmartlabs.template.domain.usecase.common
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.xmartlabs.template.device.common.Result
+import timber.log.Timber
 
 /**
  * Created by mirland on 25/04/20.
@@ -13,8 +14,9 @@ interface CoroutineUseCase<in P, R> {
     emit(
       try {
         Result.Success(execute(params))
-      } catch (ex: @Suppress("TooGenericExceptionCaught") Throwable) {
-        Result.Failure(ex)
+      } catch (throwable: Throwable) {
+        Timber.w(throwable)
+        Result.Failure(throwable)
       }
     )
   }

@@ -1,11 +1,19 @@
-final def PROPERTY_FILE = file(rootProject.file('app/keys.properties'))
-final def PROPERTIES = new Properties()
-if (PROPERTY_FILE.exists()) {
-    PROPERTY_FILE.withInputStream { PROPERTIES.load(it) }
+final def SECRET_PROPERTIES = new Properties()
+if (rootProject.secretsPropertiesFile.exists()) {
+    rootProject.secretsPropertiesFile.withInputStream { SECRET_PROPERTIES.load(it) }
+}
+
+final def CONFIG_PROPERTIES = new Properties()
+if (rootProject.configPropertiesFile.exists()) {
+    rootProject.configPropertiesFile.withInputStream { CONFIG_PROPERTIES.load(it) }
 }
 
 ext.getEnvVariable = { key, defaultValue = null ->
-    def value = PROPERTIES[key]
+    def value = SECRET_PROPERTIES[key]
+    if (value != null) {
+        return value
+    }
+    value = CONFIG_PROPERTIES[key]
     if (value != null) {
         return value
     }

@@ -12,6 +12,6 @@ object ViewModelDiModule {
   val viewModels = module {
     // TODO: Review the scope
     viewModel { SignInFragmentViewModel(get(), get()) }
-    viewModel { WelcomeFragmentViewModel(get()) }
+    viewModel { WelcomeFragmentViewModel(get(), get()) }
   }
 }

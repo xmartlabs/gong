@@ -62,11 +62,15 @@ android {
     flavorDimensions "env"
     productFlavors {
         dev {
+            buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_DEV_SERVER_URL')
+
             dimension "env"
             ext.buildTypeCode = 0
             applicationIdSuffix '.dev'
         }
         prod {
+            buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_PROD_SERVER_URL')
+
             dimension "env"
             ext.buildTypeCode = 4
         }
