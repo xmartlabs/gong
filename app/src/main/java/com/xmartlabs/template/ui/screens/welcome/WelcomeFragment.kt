@@ -3,12 +3,10 @@ package com.xmartlabs.template.ui.screens.welcome
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.xmartlabs.template.databinding.FragmentWelcomeBinding
-import com.xmartlabs.template.device.common.getOrNull
-import com.xmartlabs.template.device.common.isSuccess
 import com.xmartlabs.template.ui.common.BaseFragment
+import com.xmartlabs.template.ui.common.extensions.observeSuccessResult
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
@@ -23,11 +21,9 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.loadUser(args.userid)
-    viewModel.userLiveData.observe(viewLifecycleOwner, Observer { result ->
-      if (result.isSuccess) {
-        @SuppressLint("SetTextI18n")
-        viewBinding.titleTextView.text = "Hi ${result.getOrNull()?.name}"
-      }
-    })
+    viewModel.userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
+      @SuppressLint("SetTextI18n")
+      viewBinding.titleTextView.text = "Hi ${user.name}"
+    }
   }
 }
