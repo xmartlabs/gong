@@ -19,7 +19,7 @@ interface TimeTrackerUseCase : FlowCoroutineUseCase<TimeTrackerUseCase.Params, D
 
 class TimeTrackerUseCaseImpl : TimeTrackerUseCase {
   @OptIn(ExperimentalTime::class)
-  override fun execute(params: TimeTrackerUseCase.Params): Flow<Duration> = flow { //
+  override fun execute(params: TimeTrackerUseCase.Params): Flow<Duration> = flow {
     while (true) {
       @Suppress("MagicNumber")
       delay(1800)
