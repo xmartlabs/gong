@@ -8,6 +8,10 @@ import retrofit2.http.GET
  */
 // API should be declared here
 interface LocationServiceApi {
-  @GET("/json")
+  companion object {
+    private const val URL_GET_CURRENT_LOCATION = "/json"
+  }
+
+  @GET(URL_GET_CURRENT_LOCATION)
   suspend fun getLocation(): Location
 }
