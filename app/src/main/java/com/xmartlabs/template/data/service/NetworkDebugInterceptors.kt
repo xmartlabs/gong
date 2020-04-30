@@ -22,8 +22,8 @@ object NetworkDebugInterceptors {
   ): List<Interceptor> = mutableListOf<Interceptor>()
     .apply {
       if (useStethoInterceptor) add(createStethoInterceptor())
-      if (useOkHttpInterceptor) add(createCurlInterceptor())
-      if (useCurlInterceptor) add(createOhHttpInterceptor())
+      if (useCurlInterceptor) add(createCurlInterceptor())
+      if (useOkHttpInterceptor) add(createOkHttpInterceptor())
     }
 
   private fun createCurlInterceptor() = CurlInterceptor(Loggable { message ->
@@ -31,7 +31,7 @@ object NetworkDebugInterceptors {
       .d(message.sanitize())
   })
 
-  private fun createOhHttpInterceptor() = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+  private fun createOkHttpInterceptor() = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
     override fun log(message: String) = Timber.tag(OK_HTTP_INTERCEPTOR_LOGGER_TAG).d(message.sanitize())
   }).apply { level = HttpLoggingInterceptor.Level.BODY }
 
