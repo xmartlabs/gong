@@ -21,7 +21,7 @@ class SignInFragmentViewModel(
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
   val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
   val signIn: LiveData<Result<User>> = signInMutableLiveData
-    .switchMap { params -> signInUseCase.invoke(params) }
+      .switchMap { params -> signInUseCase.invoke(params) }
 
   @MainThread
   fun signIn(userId: String, password: String) {

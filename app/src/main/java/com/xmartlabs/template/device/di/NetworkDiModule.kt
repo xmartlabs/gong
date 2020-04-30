@@ -16,9 +16,9 @@ object NetworkDiModule {
     single { get<Retrofit>().create(LocationServiceApi::class.java) }
     single {
       val debugInterceptors = NetworkDebugInterceptors.createDebugInterceptors(
-        useOkHttpInterceptor = Config.ANDROID_SYSTEM_LOG_ENABLED,
-        useCurlInterceptor = Config.ANDROID_SYSTEM_LOG_ENABLED,
-        useStethoInterceptor = Config.STETHO_ENABLED
+          useOkHttpInterceptor = Config.ANDROID_SYSTEM_LOG_ENABLED,
+          useCurlInterceptor = Config.ANDROID_SYSTEM_LOG_ENABLED,
+          useStethoInterceptor = Config.STETHO_ENABLED
       )
       val sessionInterceptors = listOf<Interceptor>() // TODO: Add session interceptor and refresh token interceptor
       NetworkLayerCreator.createRetrofitInstance(Config.API_BASE_URL, sessionInterceptors + debugInterceptors)

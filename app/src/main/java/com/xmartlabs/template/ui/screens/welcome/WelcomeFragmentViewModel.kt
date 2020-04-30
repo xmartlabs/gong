@@ -19,7 +19,7 @@ class WelcomeFragmentViewModel(
 ) : ViewModel() {
   private val loadUserMutableLiveData = MutableLiveData<LoadUserUseCase.Params>()
   val userLiveData: LiveData<Result<User>> = loadUserMutableLiveData
-    .switchMap { params -> loadUserUseCase.invoke(params) }
+      .switchMap { params -> loadUserUseCase.invoke(params) }
 
   val locationLiveData: LiveData<Result<Location>> = getLocationUseCase.invoke(GetLocationUseCase.Params())
 

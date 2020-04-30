@@ -30,4 +30,4 @@ fun <T> Result<T>.getOrThrow() = (this as Result.Success<T>).data
 fun <T> Result<T>.getOrNull() = (this as? Result.Success<T>)?.data
 
 fun <T> Result<T>.getOr(fallback: T): T =
-  (this as? Result.Success<T>)?.data ?: fallback
+    (this as? Result.Success<T>)?.data ?: fallback

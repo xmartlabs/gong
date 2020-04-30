@@ -21,7 +21,7 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
   private val viewModel: SignInFragmentViewModel by viewModel()
 
   override fun inflateViewBinding(): FragmentSigninBinding =
-    FragmentSigninBinding.inflate(layoutInflater)
+      FragmentSigninBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -36,28 +36,28 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
       viewBinding.viewModelTimeTextView.text = "View model time, ${duration.inSeconds} seconds"
     }
     signIn.observeResult(viewLifecycleOwner,
-      onFailure = { throwable ->
-        if (throwable is SecurityException) {
-          Toast.makeText(
-            requireContext(),
-            "password or username is wrong, try with userUd = 'xmartlabs', password 'xmartlabs'",
-            Toast.LENGTH_SHORT
-          ).show()
+        onFailure = { throwable ->
+          if (throwable is SecurityException) {
+            Toast.makeText(
+                requireContext(),
+                "password or username is wrong, try with userUd = 'xmartlabs', password 'xmartlabs'",
+                Toast.LENGTH_SHORT
+            ).show()
+          }
+        },
+        onSuccess = { result ->
+          requireActivity().findNavController(R.id.fragment_container).navigateSafe(
+              SignInFragmentDirections.actionSignInFragmentToWelcomeFragment(result.id)
+          )
         }
-      },
-      onSuccess = { result ->
-        requireActivity().findNavController(R.id.fragment_container).navigateSafe(
-          SignInFragmentDirections.actionSignInFragmentToWelcomeFragment(result.id)
-        )
-      }
     )
   }
 
   private fun setupButtons() = withViewBinding {
     signInButton.setOnClickListener {
       viewModel.signIn(
-        userIdEditText.text.toString(),
-        passwordEditText.text.toString()
+          userIdEditText.text.toString(),
+          passwordEditText.text.toString()
       )
     }
   }

@@ -15,13 +15,13 @@ import timber.log.Timber
  */
 interface FlowCoroutineUseCase<in P, R> {
   operator fun invoke(params: P): LiveData<Result<R>> = execute(params)
-    .map<R, Result<R>> { value -> Result.Success<R>(value) }
-    .catch { error ->
-      Timber.w(error)
-      emit(Result.Failure(error))
-    }
-    .flowOn(Dispatchers.Default)
-    .asLiveData()
+      .map<R, Result<R>> { value -> Result.Success<R>(value) }
+      .catch { error ->
+        Timber.w(error)
+        emit(Result.Failure(error))
+      }
+      .flowOn(Dispatchers.Default)
+      .asLiveData()
 
   /**
    * Override this to set the code to be executed.
