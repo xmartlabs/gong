@@ -9,8 +9,8 @@ class UserRepository(
 ) {
 
   suspend fun signIn(id: String, password: String) =
-    userRemoteSource.signIn(id, password)
-      .let { user -> userLocalSource.createUser(user) }
+      userRemoteSource.signIn(id, password)
+          .let { user -> userLocalSource.createUser(user) }
 
   suspend fun getUser(userId: String) = userLocalSource.getUser(userId)
 }

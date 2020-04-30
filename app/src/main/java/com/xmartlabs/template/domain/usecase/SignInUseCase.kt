@@ -13,5 +13,5 @@ interface SignInUseCase : CoroutineUseCase<SignInUseCase.Params, User> {
 
 class SignInUseCaseImpl(private val userRepository: UserRepository) : SignInUseCase {
   override suspend fun execute(params: SignInUseCase.Params): User =
-    userRepository.signIn(params.id, params.password)
+      userRepository.signIn(params.id, params.password)
 }

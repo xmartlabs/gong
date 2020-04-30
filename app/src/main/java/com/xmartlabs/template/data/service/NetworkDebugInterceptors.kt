@@ -20,15 +20,15 @@ object NetworkDebugInterceptors {
       useCurlInterceptor: Boolean,
       useStethoInterceptor: Boolean
   ): List<Interceptor> = mutableListOf<Interceptor>()
-    .apply {
-      if (useStethoInterceptor) add(createStethoInterceptor())
-      if (useCurlInterceptor) add(createCurlInterceptor())
-      if (useOkHttpInterceptor) add(createOkHttpInterceptor())
-    }
+      .apply {
+        if (useStethoInterceptor) add(createStethoInterceptor())
+        if (useCurlInterceptor) add(createCurlInterceptor())
+        if (useOkHttpInterceptor) add(createOkHttpInterceptor())
+      }
 
   private fun createCurlInterceptor() = CurlInterceptor(Loggable { message ->
     Timber.tag(OK_2_CURL_INTERCEPTOR_LOGGER_TAG)
-      .d(message.sanitize())
+        .d(message.sanitize())
   })
 
   private fun createOkHttpInterceptor() = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
@@ -42,8 +42,8 @@ object NetworkDebugInterceptors {
     return if (indexOfUnknownChar >= 0) {
       val lastIndexOfUnknownChar = indexOfLast { it == UNKNOWN_CHAR }
       StringBuilder(this)
-        .replace(indexOfUnknownChar, lastIndexOfUnknownChar + 1, "** Suppress file data **")
-        .toString()
+          .replace(indexOfUnknownChar, lastIndexOfUnknownChar + 1, "** Suppress file data **")
+          .toString()
     } else {
       this
     }

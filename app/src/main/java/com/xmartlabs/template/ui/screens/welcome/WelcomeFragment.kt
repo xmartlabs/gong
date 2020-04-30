@@ -31,7 +31,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     }
     locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
       val locationName = listOfNotNull(location.city, location.country)
-        .joinToString(", ")
+          .joinToString(", ")
       if (locationName.isNotBlank()) {
         viewBinding.locationTextView.text = "You signed in from $locationName!"
       }

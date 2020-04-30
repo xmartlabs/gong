@@ -1,7 +1,7 @@
 package com.xmartlabs.template.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.xmartlabs.template.R
 
 class MainActivity : AppCompatActivity() {

@@ -53,28 +53,28 @@ class AppBase : Application() {
     startKoin {
       androidContext(this@AppBase)
       modules(
-        NetworkDiModule.network,
-        RepositoryDiModuleProvider.repositories,
-        RepositoryDiModuleProvider.sources,
-        UseCaseDiModule.useCases,
-        ViewModelDiModule.viewModels
+          NetworkDiModule.network,
+          RepositoryDiModuleProvider.repositories,
+          RepositoryDiModuleProvider.sources,
+          UseCaseDiModule.useCases,
+          ViewModelDiModule.viewModels
       )
     }
   }
 
   private fun setupCoil() {
     val imageLoader = ImageLoaderBuilder(this)
-      .apply { if (BuildConfig.DEBUG) logger(DebugLogger()) }
-      .build()
+        .apply { if (BuildConfig.DEBUG) logger(DebugLogger()) }
+        .build()
     Coil.setImageLoader(imageLoader)
   }
 
   private fun setupStrictMode() {
     val builder = StrictMode.ThreadPolicy.Builder()
-      .detectDiskReads()
-      .detectDiskWrites()
-      .detectNetwork()
-      .penaltyLog()
+        .detectDiskReads()
+        .detectDiskWrites()
+        .detectNetwork()
+        .penaltyLog()
     StrictMode.setThreadPolicy(builder.build())
     StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().apply {
       detectActivityLeaks()

@@ -13,5 +13,5 @@ interface LoadUserUseCase : CoroutineUseCase<LoadUserUseCase.Params, User> {
 
 class LoadUserUseCaseImpl(private val userRepository: UserRepository) : LoadUserUseCase {
   override suspend fun execute(params: LoadUserUseCase.Params): User =
-    userRepository.getUser(params.userId)
+      userRepository.getUser(params.userId)
 }
