@@ -5,6 +5,9 @@ buildscript {
         // App version
         versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
         projectName = "XmartlabsTemplate"
+
+        configPropertiesFile = file('config.properties') // All configurations are saved here
+        secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
     }
     apply from: 'versions.gradle'
     addRepos(repositories)

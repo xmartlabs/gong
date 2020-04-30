@@ -4,10 +4,13 @@
             <w>bugsee</w>
             <w>coroutine</w>
             <w>coroutines</w>
+            <w>crashlytics</w>
             <w>interactor</w>
+            <w>koin</w>
             <w>mirland</w>
             <w>onboarding</w>
             <w>renderable</w>
+            <w>stetho</w>
             <w>xmartlabs</w>
         </words>
     </dictionary>
