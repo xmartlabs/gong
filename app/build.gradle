@@ -1,7 +1,7 @@
 buildscript {
     addRepos(repositories)
     dependencies {
-        classpath buildscriptDeps.fabric
+        classpath buildscriptDeps.firebaseCrashlyticsPlugin
         classpath buildscriptDeps.snapshotPublisher
         classpath buildscriptDeps.navigationSafeArgPlugin
     }
@@ -14,7 +14,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.xmartlabs.snapshot-publisher'
 
 repositories {
@@ -55,7 +55,6 @@ android {
         debug {
             minifyEnabled getEnvVariable('MINIFY_CODE', false) as Boolean
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ext.enableCrashlytics = false
         }
     }
 
@@ -124,10 +123,10 @@ dependencies {
     implementation deps.androidX.recyclerview
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
-    implementation(deps.crashlytics) { transitive = true }
     implementation deps.coil
     implementation deps.firebase.analytics
     implementation deps.firebase.config
+    implementation deps.firebase.crashlytics
     implementation deps.firebase.messaging
     implementation deps.koin
     implementation deps.kotlin.core
@@ -143,6 +142,7 @@ dependencies {
     implementation deps.once
     implementation deps.retrofit2.core
     implementation deps.retrofit2.gsonAdapter
+    implementation deps.stetho
     implementation deps.timber
 
     testImplementation deps.junit
