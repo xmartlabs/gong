@@ -7,11 +7,11 @@ import com.xmartlabs.template.domain.usecase.common.CoroutineUseCase
 /**
  * Created by mirland on 25/04/20.
  */
-interface LoadUserUseCase : CoroutineUseCase<LoadUserUseCase.Params, User> {
-  data class Params(val userId: String)
+interface LoadUserUseCase : CoroutineUseCase<LoadUserUseCase.Params, User?> {
+  class Params
 }
 
 class LoadUserUseCaseImpl(private val userRepository: UserRepository) : LoadUserUseCase {
-  override suspend fun execute(params: LoadUserUseCase.Params): User =
-      userRepository.getUser(params.userId)
+  override suspend fun execute(params: LoadUserUseCase.Params): User? =
+      userRepository.getCurrentUser()
 }

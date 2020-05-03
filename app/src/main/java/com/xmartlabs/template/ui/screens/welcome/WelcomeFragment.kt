@@ -3,7 +3,6 @@ package com.xmartlabs.template.ui.screens.welcome
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.navArgs
 import com.xmartlabs.template.databinding.FragmentWelcomeBinding
 import com.xmartlabs.template.ui.common.BaseFragment
 import com.xmartlabs.template.ui.common.extensions.observeSuccessResult
@@ -14,7 +13,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
  */
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
   private val viewModel: WelcomeFragmentViewModel by viewModel()
-  private val args: WelcomeFragmentArgs by navArgs()
 
   override fun inflateViewBinding(): FragmentWelcomeBinding = FragmentWelcomeBinding.inflate(layoutInflater)
 
@@ -25,9 +23,8 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
 
   @SuppressLint("SetTextI18n")
   private fun setupViewModel() = with(viewModel) {
-    loadUser(args.userid)
     userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
-      viewBinding.titleTextView.text = "Hi ${user.name}"
+      viewBinding.titleTextView.text = "Hi ${user!!.name}"
     }
     locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
       val locationName = listOfNotNull(location.city, location.country)

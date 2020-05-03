@@ -45,9 +45,9 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
             ).show()
           }
         },
-        onSuccess = { result ->
+        onSuccess = {
           requireActivity().findNavController(R.id.fragment_container).navigateSafe(
-              SignInFragmentDirections.actionSignInFragmentToWelcomeFragment(result.id)
+              SignInFragmentDirections.actionSignInFragmentToWelcomeFragment()
           )
         }
     )

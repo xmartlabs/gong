@@ -2,6 +2,8 @@ package com.xmartlabs.template.device.di
 
 import com.xmartlabs.template.domain.usecase.GetLocationUseCase
 import com.xmartlabs.template.domain.usecase.GetLocationUseCaseImpl
+import com.xmartlabs.template.domain.usecase.GetSessionTypeUseCase
+import com.xmartlabs.template.domain.usecase.GetSessionTypeUseCaseImpl
 import com.xmartlabs.template.domain.usecase.LoadUserUseCase
 import com.xmartlabs.template.domain.usecase.LoadUserUseCaseImpl
 import com.xmartlabs.template.domain.usecase.SignInUseCase
@@ -16,6 +18,7 @@ import org.koin.dsl.module
 object UseCaseDiModule {
   val useCases = module {
     factory<GetLocationUseCase> { GetLocationUseCaseImpl(get()) }
+    factory<GetSessionTypeUseCase> { GetSessionTypeUseCaseImpl(get()) }
     factory<LoadUserUseCase> { LoadUserUseCaseImpl(get()) }
     factory<SignInUseCase> { SignInUseCaseImpl(get()) }
     factory<TimeTrackerUseCase> { TimeTrackerUseCaseImpl() }

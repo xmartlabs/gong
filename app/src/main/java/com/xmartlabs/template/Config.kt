@@ -1,5 +1,7 @@
 package com.xmartlabs.template
 
+import java.util.Locale
+
 /**
  * Created by mirland on 28/04/20.
  */
@@ -15,4 +17,11 @@ object Config {
   val STETHO_ENABLED = DEBUG || !PROD
 
   val API_BASE_URL = BuildConfig.API_BASE_URL
+
+  val SHARE_PREFERENCE_NAME = BuildConfig.APP_NAME.toFileName()
 }
+
+private fun String.toFileName() = trim()
+    .replace(" +", " ")
+    .toLowerCase(Locale.ROOT)
+    .replace(" ", "_")

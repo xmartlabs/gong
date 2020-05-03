@@ -33,6 +33,7 @@ android {
         versionName ""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        buildConfigField 'String', 'APP_NAME', '"App Template"' // Used to define some constants like the database name
     }
 
     signingConfigs {
