@@ -42,6 +42,7 @@ class AppBase : Application() {
           NetworkDiModule.network,
           RepositoryDiModuleProvider.repositories,
           RepositoryDiModuleProvider.sources,
+          RepositoryDiModuleProvider.stores,
           UseCaseDiModule.useCases,
           ViewModelDiModule.viewModels
       )
