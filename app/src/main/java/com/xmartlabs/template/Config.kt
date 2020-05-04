@@ -14,5 +14,7 @@ object Config {
 
   val STETHO_ENABLED = DEBUG || !PROD
 
-  val API_BASE_URL = BuildConfig.API_BASE_URL
+  val CRASHLYTICS_LOG_ENABLED = !DEBUG
+
+  const val API_BASE_URL = BuildConfig.API_BASE_URL
 }

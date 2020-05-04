@@ -11,8 +11,8 @@ import timber.log.Timber
  * Created by mirland on 28/04/20.
  */
 object NetworkDebugInterceptors {
-  private const val OK_HTTP_INTERCEPTOR_LOGGER_TAG = "OkHttp"
-  private const val OK_2_CURL_INTERCEPTOR_LOGGER_TAG = "Ok2Curl"
+  const val OK_HTTP_INTERCEPTOR_LOGGER_TAG = "OkHttp"
+  const val OK_2_CURL_INTERCEPTOR_LOGGER_TAG = "Ok2Curl"
   private const val UNKNOWN_CHAR = '�'
 
   fun createDebugInterceptors(
