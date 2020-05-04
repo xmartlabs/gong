@@ -16,9 +16,11 @@ object Config {
 
   val STETHO_ENABLED = DEBUG || !PROD
 
-  val API_BASE_URL = BuildConfig.API_BASE_URL
+  val CRASHLYTICS_LOG_ENABLED = !DEBUG
 
   val SHARE_PREFERENCE_NAME = BuildConfig.APP_NAME.toFileName()
+
+  const val API_BASE_URL = BuildConfig.API_BASE_URL
 }
 
 private fun String.toFileName() = trim()

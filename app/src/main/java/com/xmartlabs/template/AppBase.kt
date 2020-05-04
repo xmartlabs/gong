@@ -6,15 +6,14 @@ import android.os.StrictMode
 import coil.Coil
 import coil.ImageLoaderBuilder
 import coil.util.DebugLogger
-import com.facebook.stetho.Stetho
 import com.xmartlabs.template.device.di.NetworkDiModule
 import com.xmartlabs.template.device.di.RepositoryDiModuleProvider
 import com.xmartlabs.template.device.di.UseCaseDiModule
 import com.xmartlabs.template.device.di.ViewModelDiModule
+import com.xmartlabs.template.device.logger.LoggerModule
 import jonathanfinerty.once.Once
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import timber.log.Timber
 
 /**
  * Created by mirland on 25/04/20.
@@ -26,7 +25,6 @@ class AppBase : Application() {
     if (Config.DEBUG) {
       setupStrictMode()
     }
-    setupCrashlytics()
     setupKoinModules()
     setupLoggers()
     setupCoil()
@@ -35,19 +33,7 @@ class AppBase : Application() {
 
   private fun setupOnce() = Once.initialise(this)
 
-  private fun setupLoggers() {
-    if (Config.ANDROID_SYSTEM_LOG_ENABLED) {
-      Timber.plant(Timber.DebugTree())
-    }
-    if (Config.STETHO_ENABLED) {
-      // TODO: create a crashlytics three to share data in Stetho
-      Stetho.initializeWithDefaults(this)
-    }
-  }
-
-  private fun setupCrashlytics() {
-    // TODO:
-  }
+  private fun setupLoggers() = LoggerModule.initializeModule(this)
 
   private fun setupKoinModules() {
     startKoin {

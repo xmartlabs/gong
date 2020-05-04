@@ -18,6 +18,12 @@
         tools:targetApi="n"
         >
 
+        <!-- Enabled in the application -->
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false"
+            />
+
         <activity android:name=".ui.MainActivity">
 
             <intent-filter>
