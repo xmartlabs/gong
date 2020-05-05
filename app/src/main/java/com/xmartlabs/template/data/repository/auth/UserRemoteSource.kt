@@ -1,6 +1,7 @@
 package com.xmartlabs.template.data.repository.auth
 
 import com.xmartlabs.template.data.model.User
+import com.xmartlabs.template.data.model.service.SignInResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -20,7 +21,7 @@ class UserRemoteSource {
     @Suppress("MagicNumber")
     delay(100) // Simulate network delay
     if (id.toLowerCase(Locale.ROOT) == VALID_ID && password == VALID_PASSWORD) {
-      XMARTLABS_USER
+      SignInResponse("auth_token", XMARTLABS_USER)
     } else {
       throw SecurityException("Invalid User")
     }

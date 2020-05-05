@@ -5,6 +5,8 @@
             <w>coroutine</w>
             <w>coroutines</w>
             <w>crashlytics</w>
+            <w>firebase</w>
+            <w>gson</w>
             <w>interactor</w>
             <w>koin</w>
             <w>mirland</w>

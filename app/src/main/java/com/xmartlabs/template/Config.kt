@@ -1,5 +1,7 @@
 package com.xmartlabs.template
 
+import java.util.Locale
+
 /**
  * Created by mirland on 28/04/20.
  */
@@ -14,5 +16,14 @@ object Config {
 
   val STETHO_ENABLED = DEBUG || !PROD
 
-  val API_BASE_URL = BuildConfig.API_BASE_URL
+  val CRASHLYTICS_LOG_ENABLED = !DEBUG
+
+  val SHARE_PREFERENCE_NAME = BuildConfig.APP_NAME.toFileName()
+
+  const val API_BASE_URL = BuildConfig.API_BASE_URL
 }
+
+private fun String.toFileName() = trim()
+    .replace(" +", " ")
+    .toLowerCase(Locale.ROOT)
+    .replace(" ", "_")

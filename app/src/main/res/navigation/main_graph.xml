@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/signInFragment"
+    app:startDestination="@id/splashFragment"
     >
 
     <fragment
@@ -17,6 +17,8 @@
         <action
             android:id="@+id/action_signInFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/fragment_fade_enter"
             />
 
@@ -27,11 +29,26 @@
         android:name="com.xmartlabs.template.ui.screens.welcome.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome"
+        />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.xmartlabs.template.ui.screens.splash.SplashFragment"
+        android:label="SplashFragment"
         >
 
-        <argument
-            android:name="userid"
-            app:argType="string"
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            />
+
+        <action
+            android:id="@+id/action_splashFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             />
 
     </fragment>
