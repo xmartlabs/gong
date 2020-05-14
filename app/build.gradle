@@ -111,7 +111,6 @@ dependencies {
     devImplementation deps.tooLargeTool
 
     implementation deps.androidX.appcompat
-    implementation deps.androidX.browser
     implementation deps.androidX.cardview
     implementation deps.androidX.constraint_layout
     implementation deps.androidX.design
@@ -125,15 +124,11 @@ dependencies {
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
     implementation deps.coil
-    implementation deps.firebase.analytics
-    implementation deps.firebase.config
     implementation deps.firebase.crashlytics
-    implementation deps.firebase.messaging
     implementation deps.koin
     implementation deps.kotlin.core
     implementation deps.kotlin.coroutines.core
     implementation deps.kotlin.reflect
-    implementation deps.lottie // Animation Library, check if needed
     implementation deps.okhttp3.core
     implementation deps.okhttp3.loggingIntercepror
     implementation deps.okhttp3.ok2CurlInterceptor
