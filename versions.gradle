@@ -68,7 +68,6 @@ def deps = [:]
 deps.coil = "io.coil-kt:coil:$versions.coil"
 deps.debugDb = "com.amitshekhar.android:debug-db:$versions.debugDb"
 deps.gson = "com.google.code.gson:gson:$versions.gson"
-deps.koin = "org.koin:koin-android-viewmodel:$versions.koin"
 deps.junit = "junit:junit:$versions.junit"
 deps.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
@@ -78,6 +77,13 @@ deps.stetho = "com.github.mathroule.stetho:stetho:$versions.stetho" // https://g
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tooLargeTool = "com.github.xmartlabs:toolargetool:$versions.tooLargeTool"
 
+
+def koin = [:]
+koin.android = "org.koin:koin-android:$versions.koin"
+koin.fragments = "org.koin:koin-androidx-fragment:$versions.koin"
+koin.scope = "org.koin:koin-androidx-scope:$versions.koin"
+koin.viewModel = "org.koin:koin-androidx-viewmodel:$versions.koin"
+deps.koin = koin
 
 def kotlin = [:]
 kotlin.core = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
