@@ -1,18 +1,15 @@
 package com.xmartlabs.template.ui.screens.splash
 
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.xmartlabs.template.R
 import com.xmartlabs.template.domain.usecase.SessionType
-import com.xmartlabs.template.ui.common.extensions.navigateSafe
+import com.xmartlabs.template.ui.common.BaseFragment
 import com.xmartlabs.template.ui.common.extensions.observeResult
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by mirland on 03/05/20.
  */
 // This fragment shouldn't have ui, the splash ui should be declared in the activity style.
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragment() {
   private val viewModel: SplashFragmentViewModel by viewModel()
 
   override fun onResume() {
@@ -25,7 +22,7 @@ class SplashFragment : Fragment() {
             SessionType.NOT_LOGGED ->
               SplashFragmentDirections.actionSplashFragmentToSignInFragment()
           }
-          requireActivity().findNavController(R.id.fragment_container).navigateSafe(direction)
+          router.navigate(direction)
         })
   }
 }

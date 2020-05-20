@@ -4,20 +4,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.findNavController
-import com.xmartlabs.template.R
 import com.xmartlabs.template.databinding.FragmentSigninBinding
-import com.xmartlabs.template.ui.common.BaseFragment
-import com.xmartlabs.template.ui.common.extensions.navigateSafe
+import com.xmartlabs.template.ui.common.BaseViewBindingFragment
 import com.xmartlabs.template.ui.common.extensions.observeResult
 import com.xmartlabs.template.ui.common.extensions.observeSuccessResult
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.time.ExperimentalTime
 
 /**
  * Created by mirland on 25/04/20.
  */
-class SignInFragment : BaseFragment<FragmentSigninBinding>() {
+class SignInFragment : BaseViewBindingFragment<FragmentSigninBinding>() {
   private val viewModel: SignInFragmentViewModel by viewModel()
 
   override fun inflateViewBinding(): FragmentSigninBinding =
@@ -46,7 +43,7 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>() {
           }
         },
         onSuccess = {
-          requireActivity().findNavController(R.id.fragment_container).navigateSafe(
+          router.navigate(
               SignInFragmentDirections.actionSignInFragmentToWelcomeFragment()
           )
         }
