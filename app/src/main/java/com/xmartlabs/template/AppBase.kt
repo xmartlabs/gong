@@ -22,9 +22,7 @@ class AppBase : Application() {
   override fun onCreate() {
     super.onCreate()
 
-    if (Config.DEBUG) {
-      setupStrictMode()
-    }
+    setupStrictMode()
     setupKoinModules()
     setupLoggers()
     setupCoil()
@@ -57,25 +55,27 @@ class AppBase : Application() {
   }
 
   private fun setupStrictMode() {
-    val builder = StrictMode.ThreadPolicy.Builder()
-        .detectDiskReads()
-        .detectDiskWrites()
-        .detectNetwork()
-        .penaltyLog()
-    StrictMode.setThreadPolicy(builder.build())
-    StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().apply {
-      detectActivityLeaks()
-      detectFileUriExposure()
-      detectLeakedClosableObjects()
-      detectLeakedRegistrationObjects()
-      detectLeakedSqlLiteObjects()
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        detectCleartextNetwork()
-      }
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        detectContentUriWithoutPermission()
-      }
-      penaltyLog()
-    }.build())
+    if (Config.DEBUG) {
+      val builder = StrictMode.ThreadPolicy.Builder()
+          .detectDiskReads()
+          .detectDiskWrites()
+          .detectNetwork()
+          .penaltyLog()
+      StrictMode.setThreadPolicy(builder.build())
+      StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().apply {
+        detectActivityLeaks()
+        detectFileUriExposure()
+        detectLeakedClosableObjects()
+        detectLeakedRegistrationObjects()
+        detectLeakedSqlLiteObjects()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          detectCleartextNetwork()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          detectContentUriWithoutPermission()
+        }
+        penaltyLog()
+      }.build())
+    }
   }
 }

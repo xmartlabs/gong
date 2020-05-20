@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.xmartlabs.template.databinding.FragmentWelcomeBinding
-import com.xmartlabs.template.ui.common.BaseFragment
+import com.xmartlabs.template.ui.common.BaseViewBindingFragment
 import com.xmartlabs.template.ui.common.extensions.observeSuccessResult
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by mirland on 25/04/20.
  */
-class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
+class WelcomeFragment : BaseViewBindingFragment<FragmentWelcomeBinding>() {
   private val viewModel: WelcomeFragmentViewModel by viewModel()
 
   override fun inflateViewBinding(): FragmentWelcomeBinding = FragmentWelcomeBinding.inflate(layoutInflater)

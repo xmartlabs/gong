@@ -125,7 +125,10 @@ dependencies {
     implementation deps.androidX.viewPager2
     implementation deps.coil
     implementation deps.firebase.crashlytics
-    implementation deps.koin
+    implementation deps.koin.android
+    implementation deps.koin.fragments
+    implementation deps.koin.scope
+    implementation deps.koin.viewModel
     implementation deps.kotlin.core
     implementation deps.kotlin.coroutines.core
     implementation deps.kotlin.reflect
