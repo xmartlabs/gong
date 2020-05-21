@@ -5,11 +5,11 @@ import com.google.gson.Gson
 import com.xmartlabs.template.Config
 import com.xmartlabs.template.data.repository.auth.UserLocalSource
 import com.xmartlabs.template.data.repository.auth.UserRemoteSource
-import com.xmartlabs.template.data.repository.auth.UserRepository
+import com.xmartlabs.template.domain.repository.UserRepository
 import com.xmartlabs.template.data.repository.location.LocationRemoteSource
-import com.xmartlabs.template.data.repository.location.LocationRepository
+import com.xmartlabs.template.domain.repository.LocationRepository
 import com.xmartlabs.template.data.repository.session.SessionLocalSource
-import com.xmartlabs.template.data.repository.session.SessionRepository
+import com.xmartlabs.template.domain.repository.SessionRepository
 import com.xmartlabs.template.data.repository.store.SharePreferenceStore
 import com.xmartlabs.template.data.repository.store.SharePreferenceStoreImpl
 import org.koin.dsl.module

@@ -1,7 +1,7 @@
 package com.xmartlabs.template.domain.usecase
 
 import com.xmartlabs.template.data.model.Location
-import com.xmartlabs.template.data.repository.location.LocationRepository
+import com.xmartlabs.template.domain.repository.LocationRepository
 import com.xmartlabs.template.domain.usecase.common.CoroutineUseCase
 
 /**

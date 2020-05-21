@@ -51,13 +51,6 @@ task check() {
     dependsOn("checkStopShipXmls")
 }
 
-repositories {
-    maven {
-        url 'http://www.idescout.com/maven/repo/'
-        name 'IDEScout, Inc.'
-    }
-}
-
 // `./gradlew wrapper --gradle-version=[version]` uses the distribution type all
 wrapper {
     distributionType = Wrapper.DistributionType.ALL

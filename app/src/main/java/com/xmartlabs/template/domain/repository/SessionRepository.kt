@@ -1,4 +1,6 @@
-package com.xmartlabs.template.data.repository.session
+package com.xmartlabs.template.domain.repository
+
+import com.xmartlabs.template.data.repository.session.SessionLocalSource
 
 /**
  * Created by mirland on 03/05/20.
