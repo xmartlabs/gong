@@ -18,7 +18,6 @@ function movePackage() {
 }
 
 function changeProjectName() {
-  echo "working on $(pwd)"
   # Replace Project Name
   find . -type f \( -name "*.xml" -o -name "*.gradle" \) -exec perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
 
@@ -42,23 +41,21 @@ function changeProjectName() {
 }
 
 function changePackageName() {
-  echo "working on $(pwd)"
   find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
   find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_REAL_NAME/$REAL_PROJECT_NAME/g" {} \;
 }
 
 function cloneAndSetupRepository() {
-  echo "working on $(pwd)"
-  git clone --depth=1 $GIT_BASE_PROJECT_URL
+  git clone --depth=1 $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
 }
 
 function finishGitSetup() {
   currentCommitHash=$(git rev-parse --short HEAD)
   rm -rf .git
-  git init
+  git init > /dev/null
   git add -A
-  git commit -m "Initial commit - Based On Gong $currentCommitHash"
+  git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
@@ -90,10 +87,15 @@ PACKAGE_NAME=$(echo "$PACKAGE_NAME" | xargs)
 echo "what is the git remote url? (optional parameter)"
 read -r NEW_REMOTE_URL
 
-clear
+echo "Start clone repository process..."
 cloneAndSetupRepository
+
+echo "Rename project files..."
 changePackageName
 changeProjectName
+echo "Remove unused files..."
 removeUnusedFiles
+echo "Setup new Git repository..."
 finishGitSetup
 cd ..
+echo "Process finished, you can check the project at $(pwd)/$PROJECT_NAME"

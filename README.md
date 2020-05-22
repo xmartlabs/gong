@@ -39,12 +39,17 @@ The main libraries that we are using are:
 - [LeakCanary](https://square.github.io/leakcanary/), a memory leak detection library for Android.
 
 ## Setup
-To set up a new project you have to follow these steps:
+
+To use this template you have to excecute the following command:
+```bash
+bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/master/gong_setup.sh)
+```
+
+It will clone and setup all variables that you need.
+If you prefer to do it manually, you have to follow these steps:
 - Clone the project
 - Update the `applicationId` in the app's build gradle file.
 - Change the package structure based on your application id.
-
-_We're currently working on a script to automatize this process._
 
 ## Configuration and secrets
 The app's version name is defined in the project's [Gradle file](/build.gradle). 
