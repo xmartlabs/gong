@@ -3,7 +3,7 @@
 ext {
     // App version
     versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
-    name = "Gong - Android Template"
+    name = "Gong"
     configPropertiesFile = file('config.properties') // All configurations are saved here
     secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
 }
