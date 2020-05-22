@@ -2,8 +2,6 @@
 
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
-BASE_PROJECT_REAL_NAME="Base project"
-BASE_PROJECT_DB_NAME="base_project_database"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
@@ -21,11 +19,13 @@ function changeProjectName() {
   # Replace Project Name
   find . -type f \( -name "*.xml" -o -name "*.gradle" \) -exec perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
 
+  # Replace package names
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
+
+  # Change file structure
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
   gong_new_path=$(sed "s/\./\//g" <<<"$BASE_PROJECT_PAKAGE_NAME")
-
   first_gong_folder=$(sed 's/\..*//' <<<"$BASE_PROJECT_PAKAGE_NAME")
-
   cd "app/src/" || exit 1
 
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
@@ -38,11 +38,6 @@ function changeProjectName() {
   cd ../../../
   mv $BASE_PROJECT_NAME "$PROJECT_NAME"
   cd "$PROJECT_NAME" || exit 1
-}
-
-function changePackageName() {
-  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
-  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_REAL_NAME/$REAL_PROJECT_NAME/g" {} \;
 }
 
 function cloneAndSetupRepository() {
