@@ -20,7 +20,7 @@ function movePackage() {
 function changeProjectName() {
   echo "working on $(pwd)"
   # Replace Project Name
-  find . -type f \( -name "*.xml" -o -name "*.gradle" \) -exec sed -i -e "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
+  find . -type f \( -name "*.xml" -o -name "*.gradle" \) -exec perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
 
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
   gong_new_path=$(sed "s/\./\//g" <<<"$BASE_PROJECT_PAKAGE_NAME")
@@ -43,12 +43,8 @@ function changeProjectName() {
 
 function changePackageName() {
   echo "working on $(pwd)"
-  find . -type f -print0 | xargs -0 sed -i "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g"
-  find . -type f -print0 | xargs -0 sed -i "s/$BASE_PROJECT_REAL_NAME/$REAL_PROJECT_NAME/g"
-
-  find . -type f -print0 | xargs -0 sed -i "s/$BASE_PROJECT_DB_NAME/$REAL_PROJECT_NAME/g"
-  NEW_DB_NAME="$(echo "$REAL_PROJECT_NAME" | sed 's/[^ ]\+/\l\u&/g' | sed 's/ /_/g' | tr '[:upper:]' '[:lower:]')"
-  find . -type f -print0 | xargs -0 sed -i "s/$BASE_PROJECT_DB_NAME/$NEW_DB_NAME/g"
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_REAL_NAME/$REAL_PROJECT_NAME/g" {} \;
 }
 
 function cloneAndSetupRepository() {
@@ -86,7 +82,7 @@ PROJECT_NAME=${REAL_PROJECT_NAME// /-}
 echo "What is the new package name? (For example: 'com.xmartlabs.gong')"
 read -r PACKAGE_NAME
 
-echo "what is the git remote url? \(optional parameter)"
+echo "what is the git remote url? (optional parameter)"
 read -r NEW_REMOTE_URL
 
 clear
