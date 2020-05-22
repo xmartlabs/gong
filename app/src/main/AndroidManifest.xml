@@ -2,12 +2,12 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.xmartlabs.template"
+    package="com.xmartlabs.gong"
     >
 
     <!--  TODO: Remove networkSecurityConfig -->
     <application
-        android:name=".AppBase"
+        android:name="com.xmartlabs.gong.AppBase"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,7 +24,7 @@
             android:value="false"
             />
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.xmartlabs.gong.ui.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
