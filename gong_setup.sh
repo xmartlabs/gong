@@ -77,10 +77,15 @@ echo "Gong - Xmartlabs' Android Base Project initialization process"
 echo -e "-----------------------------------------------------------\n"
 echo "What's your project name?"
 read -r REAL_PROJECT_NAME
+REAL_PROJECT_NAME=$(echo "$REAL_PROJECT_NAME" | xargs)
 PROJECT_NAME=${REAL_PROJECT_NAME// /-}
+
+[[ -z "$PROJECT_NAME" ]] && echo "Project name cannot be empty" && exit 1
 
 echo "What is the new package name? (For example: 'com.xmartlabs.gong')"
 read -r PACKAGE_NAME
+PACKAGE_NAME=$(echo "$PACKAGE_NAME" | xargs)
+[[ -z "$PACKAGE_NAME" ]] && echo "Package name cannot be empty" && exit 1
 
 echo "what is the git remote url? (optional parameter)"
 read -r NEW_REMOTE_URL
