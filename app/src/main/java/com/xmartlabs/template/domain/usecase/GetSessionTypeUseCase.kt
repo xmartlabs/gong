@@ -1,6 +1,6 @@
 package com.xmartlabs.template.domain.usecase
 
-import com.xmartlabs.template.data.repository.session.SessionRepository
+import com.xmartlabs.template.domain.repository.SessionRepository
 import com.xmartlabs.template.domain.usecase.common.CoroutineUseCase
 
 /**

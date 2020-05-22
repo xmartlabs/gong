@@ -1,7 +1,7 @@
 package com.xmartlabs.template.domain.usecase
 
 import com.xmartlabs.template.data.model.User
-import com.xmartlabs.template.data.repository.auth.UserRepository
+import com.xmartlabs.template.domain.repository.UserRepository
 import com.xmartlabs.template.domain.usecase.common.CoroutineUseCase
 
 /**

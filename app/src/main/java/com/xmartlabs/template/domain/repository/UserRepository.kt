@@ -1,5 +1,7 @@
-package com.xmartlabs.template.data.repository.auth
+package com.xmartlabs.template.domain.repository
 
+import com.xmartlabs.template.data.repository.auth.UserLocalSource
+import com.xmartlabs.template.data.repository.auth.UserRemoteSource
 import com.xmartlabs.template.data.repository.session.SessionLocalSource
 
 /**
