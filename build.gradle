@@ -1,14 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
-    ext {
-        // App version
-        versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
-        projectName = "XmartlabsTemplate"
+ext {
+    // App version
+    versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
+    name = "Gong - Android Template"
+    configPropertiesFile = file('config.properties') // All configurations are saved here
+    secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
+}
 
-        configPropertiesFile = file('config.properties') // All configurations are saved here
-        secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
-    }
+buildscript {
     apply from: 'versions.gradle'
     addRepos(repositories)
     dependencies {

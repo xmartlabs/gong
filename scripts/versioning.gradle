@@ -28,7 +28,7 @@ android.applicationVariants.all { variant ->
         for (flavor in variant.productFlavors) {
             def apk = output.outputFileName
             if (apk.endsWith(".apk") && !apk.contains("unaligned")) {
-                def project = rootProject.projectName
+                def project = rootProject.name
                 def separator = "-"
                 def buildType = variant.variantData.variantConfiguration.buildType.name
                 def flavorName = flavor.name
