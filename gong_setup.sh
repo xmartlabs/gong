@@ -65,9 +65,9 @@ function removeUnusedFiles() {
 
 if [ -d "$BASE_PROJECT_NAME" ]; then echo "Gong temporal director error, please delete '$BASE_PROJECT_NAME' folder" && exit 1; fi
 
-echo "-----------------------------------------------------------"
+echo "-------------------------------------------------------------"
 echo "Gong - Xmartlabs' Android Base Project initialization process"
-echo -e "-----------------------------------------------------------\n"
+echo -e "-------------------------------------------------------------\n"
 echo "What's your project name?"
 read -r REAL_PROJECT_NAME
 REAL_PROJECT_NAME=$(echo "$REAL_PROJECT_NAME" | xargs)

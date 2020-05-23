@@ -2,7 +2,7 @@
   <img src="/images/banner.png">
 </p>
 
-**Gong** is [Xmartlabs](https://xmartlabs.com/)' official Android template project, written in Kotlin and focused on providing a solid app architecture.
+**Gong** is [Xmartlabs](https://xmartlabs.com/)' official Android template project, written in Kotlin, and focused on providing a solid app architecture.
 One of the main objectives of this project is to supply a good starting point for all new android apps, which lets you move forward fast using the latest Android Components and libraries.
 We're using "clean architecture" to structure, decouple, expand, and maintain the code.
 
@@ -26,10 +26,10 @@ The core libraries for the communication between layer components are: [**LiveDa
 ## Core Libraries
 The main libraries that we are using are:
 - [Android Architecture Components - Jetpack](https://developer.android.com/topic/libraries/architecture):
- - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) which provides data objects that notify views when the underlying database changes.
- - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) which stores UI-related data that isn't destroyed upon app rotation.
- - [Room](https://developer.android.com/topic/libraries/architecture/room), a SQLite object mapping library.
- - [Android Navigation Component](https://developer.android.com/guide/navigation) used to navigate across different pieces of content within your app.
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) which provides data objects that notify views when the underlying database changes.
+  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) which stores UI-related data that isn't destroyed upon app rotation.
+  - [Android Navigation Component](https://developer.android.com/guide/navigation) used to navigate across different pieces of content within your app.
+  - [Room](https://developer.android.com/topic/libraries/architecture/room), a SQLite object mapping library.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) for asynchronous programming
 - [Coil](https://coil-kt.github.io/coil/), an image loading library for Android backed by Kotlin Coroutines.
 - [Koin](https://insert-koin.io/), a lightweight dependency injection framework for Kotlin.
@@ -40,7 +40,8 @@ The main libraries that we are using are:
 
 ## Setup
 
-To use this template you have to excecute the following command:
+To use this template, you can use the [gong_setup.sh](/gong_setup.sh) script that automatizes the setup process.
+You can run it remotely executing the following command:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/master/gong_setup.sh)
 ```
