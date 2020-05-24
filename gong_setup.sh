@@ -60,7 +60,9 @@ function finishGitSetup() {
 
 function removeUnusedFiles() {
   rm "$SCRIPT_NAME"
+  rm -r ".circleci"
   rm ".github/CODEOWNERS"
+  rm "LICENSE"
 }
 
 if [ -d "$BASE_PROJECT_NAME" ]; then echo "Gong temporal director error, please delete '$BASE_PROJECT_NAME' folder" && exit 1; fi
