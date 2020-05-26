@@ -1,8 +1,6 @@
 version: 2.1
-
 orbs:
   android: circleci/android@0.2.0
-
 jobs:
   build:
     executor: android/android
@@ -13,10 +11,13 @@ jobs:
           command: ./gradlew detekt
       - run:
           name: Lints
-          command: ./gradlew lintDevDebug
+          command: ./gradlew lint
       - run:
           name: Compile
-          command: ./gradlew assembleDevDebug
+          command: ./gradlew assemble
+      - run:
+          name: Build
+          command: ./gradlew build
       - store_artifacts:
           path: build/reports
           destination: reports

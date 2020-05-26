@@ -6,19 +6,13 @@ import android.os.StrictMode
 import coil.Coil
 import coil.ImageLoaderBuilder
 import coil.util.DebugLogger
-import com.xmartlabs.gong.device.di.NetworkDiModule
-import com.xmartlabs.gong.device.di.RepositoryDiModuleProvider
-import com.xmartlabs.gong.device.di.UseCaseDiModule
-import com.xmartlabs.gong.device.di.ViewModelDiModule
 import com.xmartlabs.gong.device.logger.LoggerModule
 import jonathanfinerty.once.Once
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 /**
  * Created by mirland on 25/04/20.
  */
-class AppBase : Application() {
+abstract class AppBase : Application() {
   override fun onCreate() {
     super.onCreate()
 
@@ -33,19 +27,7 @@ class AppBase : Application() {
 
   private fun setupLoggers() = LoggerModule.initializeModule(this)
 
-  private fun setupKoinModules() {
-    startKoin {
-      androidContext(this@AppBase)
-      modules(
-          NetworkDiModule.network,
-          RepositoryDiModuleProvider.repositories,
-          RepositoryDiModuleProvider.sources,
-          RepositoryDiModuleProvider.stores,
-          UseCaseDiModule.useCases,
-          ViewModelDiModule.viewModels
-      )
-    }
-  }
+  protected abstract fun setupKoinModules()
 
   private fun setupCoil() {
     val imageLoader = ImageLoaderBuilder(this)
