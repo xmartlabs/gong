@@ -2,6 +2,7 @@
     <dictionary name="project_dictionary">
         <words>
             <w>bugsee</w>
+            <w>codebeat</w>
             <w>coroutine</w>
             <w>coroutines</w>
             <w>crashlytics</w>
