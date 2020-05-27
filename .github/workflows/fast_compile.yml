@@ -1,31 +1,20 @@
-name: Fast check
+name: Run lints and compile
 on: [push]
 jobs:
-  build:
+  lint_dev_checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache gradle cache
-        uses: actions/cache@v1.1.2
+      - name: Cache files
+        uses: actions/cache@v2.0.0
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.android/build-cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}-${{ hashFiles('**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Cache gradle wrapper
-        uses: actions/cache@v1.1.2
-        with:
-          path: ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradlewrapper-${{ hashFiles('**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradlegradlewrapper-
-      - name: Cache android cache
-        uses: actions/cache@v1.1.2
-        with:
-          path: ~/.android/build-cache
-          key: ${{ runner.os }}-android-cache
-          restore-keys: |
-            ${{ runner.os }}-gradlegradlewrapper-
       - name: Gradle Initialization
         run: ./gradlew
       - name: Check forbidden comments
@@ -46,3 +35,25 @@ jobs:
         with:
           name: Lints report
           path: app/build/reports/lint-results-devDebug.html
+  build_app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache files
+        uses: actions/cache@v2.0.0
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.android/build-cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}-${{ hashFiles('**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build App
+        run: ./gradlew build
+      - name: Upload Report
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Lints report
+          path: app/build/reports/
