@@ -1,6 +1,7 @@
 <p align="center">
   <img src="/images/banner.png">
 </p>
+
 ![Fast check](https://github.com/xmartlabs/gong/workflows/Fast%20check/badge.svg?branch=master)
 
 **Gong** is [Xmartlabs](https://xmartlabs.com/)' official Android template project, written in Kotlin, and focused on providing a solid app architecture.
