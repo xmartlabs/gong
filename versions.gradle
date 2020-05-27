@@ -12,6 +12,7 @@ ext.androidVersions = androidVersions
 
 ext.deps = [:]
 def versions = [:]
+versions.androidSwissKnife = "fd46f22979"
 versions.androidXAppCompact = "1.1.0"
 versions.androidXBrowser = "1.2.0"
 versions.androidXCardView = "1.0.0"
@@ -93,6 +94,11 @@ kotlin.coroutines.playServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-
 kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect"
 deps.kotlin = kotlin
 
+def androidSwissKnife = [:]
+androidSwissKnife.navigation = "com.github.xmartlabs.AndroidSwissKnife:navigation:$versions.androidSwissKnife"
+androidSwissKnife.navigationDebug = "com.github.xmartlabs.AndroidSwissKnife:navigation-debug:$versions.androidSwissKnife"
+deps.androidSwissKnife = androidSwissKnife
+
 def androidXTest = [:]
 androidXTest.espresso = "androidx.test.espresso:espresso-core:$versions.androidXTestEspresso"
 androidXTest.junit = "androidx.test.ext:junit:$versions.androidXTestJunit"
@@ -167,7 +173,7 @@ buildscriptDeps.navigationSafeArgPlugin = "androidx.navigation:navigation-safe-a
 buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
 ext.buildscriptDeps = buildscriptDeps
 
-def addRepos(RepositoryHandler handler) {
+static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.mavenCentral()
     handler.gradlePluginPortal()

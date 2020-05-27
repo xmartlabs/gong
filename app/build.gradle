@@ -14,8 +14,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.xmartlabs.snapshot-publisher'
+
+// TODO: Enable Crashlytics
+// apply plugin: 'com.google.firebase.crashlytics'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -33,7 +35,7 @@ android {
         versionName ""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        buildConfigField 'String', 'APP_NAME', '"App Template"' // Used to define some constants like the database name
+        buildConfigField 'String', 'APP_NAME', '"Gong"' // Used to define some constants like the share preferences's file name.
     }
 
     signingConfigs {
@@ -108,8 +110,9 @@ dependencies {
     debugImplementation deps.debugDb
     debugImplementation deps.leakcanary
 
-    devImplementation deps.tooLargeTool
+    devImplementation deps.androidSwissKnife.navigationDebug
 
+    implementation deps.androidSwissKnife.navigation
     implementation deps.androidX.appcompat
     implementation deps.androidX.cardview
     implementation deps.androidX.constraint_layout

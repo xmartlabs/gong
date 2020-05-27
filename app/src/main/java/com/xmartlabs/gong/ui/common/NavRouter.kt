@@ -12,7 +12,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.xmartlabs.gong.ui.common.extensions.navigateSafe
+import com.xmartlabs.gong.device.logger.NavigationLogger
+import com.xmartlabs.swissknife.navigation.navigateSafe
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 /**
  * Created by mirland on 14/05/20.
@@ -32,11 +35,13 @@ interface NavRouter {
   )
 }
 
-open class NavRouterImpl : NavRouter {
+open class NavRouterImpl : NavRouter, KoinComponent {
   private lateinit var navController: NavController
+  private val navigationLogger: NavigationLogger by inject()
 
   fun setupNavController(navController: NavController) {
     this.navController = navController
+    navigationLogger.setup(navController)
   }
 
   override fun getCurrentDestination(): NavDestination? = navController.currentDestination

@@ -18,7 +18,9 @@ function movePackage() {
 function changeProjectName() {
   # Replace Project Name
   find "app/src/main/res/values" -type f -name "*.xml" -exec perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
+  find "app/src/dev/res/values" -type f -name "*.xml" -exec perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" {} \;
   perl -i -pe "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/gi" build.gradle
+  perl -i -pe "s/\"$BASE_PROJECT_NAME/\"$REAL_PROJECT_NAME/gi" app/build.gradle
 
   # Replace package names
   find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
