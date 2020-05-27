@@ -13,7 +13,7 @@ import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.xmartlabs.gong.device.logger.NavigationLogger
-import com.xmartlabs.swissknife.navigation.navigateSafe
+import com.xmartlabs.swissknife.navigation.extensions.navigateSafe
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
