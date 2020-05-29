@@ -35,9 +35,10 @@ android {
         versionName ""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        buildConfigField 'String', 'APP_NAME', '"Gong"' // Used to define some constants like the share preferences's file name.
+        // Used to define some constants like the share preferences's file name.
+        buildConfigField 'String', 'APP_NAME', '"Gong"'
     }
-
+    buildFeatures.viewBinding = true
     signingConfigs {
         release {
             storeFile getEnvVariable('KEYSTORE_FILE') == null ? null : file(getEnvVariable('KEYSTORE_FILE'))
@@ -102,8 +103,6 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xopt-in=kotlin.RequiresOptIn"]
     }
-
-    viewBinding.enabled = true
 }
 
 dependencies {
