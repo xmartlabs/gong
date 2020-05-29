@@ -2,7 +2,7 @@ package com.xmartlabs.gong.device.logger
 
 import androidx.navigation.NavController
 import com.xmartlabs.swissknife.core.Logger
-import com.xmartlabs.swissknife.navigationdebug.setupOnDestinationChangedLogger
+import com.xmartlabs.swissknife.navigationdebug.extensions.setupOnDestinationChangedLogger
 import timber.log.Timber
 import java.util.Collections
 import java.util.WeakHashMap
