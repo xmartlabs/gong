@@ -12,7 +12,7 @@ ext.androidVersions = androidVersions
 
 ext.deps = [:]
 def versions = [:]
-versions.androidSwissKnife = "fd46f22979"
+versions.androidSwissKnife = "1c38b28b23"
 versions.androidXAppCompact = "1.1.0"
 versions.androidXBrowser = "1.2.0"
 versions.androidXCardView = "1.0.0"
@@ -95,6 +95,7 @@ kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect"
 deps.kotlin = kotlin
 
 def androidSwissKnife = [:]
+androidSwissKnife.core = "com.github.xmartlabs.AndroidSwissKnife:core:$versions.androidSwissKnife"
 androidSwissKnife.navigation = "com.github.xmartlabs.AndroidSwissKnife:navigation:$versions.androidSwissKnife"
 androidSwissKnife.navigationDebug = "com.github.xmartlabs.AndroidSwissKnife:navigation-debug:$versions.androidSwissKnife"
 deps.androidSwissKnife = androidSwissKnife

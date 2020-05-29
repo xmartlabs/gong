@@ -111,6 +111,7 @@ dependencies {
 
     devImplementation deps.androidSwissKnife.navigationDebug
 
+    implementation deps.androidSwissKnife.core
     implementation deps.androidSwissKnife.navigation
     implementation deps.androidX.appcompat
     implementation deps.androidX.cardview
