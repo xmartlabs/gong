@@ -41,6 +41,7 @@ The main libraries that we are using are:
 - [Timber](https://github.com/JakeWharton/timber) one of the most popular loggers on Android.
 - [Stetho](http://facebook.github.io/stetho/), a sophisticated debug bridge for Android applications.
 - [LeakCanary](https://square.github.io/leakcanary/), a memory leak detection library for Android.
+- [AndroidSnapshotPublisher](https://github.com/xmartlabs/android-snapshot-publisher), one of the most important tools used in the QA process, it's a Gradle plugin that prepares and distributes deliverable versions easily when they are ready to test.
 
 ## Setup
 
