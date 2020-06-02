@@ -27,22 +27,24 @@ class LocationRepository(
   private var lastRequestedLocation: Date? = null
 
   fun getLocation(): Flow<Location> {
-    val previousRequest = lastRequestedLocation?.let { lastRequested -> Date() - lastRequested }
-    return if (previousRequest == null || previousRequest > REFRESH_LOCATION_DURATION) {
+    return if (shouldFetchNewLocation()) {
       val getNewLocationFlow = flow {
         val newLocation = locationRemoteSource.getLocation()
-        locationLocalSource.saveLocation(newLocation.copy(timestamp = Date()))
+        locationLocalSource.saveLocation(newLocation)
         lastRequestedLocation = Date()
         emit(newLocation)
       }
-
       listOf(getNewLocationFlow, locationLocalSource.getLocation())
           .merge()
     } else {
       locationLocalSource.getLocation()
     }.filterNotNull()
   }
-}
 
-@OptIn(ExperimentalTime::class)
-private operator fun Date.minus(date: Date) = (time - date.time).milliseconds
+  private fun shouldFetchNewLocation(): Boolean {
+    val previousRequest = lastRequestedLocation?.let { lastRequested -> Date() - lastRequested }
+    return previousRequest == null || previousRequest > REFRESH_LOCATION_DURATION
+  }
+
+  private operator fun Date.minus(date: Date) = (time - date.time).milliseconds
+}
