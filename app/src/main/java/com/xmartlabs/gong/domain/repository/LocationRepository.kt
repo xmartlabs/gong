@@ -3,9 +3,11 @@ package com.xmartlabs.gong.domain.repository
 import com.xmartlabs.gong.data.model.Location
 import com.xmartlabs.gong.data.repository.location.LocationLocalSource
 import com.xmartlabs.gong.data.repository.location.LocationRemoteSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.merge
 import java.util.Date
 import kotlin.time.ExperimentalTime
@@ -28,18 +30,21 @@ class LocationRepository(
 
   fun getLocation(): Flow<Location> {
     return if (shouldFetchNewLocation()) {
-      val getNewLocationFlow = flow {
-        val newLocation = locationRemoteSource.getLocation()
-        locationLocalSource.saveLocation(newLocation)
-        lastRequestedLocation = Date()
-        emit(newLocation)
-      }
-      listOf(getNewLocationFlow, locationLocalSource.getLocation())
+      listOf(getRemoteLocationFlow(), locationLocalSource.getLocation())
           .merge()
     } else {
       locationLocalSource.getLocation()
-    }.filterNotNull()
+    }
+        .filterNotNull()
+        .flowOn(Dispatchers.IO)
   }
+
+  private fun getRemoteLocationFlow(): Flow<Location> = flow {
+    val newLocation = locationRemoteSource.getLocation()
+    locationLocalSource.saveLocation(newLocation)
+    lastRequestedLocation = Date()
+    emit(newLocation)
+  }.flowOn(Dispatchers.IO)
 
   private fun shouldFetchNewLocation(): Boolean {
     val previousRequest = lastRequestedLocation?.let { lastRequested -> Date() - lastRequested }

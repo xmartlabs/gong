@@ -1,4 +1,4 @@
-package com.xmartlabs.gong.data.repository.store.sharePrreferences.converters
+package com.xmartlabs.gong.data.repository.store.sharePreferences.converters
 
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson

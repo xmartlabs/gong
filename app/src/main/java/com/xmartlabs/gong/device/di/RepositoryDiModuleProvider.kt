@@ -10,8 +10,8 @@ import com.xmartlabs.gong.data.repository.location.LocationLocalSource
 import com.xmartlabs.gong.data.repository.location.LocationRemoteSource
 import com.xmartlabs.gong.data.repository.session.SessionLocalSource
 import com.xmartlabs.gong.data.repository.store.db.AppDatabase
-import com.xmartlabs.gong.data.repository.store.sharePrreferences.SharePreferenceStore
-import com.xmartlabs.gong.data.repository.store.sharePrreferences.SharePreferenceStoreImpl
+import com.xmartlabs.gong.data.repository.store.sharePreferences.SharePreferenceStore
+import com.xmartlabs.gong.data.repository.store.sharePreferences.SharePreferenceStoreImpl
 import com.xmartlabs.gong.domain.repository.LocationRepository
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.repository.UserRepository

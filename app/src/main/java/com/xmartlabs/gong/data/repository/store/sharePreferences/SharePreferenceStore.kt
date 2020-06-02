@@ -1,8 +1,8 @@
-package com.xmartlabs.gong.data.repository.store.sharePrreferences
+package com.xmartlabs.gong.data.repository.store.sharePreferences
 
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
-import com.xmartlabs.gong.data.repository.store.sharePrreferences.converters.SharePreferenceEntityConverter
+import com.xmartlabs.gong.data.repository.store.sharePreferences.converters.SharePreferenceEntityConverter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
