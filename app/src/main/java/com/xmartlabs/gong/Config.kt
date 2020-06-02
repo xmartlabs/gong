@@ -19,6 +19,7 @@ object Config {
   val CRASHLYTICS_LOG_ENABLED = !DEBUG
 
   val SHARE_PREFERENCE_NAME = BuildConfig.APP_NAME.toFileName()
+  val DB_NAME = BuildConfig.APP_NAME.toFileName()
 
   const val API_BASE_URL = BuildConfig.API_BASE_URL
 }

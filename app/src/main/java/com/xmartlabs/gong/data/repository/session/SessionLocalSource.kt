@@ -2,8 +2,8 @@ package com.xmartlabs.gong.data.repository.session
 
 import com.google.gson.Gson
 import com.xmartlabs.gong.data.model.User
-import com.xmartlabs.gong.data.repository.store.SharePreferenceStore
-import com.xmartlabs.gong.data.repository.store.converters.UserConverter
+import com.xmartlabs.gong.data.repository.store.sharePrreferences.SharePreferenceStore
+import com.xmartlabs.gong.data.repository.store.sharePrreferences.converters.UserConverter
 
 /**
  * Created by mirland on 03/05/20.
