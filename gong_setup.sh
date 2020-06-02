@@ -62,7 +62,6 @@ function finishGitSetup() {
 
 function removeUnusedFiles() {
   rm "$SCRIPT_NAME"
-  rm -r ".circleci"
   rm ".github/CODEOWNERS"
   rm "LICENSE"
 }
