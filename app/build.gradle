@@ -12,6 +12,7 @@ apply from: rootProject.file('scripts/versioning.gradle')
 apply from: rootProject.file('scripts/read_properties.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.xmartlabs.snapshot-publisher'
@@ -106,6 +107,9 @@ android {
 }
 
 dependencies {
+    androidTestImplementation deps.androidX.test.junit
+    androidTestImplementation deps.androidX.test.espresso
+
     debugImplementation deps.debugDb
     debugImplementation deps.leakcanary
 
@@ -124,6 +128,7 @@ dependencies {
     implementation deps.androidX.navigation.fragment
     implementation deps.androidX.navigation.ui
     implementation deps.androidX.recyclerview
+    implementation deps.androidX.room.coreKtx
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
     implementation deps.coil
@@ -147,9 +152,9 @@ dependencies {
     implementation deps.stetho
     implementation deps.timber
 
+    kapt deps.androidX.room.compiler
+
     testImplementation deps.junit
-    androidTestImplementation deps.androidX.test.junit
-    androidTestImplementation deps.androidX.test.espresso
 }
 
 snapshotPublisher {

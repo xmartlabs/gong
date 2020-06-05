@@ -1,4 +1,4 @@
-package com.xmartlabs.gong.data.repository.store.converters
+package com.xmartlabs.gong.data.repository.store.sharePreferences.converters
 
 import androidx.annotation.WorkerThread
 
