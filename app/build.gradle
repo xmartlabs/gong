@@ -15,7 +15,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'com.xmartlabs.snapshot-publisher'
+
+if (getEnvVariable('KEYSTORE_FILE') != null) {
+    // Avoid Signing not ready issues in Gradle Play Publisher plugin
+    apply from: rootProject.file('scripts/snapshot_publish.gradle')
+}
+
+// TODO: Enable when the services json is added
+// apply plugin: 'com.google.gms.google-services'
 
 // TODO: Enable Crashlytics
 // apply plugin: 'com.google.firebase.crashlytics'
@@ -156,25 +163,3 @@ dependencies {
 
     testImplementation deps.junit
 }
-
-snapshotPublisher {
-    version {
-        versionNameFormat = getEnvVariable('SNAPSHOT_VERSION_NAME_FORMAT', '{currentVersionName}-{commitHash}')
-    }
-    releaseNotes {
-        commitHistoryFormat = '• %s'
-        headerFormat = getEnvVariable('SNAPSHOT_HEADER_FORMAT', '%s%n%nAuthor: %an <%ae>')
-        includeHistorySinceLastTag = true
-        includeLastCommitInHistory = getEnvVariable('SNAPSHOT_INCLUDE_LAST_COMMIT_IN_HISTORY', false) as Boolean
-        includeMergeCommitsInHistory = false
-        maxCommitHistoryLines = getEnvVariable('SNAPSHOT_MAX_COMMIT_HISTORY_LINES', 10) as Integer
-    }
-    firebaseAppDistribution {
-        serviceAccountCredentials = getEnvVariable('FIREBASE_SERVICE_ACCOUNT_CREDENTIALS_FILE')
-        distributionEmails = getEnvVariable('BETA_DISTRIBUTION_EMAILS')
-        distributionGroupAliases = getEnvVariable('BETA_DISTRIBUTION_GROUP_ALIASES')
-    }
-}
-
-// Enable when the services json is added
-// apply plugin: 'com.google.gms.google-services'
