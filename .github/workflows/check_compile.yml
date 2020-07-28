@@ -1,12 +1,12 @@
 name: Run lints and compile
-on: [push]
+on: [pull_request]
 jobs:
   lint_dev_checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Cache files
-        uses: actions/cache@v2.0.0
+        uses: actions/cache@v2.1.0
         with:
           path: |
             ~/.gradle/caches
@@ -22,7 +22,7 @@ jobs:
       - name: Detekt
         run: ./gradlew detekt
       - name: Upload Detekt report
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: Detekt report
@@ -30,7 +30,7 @@ jobs:
       - name: Android Lints
         run: ./gradlew :app:lintDevDebug
       - name: Upload Lint report
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: Lints report
@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache files
-        uses: actions/cache@v2.0.0
+        uses: actions/cache@v2.1.0
         with:
           path: |
             ~/.gradle/caches
@@ -52,7 +52,7 @@ jobs:
       - name: Build App
         run: ./gradlew build
       - name: Upload Report
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: Lints report
