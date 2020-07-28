@@ -34,6 +34,8 @@ function changeProjectName() {
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
   mkdir "$TEMPORAL_FOLDER"
 
+  movePackage "dev"
+  movePackage "prod"
   movePackage "main"
   movePackage "androidTest"
   movePackage "test"
