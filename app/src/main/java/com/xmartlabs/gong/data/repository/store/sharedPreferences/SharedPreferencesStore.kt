@@ -1,8 +1,8 @@
-package com.xmartlabs.gong.data.repository.store.sharePreferences
+package com.xmartlabs.gong.data.repository.store.sharedPreferences
 
 import android.content.SharedPreferences
 import androidx.annotation.WorkerThread
-import com.xmartlabs.gong.data.repository.store.sharePreferences.converters.SharePreferenceEntityConverter
+import com.xmartlabs.gong.data.repository.store.sharedPreferences.converters.SharedPreferencesEntityConverter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -15,15 +15,15 @@ interface SharedPreferencesStore {
 
   suspend fun getString(key: String, defaultValue: String? = null): String?
   fun putString(key: String, value: String?)
-  suspend fun <T> getEntity(key: String, converter: SharePreferenceEntityConverter<T>): T?
-  suspend fun <T> putEntity(key: String, t: T, converter: SharePreferenceEntityConverter<T>)
+  suspend fun <T> getEntity(key: String, converter: SharedPreferencesEntityConverter<T>): T?
+  suspend fun <T> putEntity(key: String, t: T, converter: SharedPreferencesEntityConverter<T>)
 }
 
 class SharedPreferencesStoreImpl(
     private val sharedPreferences: SharedPreferences
 ) : SharedPreferencesStore {
   private val cachedEntity: MutableMap<String, Any?> = mutableMapOf()
-  override suspend fun <T> putEntity(key: String, t: T, converter: SharePreferenceEntityConverter<T>) =
+  override suspend fun <T> putEntity(key: String, t: T, converter: SharedPreferencesEntityConverter<T>) =
       withContext(Dispatchers.Default) {
         t.saveInCache(key)
         sharedPreferences.edit()
@@ -38,7 +38,7 @@ class SharedPreferencesStoreImpl(
           .saveInCache(key)
 
   @Suppress("UNCHECKED_CAST")
-  override suspend fun <T> getEntity(key: String, converter: SharePreferenceEntityConverter<T>): T? =
+  override suspend fun <T> getEntity(key: String, converter: SharedPreferencesEntityConverter<T>): T? =
       (cachedEntity[key] as? T)
           ?: withContext(Dispatchers.Default) {
             val json = sharedPreferences.getString(key, null)
