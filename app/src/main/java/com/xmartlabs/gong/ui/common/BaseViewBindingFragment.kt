@@ -11,7 +11,7 @@ import androidx.viewbinding.ViewBinding
  */
 abstract class BaseViewBindingFragment<V : ViewBinding> : BaseFragment() {
   private var _binding: V? = null
-  protected val viewBinding get() = _binding!!
+  protected val viewBinding get() = requireNotNull(_binding)
 
   protected abstract fun inflateViewBinding(): V
 
