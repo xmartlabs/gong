@@ -10,8 +10,8 @@ import com.xmartlabs.gong.data.repository.location.LocationLocalSource
 import com.xmartlabs.gong.data.repository.location.LocationRemoteSource
 import com.xmartlabs.gong.data.repository.session.SessionLocalSource
 import com.xmartlabs.gong.data.repository.store.db.AppDatabase
-import com.xmartlabs.gong.data.repository.store.sharePreferences.SharePreferenceStore
-import com.xmartlabs.gong.data.repository.store.sharePreferences.SharePreferenceStoreImpl
+import com.xmartlabs.gong.data.repository.store.sharePreferences.SharedPreferencesStore
+import com.xmartlabs.gong.data.repository.store.sharePreferences.SharedPreferencesStoreImpl
 import com.xmartlabs.gong.domain.repository.LocationRepository
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.repository.UserRepository
@@ -22,8 +22,10 @@ import org.koin.dsl.module
  */
 object RepositoryDiModuleProvider {
   val stores = module {
-    single<SharePreferenceStore> {
-      SharePreferenceStoreImpl(get<Context>().getSharedPreferences(Config.SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE))
+    single<SharedPreferencesStore> {
+      SharedPreferencesStoreImpl(
+          get<Context>().getSharedPreferences(Config.SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE)
+      )
     }
     single {
       Room.databaseBuilder(get(), AppDatabase::class.java, Config.DB_NAME)

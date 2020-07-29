@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 /**
  * Created by mirland on 03/05/20.
  */
-interface SharePreferenceStore {
+interface SharedPreferencesStore {
   @WorkerThread
   fun getStringOnCurrentThread(key: String, defaultValue: String? = null): String? // It's used to get the access token
 
@@ -19,9 +19,9 @@ interface SharePreferenceStore {
   suspend fun <T> putEntity(key: String, t: T, converter: SharePreferenceEntityConverter<T>)
 }
 
-class SharePreferenceStoreImpl(
+class SharedPreferencesStoreImpl(
     private val sharedPreferences: SharedPreferences
-) : SharePreferenceStore {
+) : SharedPreferencesStore {
   private val cachedEntity: MutableMap<String, Any?> = mutableMapOf()
   override suspend fun <T> putEntity(key: String, t: T, converter: SharePreferenceEntityConverter<T>) =
       withContext(Dispatchers.Default) {
