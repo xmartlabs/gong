@@ -3,15 +3,15 @@ package com.xmartlabs.gong.domain.usecase
 import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.domain.repository.UserRepository
 import com.xmartlabs.gong.domain.usecase.common.CoroutineUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 
 /**
  * Created by mirland on 25/04/20.
  */
-interface LoadUserUseCase : CoroutineUseCase<LoadUserUseCase.Params, User?> {
-  class Params
-}
-
-class LoadUserUseCaseImpl(private val userRepository: UserRepository) : LoadUserUseCase {
-  override suspend fun execute(params: LoadUserUseCase.Params): User? =
+class LoadUserUseCase(
+    private val userRepository: UserRepository,
+    dispatcher: CoroutineDispatcher
+) : CoroutineUseCase<Unit, User?>(dispatcher) {
+  override suspend fun execute(params: Unit): User? =
       userRepository.getCurrentUser()
 }

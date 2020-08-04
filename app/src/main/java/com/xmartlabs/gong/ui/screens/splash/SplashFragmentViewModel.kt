@@ -11,5 +11,5 @@ import com.xmartlabs.gong.domain.usecase.SessionType
  */
 class SplashFragmentViewModel(getSessionTypeUseCase: GetSessionTypeUseCase) : ViewModel() {
   val currentSessionTypeLiveData: LiveData<Result<SessionType>> =
-      getSessionTypeUseCase.invoke(GetSessionTypeUseCase.Params)
+      getSessionTypeUseCase.invokeAsLiveData(Unit)
 }
