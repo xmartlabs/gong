@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">@color/pink</color>
-    <color name="primaryLightColor">#ff5b95</color>
-    <color name="primaryDarkColor">#9d003d</color>
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryDarkColor">@color/pink_dark</color>
 
     <color name="pink">#d41a67</color>
+    <color name="pink_dark">#9d003d</color>
 </resources>
