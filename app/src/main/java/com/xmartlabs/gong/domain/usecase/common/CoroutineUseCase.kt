@@ -1,28 +1,43 @@
 package com.xmartlabs.gong.domain.usecase.common
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import com.xmartlabs.gong.device.common.Result
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
- * Created by mirland on 25/04/20.
+ * Executes business logic synchronously or asynchronously using Coroutines.
+ * https://github.com/google/iosched/blob/ee7f31c16f2d1e1f20f479b384dccb205e3e9584/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/CoroutineUseCase.kt
  */
-interface CoroutineUseCase<in P, R> {
-  operator fun invoke(params: P): LiveData<Result<R>> = liveData {
+abstract class CoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) {
+  fun invokeAsLiveData(params: P): LiveData<Result<R>> = invokeAsFlow(params).asLiveData()
+
+  fun invokeAsFlow(params: P): Flow<Result<R>> = flow {
     emit(Result.Loading)
-    emit(
-        try {
-          Result.Success(execute(params))
-        } catch (throwable: Throwable) {
-          Timber.w(throwable)
-          Result.Failure(throwable)
-        }
-    )
+    emit(invoke(params))
+  }
+
+  suspend operator fun invoke(params: P): Result<R> = try {
+    // Moving all use case's executions to the injected dispatcher
+    // In production code, this is usually the Default dispatcher (background thread)
+    // In tests, this becomes a TestCoroutineDispatcher
+    withContext(coroutineDispatcher) {
+      execute(params).let {
+        Result.Success(it)
+      }
+    }
+  } catch (throwable: Throwable) {
+    Timber.w(throwable)
+    Result.Failure(throwable)
   }
 
   /**
    * Override this to set the code to be executed.
    */
-  suspend fun execute(params: P): R
+  abstract suspend fun execute(params: P): R
 }
