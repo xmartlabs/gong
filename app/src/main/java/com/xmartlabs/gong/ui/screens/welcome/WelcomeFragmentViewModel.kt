@@ -15,8 +15,7 @@ class WelcomeFragmentViewModel(
     getLocationUseCase: GetLocationUseCase,
     loadUserUseCase: LoadUserUseCase
 ) : ViewModel() {
+  val userLiveData: LiveData<Result<User?>> = loadUserUseCase.invokeAsLiveData(Unit)
 
-  val userLiveData: LiveData<Result<User?>> = loadUserUseCase.invoke(LoadUserUseCase.Params())
-
-  val locationLiveData: LiveData<Result<Location>> = getLocationUseCase.invoke(GetLocationUseCase.Params())
+  val locationLiveData: LiveData<Result<Location>> = getLocationUseCase.invokeAsLiveData(Unit)
 }
