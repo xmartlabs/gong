@@ -4,6 +4,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.Result
@@ -20,8 +21,9 @@ class SignInFragmentViewModel(
 ) : ViewModel() {
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
   val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
+      .asLiveData()
   val signIn: LiveData<Result<User>> = signInMutableLiveData
-      .switchMap { params -> signInUseCase.invoke(params) }
+      .switchMap { params -> signInUseCase.invokeAsLiveData(params) }
 
   @MainThread
   fun signIn(userId: String, password: String) {

@@ -8,6 +8,7 @@ import org.koin.dsl.module
  */
 object DiAppModules {
   private val modules = listOf(
+      DispatchersDiModule.dispatchers,
       NetworkDiModule.network,
       RepositoryDiModuleProvider.repositories,
       RepositoryDiModuleProvider.sources,

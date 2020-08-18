@@ -1,6 +1,7 @@
 package com.xmartlabs.gong.domain.usecase
 
 import com.xmartlabs.gong.domain.usecase.common.FlowCoroutineUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,13 +14,12 @@ import kotlin.time.milliseconds
  * Created by mirland on 27/04/20.
  */
 @OptIn(ExperimentalTime::class)
-interface TimeTrackerUseCase : FlowCoroutineUseCase<TimeTrackerUseCase.Params, Duration> {
+class TimeTrackerUseCase(
+    dispatcher: CoroutineDispatcher
+) : FlowCoroutineUseCase<TimeTrackerUseCase.Params, Duration>(dispatcher) {
   data class Params(val startTime: Date)
-}
 
-class TimeTrackerUseCaseImpl : TimeTrackerUseCase {
-  @OptIn(ExperimentalTime::class)
-  override fun execute(params: TimeTrackerUseCase.Params): Flow<Duration> = flow {
+  override fun execute(params: Params): Flow<Duration> = flow {
     while (true) {
       @Suppress("MagicNumber")
       delay(1800)

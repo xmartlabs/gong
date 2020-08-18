@@ -2,21 +2,21 @@ package com.xmartlabs.gong.domain.usecase
 
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.usecase.common.CoroutineUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 
 /**
  * Created by mirland on 03/05/20.
  */
-interface GetSessionTypeUseCase : CoroutineUseCase<GetSessionTypeUseCase.Params, SessionType> {
-  object Params
+class GetSessionTypeUseCase(
+    private val sessionRepository: SessionRepository,
+    dispatcher: CoroutineDispatcher
+) : CoroutineUseCase<Unit, SessionType>(dispatcher) {
+  override suspend fun execute(params: Unit): SessionType =
+      sessionRepository.isUserLogged()
+          .let { isUserLogged -> if (isUserLogged) SessionType.LOGGED else SessionType.NOT_LOGGED }
 }
 
 enum class SessionType {
   LOGGED,
   NOT_LOGGED
-}
-
-class GetSessionTypeUseCaseImpl(private val sessionRepository: SessionRepository) : GetSessionTypeUseCase {
-  override suspend fun execute(params: GetSessionTypeUseCase.Params): SessionType =
-      sessionRepository.isUserLogged()
-          .let { isUserLogged -> if (isUserLogged) SessionType.LOGGED else SessionType.NOT_LOGGED }
 }
