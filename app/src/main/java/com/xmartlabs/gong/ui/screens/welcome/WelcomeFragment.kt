@@ -18,6 +18,7 @@ class WelcomeFragment : BaseViewBindingFragment<FragmentWelcomeBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    setupScreenToolbar(viewBinding.toolbar, hasUpButton = false)
     setupViewModel()
   }
 

@@ -14,7 +14,10 @@
     "io.gitlab.arturbosch.detekt:detekt-formatting",
     "org.jetbrains.kotlin:kotlin-android-extensions",
     "org.jetbrains.kotlin:kotlin-gradle-plugin",
-    "org.jetbrains.kotlin:kotlin-reflect"
+    "org.jetbrains.kotlin:kotlin-reflect",
+    "org.koin:koin-androidx-fragment",
+    "org.koin:koin-androidx-scope",
+    "org.koin:koin-androidx-viewmodel"
   ],
   "labels": [
     "dependencies"
