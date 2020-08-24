@@ -24,7 +24,7 @@ object RepositoryDiModuleProvider {
   val stores = module {
     single<SharedPreferencesStore> {
       SharedPreferencesStoreImpl(
-          get<Context>().getSharedPreferences(Config.SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE)
+          get<Context>().getSharedPreferences(Config.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
       )
     }
     single {
