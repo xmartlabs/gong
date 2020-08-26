@@ -25,7 +25,7 @@ class WelcomeFragment : BaseViewBindingFragment<FragmentWelcomeBinding>() {
   @SuppressLint("SetTextI18n")
   private fun setupViewModel() = with(viewModel) {
     userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
-      viewBinding.titleTextView.text = "Hi ${user!!.name}"
+      viewBinding.titleTextView.text = "Hi ${requireNotNull(user).name}"
     }
     locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
       val locationName = listOfNotNull(location.city, location.country)

@@ -21,6 +21,6 @@ class UserLocalSource {
   suspend fun getUser(userId: String): User {
     @Suppress("MagicNumber")
     delay(30)
-    return localUsers[userId]!!
+    return requireNotNull(localUsers[userId])
   }
 }

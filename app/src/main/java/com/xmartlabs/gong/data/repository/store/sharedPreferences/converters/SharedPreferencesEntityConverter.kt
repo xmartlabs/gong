@@ -1,11 +1,11 @@
-package com.xmartlabs.gong.data.repository.store.sharePreferences.converters
+package com.xmartlabs.gong.data.repository.store.sharedPreferences.converters
 
 import androidx.annotation.WorkerThread
 
 /**
  * Created by mirland on 03/05/20.
  */
-interface SharePreferenceEntityConverter <T> {
+interface SharedPreferencesEntityConverter <T> {
   @WorkerThread
   fun toString(t: T): String
   @WorkerThread
