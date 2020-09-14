@@ -19,5 +19,6 @@ dependencyUpdates {
     }
     checkForGradleUpdate = true
     outputDir = "build/reports/dependencyUpdates"
+    outputFormatter = "html"
     reportfileName = "report"
 }
