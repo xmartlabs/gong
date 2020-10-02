@@ -46,7 +46,12 @@ android {
         // Used to define some constants like the share preferences's file name.
         buildConfigField 'String', 'APP_NAME', '"Gong"'
     }
-    buildFeatures.viewBinding = true
+
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+
     signingConfigs {
         release {
             storeFile getEnvVariable('KEYSTORE_FILE') == null ? null : file(getEnvVariable('KEYSTORE_FILE'))
@@ -108,8 +113,15 @@ android {
     }
 
     kotlinOptions {
+        useIR = true
+        languageVersion = "1.4"
         jvmTarget = '1.8'
         freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    composeOptions {
+        kotlinCompilerVersion versions.kotlin
+        kotlinCompilerExtensionVersion versions.compose
     }
 }
 
@@ -139,6 +151,11 @@ dependencies {
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
     implementation deps.coil
+    implementation deps.compose.liveData
+    implementation deps.compose.material
+    implementation deps.compose.runtime
+    implementation deps.compose.ui
+    implementation deps.compose.foundation
     implementation deps.firebase.crashlytics
     implementation deps.koin.android
     implementation deps.koin.fragments
@@ -162,4 +179,22 @@ dependencies {
     kapt deps.androidX.room.compiler
 
     testImplementation deps.junit
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        // Treat all Kotlin warnings as errors
+        useIR = true
+
+        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
+        freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+        freeCompilerArgs += '-Xallow-jvm-ir-dependencies'
+
+        // Set JVM target to 1.8
+        jvmTarget = "1.8"
+    }
 }
