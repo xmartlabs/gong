@@ -43,7 +43,7 @@ versions.firebase_config = "19.1.3"
 versions.firebase_crashlytics = "17.2.1"
 versions.firebase_messaging = "20.1.6"
 versions.googleServices = "4.3.4"
-versions.gradle = "4.0.1"
+versions.gradle = "4.2.0-alpha13"
 versions.gson = "2.8.6"
 versions.junit = "4.13"
 versions.koin = "2.1.6"
@@ -81,6 +81,7 @@ deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tooLargeTool = "com.github.xmartlabs:toolargetool:$versions.tooLargeTool"
 
 def compose = [:]
+compose.compiler = "androidx.compose.compiler:compiler:$versions.compose"
 compose.ui = "androidx.compose.ui:ui:$versions.compose"
 compose.runtime = "androidx.compose.runtime:runtime:$versions.compose"
 compose.liveData = "androidx.compose.runtime:runtime-livedata:$versions.compose"
@@ -143,6 +144,7 @@ androidX.preference = "androidx.preference:preference:$versions.androidXPreferen
 androidX.percentlayout = "androidx.percentlayout:percentlayout:$versions.androidXPercentLayout"
 androidX.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerView"
 androidX.workManager = "androidx.work:work-runtime-ktx:$versions.archWorkManager"
+androidX.tooling = "androidx.ui:ui-tooling:$versions.compose"
 androidX.transition = "androidx.transition:transition:$versions.androidXTransition"
 androidX.viewPager2 = "androidx.viewpager2:viewpager2:$versions.androidXViewPager2"
 deps.androidX = androidX
@@ -185,7 +187,7 @@ buildscriptDeps.gradle = "com.android.tools.build:gradle:$versions.gradle"
 buildscriptDeps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 buildscriptDeps.kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
 buildscriptDeps.navigationSafeArgPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.archNavigationArchComponent"
-buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
+//buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
 ext.buildscriptDeps = buildscriptDeps
 
 static def addRepos(RepositoryHandler handler) {
