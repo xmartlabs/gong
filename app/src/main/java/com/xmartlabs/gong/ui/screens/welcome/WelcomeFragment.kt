@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.xmartlabs.gong.R
+import com.xmartlabs.gong.data.model.toShortString
 import com.xmartlabs.gong.device.common.getOrNull
 import com.xmartlabs.gong.ui.common.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,8 +41,7 @@ class WelcomeFragment : BaseFragment() {
               val user = userResult?.getOrNull()
               val locationResult by viewModel.locationLiveData.observeAsState()
               val location = locationResult?.getOrNull()
-              val locationString = listOfNotNull(location?.city, location?.country)
-                  .joinToString(", ")
+              val locationString = location?.toShortString() ?: ""
               WelcomeContent(
                   user = user?.name ?: "",
                   location = locationString,

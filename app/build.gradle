@@ -2,7 +2,7 @@ buildscript {
     addRepos(repositories)
     dependencies {
         classpath buildscriptDeps.firebaseCrashlyticsPlugin
-//        classpath buildscriptDeps.snapshotPublisher
+        classpath buildscriptDeps.snapshotPublisher
         classpath buildscriptDeps.navigationSafeArgPlugin
     }
 }

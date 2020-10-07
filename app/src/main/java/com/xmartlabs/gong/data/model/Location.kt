@@ -25,3 +25,6 @@ data class Location(
     val query: String,
     val timestamp: Date = Date()
 )
+
+fun Location.toShortString() = listOfNotNull(city, country)
+    .joinToString(", ")

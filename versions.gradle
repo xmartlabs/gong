@@ -187,7 +187,7 @@ buildscriptDeps.gradle = "com.android.tools.build:gradle:$versions.gradle"
 buildscriptDeps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 buildscriptDeps.kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
 buildscriptDeps.navigationSafeArgPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.archNavigationArchComponent"
-//buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
+buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
 ext.buildscriptDeps = buildscriptDeps
 
 static def addRepos(RepositoryHandler handler) {
