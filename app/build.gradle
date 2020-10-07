@@ -126,7 +126,7 @@ dependencies {
     implementation deps.androidSwissKnife.navigation
     implementation deps.androidX.appcompat
     implementation deps.androidX.cardview
-    implementation deps.androidX.constraint_layout
+    implementation deps.androidX.constraintLayout
     implementation deps.androidX.design
     implementation deps.androidX.lifecycle.livedata
     implementation deps.androidX.lifecycle.runtime
