@@ -1,38 +1,102 @@
 package com.xmartlabs.gong.ui.screens.welcome
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
-import com.xmartlabs.gong.databinding.FragmentWelcomeBinding
-import com.xmartlabs.gong.ui.common.BaseViewBindingFragment
-import com.xmartlabs.gong.ui.common.extensions.observeSuccessResult
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
+import androidx.ui.tooling.preview.Preview
+import com.xmartlabs.gong.R
+import com.xmartlabs.gong.data.model.toShortString
+import com.xmartlabs.gong.device.common.getOrNull
+import com.xmartlabs.gong.ui.common.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by mirland on 25/04/20.
  */
-class WelcomeFragment : BaseViewBindingFragment<FragmentWelcomeBinding>() {
+class WelcomeFragment : BaseFragment() {
   private val viewModel: WelcomeFragmentViewModel by viewModel()
 
-  override fun inflateViewBinding(): FragmentWelcomeBinding = FragmentWelcomeBinding.inflate(layoutInflater)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+      ComposeView(requireContext())
+          .apply {
+            setContent {
+              val userResult by viewModel.userLiveData.observeAsState()
+              val user = userResult?.getOrNull()
+              val locationResult by viewModel.locationLiveData.observeAsState()
+              val location = locationResult?.getOrNull()
+              val locationString = location?.toShortString() ?: ""
+              WelcomeContent(
+                  user = user?.name ?: "",
+                  location = locationString,
+              )
+            }
+          }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setupScreenToolbar(viewBinding.toolbar, hasUpButton = false)
-    setupViewModel()
+  @Suppress("MagicNumber")
+  @Composable
+  fun WelcomeContent(user: String, location: String) {
+    Scaffold(
+        topBar = { GongTopBar() },
+    ) {
+      Surface(color = colorResource(id = R.color.design_default_color_surface)) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+          Text(
+              text = "Hi $user",
+              style = MaterialTheme.typography.h3.copy(
+                  fontSize = 40.sp,
+                  color = colorResource(id = android.R.color.darker_gray)
+              ),
+              modifier = Modifier.align(Alignment.CenterHorizontally)
+          )
+          Text(
+              text = "You signed in from: $location!",
+              style = MaterialTheme.typography.body2.copy(
+                  color = colorResource(id = android.R.color.darker_gray)
+              ),
+              modifier = Modifier.align(Alignment.CenterHorizontally)
+          )
+        }
+      }
+    }
   }
 
-  @SuppressLint("SetTextI18n")
-  private fun setupViewModel() = with(viewModel) {
-    userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
-      viewBinding.titleTextView.text = "Hi ${requireNotNull(user).name}"
-    }
-    locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
-      val locationName = listOfNotNull(location.city, location.country)
-          .joinToString(", ")
-      if (locationName.isNotBlank()) {
-        viewBinding.locationTextView.text = "You signed in from $locationName!"
-      }
+  @Preview
+  @Composable
+  fun WelcomePreview() {
+    WelcomeContent(user = "Sante", location = "Uruguay")
+  }
+
+  @Composable
+  fun GongTopBar() {
+    TopAppBar(
+        backgroundColor = colorResource(id = R.color.primaryColor),
+        contentColor = colorResource(id = R.color.design_default_color_surface)
+    ) {
+      Text(
+          text = stringResource(id = R.string.app_name),
+          style = MaterialTheme.typography.body1,
+          modifier = Modifier.align(Alignment.CenterVertically)
+      )
     }
   }
 }

@@ -148,9 +148,11 @@ dependencies {
     implementation deps.androidX.navigation.ui
     implementation deps.androidX.recyclerview
     implementation deps.androidX.room.coreKtx
+    implementation deps.androidX.tooling
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
     implementation deps.coil
+    implementation deps.compose.compiler
     implementation deps.compose.liveData
     implementation deps.compose.material
     implementation deps.compose.runtime
