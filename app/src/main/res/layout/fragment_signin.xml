@@ -20,7 +20,7 @@
         tools:ignore="HardcodedText"
         />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/userIdEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -30,10 +30,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hiAllTextView"
-        tools:ignore="HardcodedText"
+        tools:ignore="Autofill,HardcodedText"
         />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userIdEditText"
-        tools:ignore="HardcodedText"
+        tools:ignore="Autofill,HardcodedText"
         />
 
     <TextView

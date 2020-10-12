@@ -25,8 +25,23 @@ class SignInFragmentViewModel(
   val signIn: LiveData<Result<User>> = signInMutableLiveData
       .switchMap { params -> signInUseCase.invokeAsLiveData(params) }
 
+  val userMutableLiveData = MutableLiveData<String>()
+  val userLiveData = userMutableLiveData
+
+  var passwordMutableLiveData = MutableLiveData<String>()
+  var passwordLiveData = passwordMutableLiveData
+
   @MainThread
-  fun signIn(userId: String, password: String) {
-    signInMutableLiveData.value = SignInUseCase.Params(userId, password)
+  fun signIn() {
+    signInMutableLiveData.value =
+        SignInUseCase.Params(userLiveData.value ?: "", passwordLiveData.value ?: "")
+  }
+
+  fun updateUser(user: String) {
+    userMutableLiveData.value = user
+  }
+
+  fun updatePassword(password: String) {
+    passwordMutableLiveData.value = password
   }
 }

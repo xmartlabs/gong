@@ -37,21 +37,13 @@ class WelcomeFragment : BaseFragment() {
       ComposeView(requireContext())
           .apply {
             setContent {
-              val userResult by viewModel.userLiveData.observeAsState()
-              val user = userResult?.getOrNull()
-              val locationResult by viewModel.locationLiveData.observeAsState()
-              val location = locationResult?.getOrNull()
-              val locationString = location?.toShortString() ?: ""
-              WelcomeContent(
-                  user = user?.name ?: "",
-                  location = locationString,
-              )
+              WelcomeContent()
             }
           }
 
   @Suppress("MagicNumber")
   @Composable
-  fun WelcomeContent(user: String, location: String) {
+  fun WelcomeContent() {
     Scaffold(
         topBar = { GongTopBar() },
     ) {
@@ -60,16 +52,20 @@ class WelcomeFragment : BaseFragment() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()
         ) {
+          val userResult by viewModel.userLiveData.observeAsState()
           Text(
-              text = "Hi $user",
+              text = "Hi ${userResult?.getOrNull()?.name}",
               style = MaterialTheme.typography.h3.copy(
                   fontSize = 40.sp,
                   color = colorResource(id = android.R.color.darker_gray)
               ),
               modifier = Modifier.align(Alignment.CenterHorizontally)
           )
+          val locationResult by viewModel.locationLiveData.observeAsState()
+          val location = locationResult?.getOrNull()
+          val locationString = location?.toShortString() ?: ""
           Text(
-              text = "You signed in from: $location!",
+              text = "You signed in from: $locationString!",
               style = MaterialTheme.typography.body2.copy(
                   color = colorResource(id = android.R.color.darker_gray)
               ),
@@ -83,7 +79,7 @@ class WelcomeFragment : BaseFragment() {
   @Preview
   @Composable
   fun WelcomePreview() {
-    WelcomeContent(user = "Sante", location = "Uruguay")
+    WelcomeContent()
   }
 
   @Composable
