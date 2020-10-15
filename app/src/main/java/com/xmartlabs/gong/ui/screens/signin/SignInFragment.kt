@@ -88,7 +88,7 @@ class SignInFragment : BaseViewBindingFragment<FragmentSigninBinding>() {
     )
   }
 
-  @Suppress("MagicNumber", "LongMethod")
+  @Suppress("LongMethod")
   @ExperimentalTime
   @Preview
   @Composable

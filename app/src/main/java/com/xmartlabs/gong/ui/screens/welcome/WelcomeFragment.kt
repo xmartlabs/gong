@@ -41,7 +41,6 @@ class WelcomeFragment : BaseFragment() {
             }
           }
 
-  @Suppress("MagicNumber")
   @Composable
   fun WelcomeContent() {
     Scaffold(
