@@ -1,20 +1,20 @@
 package com.xmartlabs.gong.device.di
 
 import android.content.Context
+import androidx.datastore.preferences.createDataStore
 import androidx.room.Room
-import com.google.gson.Gson
 import com.xmartlabs.gong.Config
 import com.xmartlabs.gong.data.repository.auth.UserLocalSource
 import com.xmartlabs.gong.data.repository.auth.UserRemoteSource
 import com.xmartlabs.gong.data.repository.location.LocationLocalSource
 import com.xmartlabs.gong.data.repository.location.LocationRemoteSource
 import com.xmartlabs.gong.data.repository.session.SessionLocalSource
+import com.xmartlabs.gong.data.repository.store.datastorage.GsonDataStoreEntitySerializer
 import com.xmartlabs.gong.data.repository.store.db.AppDatabase
-import com.xmartlabs.gong.data.repository.store.sharedPreferences.SharedPreferencesStore
-import com.xmartlabs.gong.data.repository.store.sharedPreferences.SharedPreferencesStoreImpl
 import com.xmartlabs.gong.domain.repository.LocationRepository
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.repository.UserRepository
+import com.xmartlabs.swissknife.datastore.DataStoreSource
 import org.koin.dsl.module
 
 /**
@@ -22,9 +22,10 @@ import org.koin.dsl.module
  */
 object RepositoryDiModuleProvider {
   val stores = module {
-    single<SharedPreferencesStore> {
-      SharedPreferencesStoreImpl(
-          get<Context>().getSharedPreferences(Config.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+    single {
+      DataStoreSource(
+          dataStore = get<Context>().createDataStore(name = Config.SHARED_PREFERENCES_NAME),
+          serializer = GsonDataStoreEntitySerializer()
       )
     }
     single {
@@ -38,7 +39,7 @@ object RepositoryDiModuleProvider {
     single { LocationLocalSource(get()) }
     single { UserLocalSource() }
     single { UserRemoteSource() }
-    single { SessionLocalSource(get(), Gson()) }
+    single { SessionLocalSource(get()) }
   }
   val repositories = module {
     single { LocationRepository(get(), get()) }
