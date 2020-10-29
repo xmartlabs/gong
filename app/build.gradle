@@ -123,10 +123,12 @@ dependencies {
     devImplementation deps.androidSwissKnife.navigationDebug
 
     implementation deps.androidSwissKnife.core
+    implementation deps.androidSwissKnife.dataStore
     implementation deps.androidSwissKnife.navigation
     implementation deps.androidX.appcompat
     implementation deps.androidX.cardview
     implementation deps.androidX.constraintLayout
+    implementation deps.androidX.dataStore
     implementation deps.androidX.design
     implementation deps.androidX.lifecycle.livedata
     implementation deps.androidX.lifecycle.runtime
