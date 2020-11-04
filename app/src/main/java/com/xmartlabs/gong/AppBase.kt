@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.StrictMode
 import coil.Coil
 import coil.ImageLoader
-import coil.ImageLoaderBuilder
 import coil.util.DebugLogger
 import com.xmartlabs.gong.device.logger.LoggerModule
 import jonathanfinerty.once.Once

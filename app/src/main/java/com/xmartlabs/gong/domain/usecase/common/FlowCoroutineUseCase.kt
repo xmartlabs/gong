@@ -15,10 +15,10 @@ import timber.log.Timber
 abstract class FlowCoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
   @OptIn(ExperimentalCoroutinesApi::class)
   operator fun invoke(params: P): Flow<Result<R>> = execute(params)
-      .map { value -> Result.success<R>(value) }
+      .map { value -> Result.success(value) }
       .catch { error ->
         Timber.w(error)
-        emit(Result.failure<R>(error))
+        emit(Result.failure(error))
       }
       .flowOn(coroutineDispatcher)
 
