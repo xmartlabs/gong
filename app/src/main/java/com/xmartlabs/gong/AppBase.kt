@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Build
 import android.os.StrictMode
 import coil.Coil
+import coil.ImageLoader
 import coil.ImageLoaderBuilder
 import coil.util.DebugLogger
 import com.xmartlabs.gong.device.logger.LoggerModule
@@ -30,7 +31,7 @@ abstract class AppBase : Application() {
   protected abstract fun setupKoinModules()
 
   private fun setupCoil() {
-    val imageLoader = ImageLoaderBuilder(this)
+    val imageLoader = ImageLoader.Builder(this)
         .apply { if (BuildConfig.DEBUG) logger(DebugLogger()) }
         .build()
     Coil.setImageLoader(imageLoader)

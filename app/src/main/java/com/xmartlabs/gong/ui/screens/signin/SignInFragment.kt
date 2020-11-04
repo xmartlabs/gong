@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.xmartlabs.gong.databinding.FragmentSigninBinding
 import com.xmartlabs.gong.ui.common.BaseViewBindingFragment
-import com.xmartlabs.gong.ui.common.extensions.observeResult
+import com.xmartlabs.gong.ui.common.extensions.observeStateResult
 import com.xmartlabs.gong.ui.common.extensions.observeSuccessResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.time.ExperimentalTime
@@ -32,7 +32,7 @@ class SignInFragment : BaseViewBindingFragment<FragmentSigninBinding>() {
     viewModelTime.observeSuccessResult(viewLifecycleOwner) { duration ->
       viewBinding.viewModelTimeTextView.text = "View model time, ${duration.inSeconds} seconds"
     }
-    signIn.observeResult(viewLifecycleOwner,
+    signIn.observeStateResult(viewLifecycleOwner,
         onFailure = { throwable ->
           if (throwable is SecurityException) {
             Toast.makeText(

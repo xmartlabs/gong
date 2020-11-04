@@ -1,7 +1,6 @@
 package com.xmartlabs.gong.domain.usecase.common
 
 import androidx.lifecycle.asLiveData
-import com.xmartlabs.gong.device.common.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -16,10 +15,10 @@ import timber.log.Timber
 abstract class FlowCoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
   @OptIn(ExperimentalCoroutinesApi::class)
   operator fun invoke(params: P): Flow<Result<R>> = execute(params)
-      .map<R, Result<R>> { value -> Result.Success<R>(value) }
+      .map { value -> Result.success<R>(value) }
       .catch { error ->
         Timber.w(error)
-        emit(Result.Failure(error))
+        emit(Result.failure<R>(error))
       }
       .flowOn(coroutineDispatcher)
 
