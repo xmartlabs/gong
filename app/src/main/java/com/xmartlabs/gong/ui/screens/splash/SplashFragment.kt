@@ -2,7 +2,7 @@ package com.xmartlabs.gong.ui.screens.splash
 
 import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.common.BaseFragment
-import com.xmartlabs.gong.ui.common.extensions.observeResult
+import com.xmartlabs.gong.ui.common.extensions.observeStateResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -14,7 +14,7 @@ class SplashFragment : BaseFragment() {
 
   override fun onResume() {
     super.onResume()
-    viewModel.currentSessionTypeLiveData.observeResult(this,
+    viewModel.currentSessionTypeLiveData.observeStateResult(this,
         onFailure = { ex -> throw IllegalStateException("Invalid state", ex) },
         onSuccess = { sessionType ->
           val direction = when (sessionType) {

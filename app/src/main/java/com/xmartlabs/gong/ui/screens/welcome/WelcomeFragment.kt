@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.xmartlabs.gong.databinding.FragmentWelcomeBinding
 import com.xmartlabs.gong.ui.common.BaseViewBindingFragment
+import com.xmartlabs.gong.ui.common.extensions.observeFinishSuccessResult
 import com.xmartlabs.gong.ui.common.extensions.observeSuccessResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +25,7 @@ class WelcomeFragment : BaseViewBindingFragment<FragmentWelcomeBinding>() {
 
   @SuppressLint("SetTextI18n")
   private fun setupViewModel() = with(viewModel) {
-    userLiveData.observeSuccessResult(viewLifecycleOwner) { user ->
+    userLiveData.observeFinishSuccessResult(viewLifecycleOwner) { user ->
       viewBinding.titleTextView.text = "Hi ${requireNotNull(user).name}"
     }
     locationLiveData.observeSuccessResult(viewLifecycleOwner) { location ->
