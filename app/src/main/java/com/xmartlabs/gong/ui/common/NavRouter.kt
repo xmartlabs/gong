@@ -14,8 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.xmartlabs.gong.device.logger.NavigationLogger
 import com.xmartlabs.swissknife.navigation.extensions.navigateSafe
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Created by mirland on 14/05/20.
