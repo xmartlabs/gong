@@ -12,7 +12,7 @@ ext.androidVersions = androidVersions
 
 ext.deps = [:]
 def versions = [:]
-versions.androidSwissKnife = "cd4a54cf88"
+versions.androidSwissKnife = "44f27ec213"
 versions.androidXAppCompat = "1.2.0"
 versions.androidXBrowser = "1.2.0"
 versions.androidXCardView = "1.0.0"
