@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.xmartlabs.gong.ui.screens.signin.SignInFragment"
+        android:name="com.xmartlabs.gong.ui.screens.signin.SignInScreen"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_signin"
         >
@@ -19,7 +19,6 @@
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/signInFragment"
             app:popUpToInclusive="true"
-            app:enterAnim="@anim/fragment_fade_enter"
             />
 
     </fragment>
@@ -33,7 +32,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.xmartlabs.gong.ui.screens.splash.SplashFragment"
+        android:name="com.xmartlabs.gong.ui.screens.splash.SplashScreen"
         android:label="SplashFragment"
         >
 

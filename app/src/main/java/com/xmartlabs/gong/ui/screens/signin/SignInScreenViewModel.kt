@@ -10,22 +10,25 @@ import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.Result
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
 import com.xmartlabs.gong.domain.usecase.TimeTrackerUseCase
+import org.koin.java.KoinJavaComponent.get
+import org.koin.java.KoinJavaComponent.inject
+import java.sql.Time
 import java.util.Date
 
 /**
  * Created by mirland on 25/04/20.
  */
-class SignInFragmentViewModel(
-    private val signInUseCase: SignInUseCase,
-    timeTrackerUseCase: TimeTrackerUseCase
-) : ViewModel() {
+class SignInScreenViewModel : ViewModel() {
+  private val signInUseCase: SignInUseCase by inject(SignInUseCase::class.java)
+  private val timeTrackerUseCase: TimeTrackerUseCase by inject(TimeTrackerUseCase::class.java)
+
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
   val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
       .asLiveData()
   val signIn: LiveData<Result<User>> = signInMutableLiveData
       .switchMap { params -> signInUseCase.invokeAsLiveData(params) }
 
-  val userMutableLiveData = MutableLiveData<String>()
+  private val userMutableLiveData = MutableLiveData<String>()
   val userLiveData = userMutableLiveData
 
   var passwordMutableLiveData = MutableLiveData<String>()

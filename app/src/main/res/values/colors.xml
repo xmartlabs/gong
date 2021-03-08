@@ -5,4 +5,5 @@
 
     <color name="pink">#d41a67</color>
     <color name="pink_dark">#9d003d</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>
