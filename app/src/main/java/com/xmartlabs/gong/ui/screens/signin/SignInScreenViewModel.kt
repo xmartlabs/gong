@@ -10,9 +10,7 @@ import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.Result
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
 import com.xmartlabs.gong.domain.usecase.TimeTrackerUseCase
-import org.koin.java.KoinJavaComponent.get
 import org.koin.java.KoinJavaComponent.inject
-import java.sql.Time
 import java.util.Date
 
 /**

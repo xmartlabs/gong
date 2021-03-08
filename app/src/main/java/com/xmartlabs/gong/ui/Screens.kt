@@ -1,7 +1,7 @@
 package com.xmartlabs.gong.ui
 
 object Screens {
-  val SPLASH = "splash"
-  val SIGN_IN = "signIn"
-  val WELCOME = "welcome"
+  const val SPLASH = "splash"
+  const val SIGN_IN = "signIn"
+  const val WELCOME = "welcome"
 }

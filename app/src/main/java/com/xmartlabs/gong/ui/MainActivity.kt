@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme_NoActionBar)
     super.onCreate(savedInstanceState)
-    setContent{
+    setContent {
       GongNavigationManager()
     }
   }
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     NavHost(navController = navigationController, startDestination = Screens.SPLASH) {
       composable(Screens.SPLASH) { SplashScreen(navController = navigationController) }
       composable(Screens.SIGN_IN) { SignInScreen(navController = navigationController) }
-      composable(Screens.WELCOME){ WelcomeScreen() }
+      composable(Screens.WELCOME) { WelcomeScreen() }
     }
   }
 }
