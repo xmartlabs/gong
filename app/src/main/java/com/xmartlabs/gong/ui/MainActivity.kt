@@ -14,7 +14,6 @@ import com.xmartlabs.gong.ui.screens.splash.SplashScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     setTheme(R.style.AppTheme_NoActionBar)

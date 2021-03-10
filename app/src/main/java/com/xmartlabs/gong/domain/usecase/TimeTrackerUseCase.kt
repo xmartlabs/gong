@@ -13,7 +13,6 @@ import kotlin.time.milliseconds
 /**
  * Created by mirland on 27/04/20.
  */
-@OptIn(ExperimentalTime::class)
 class TimeTrackerUseCase(
     dispatcher: CoroutineDispatcher
 ) : FlowCoroutineUseCase<TimeTrackerUseCase.Params, Duration>(dispatcher) {

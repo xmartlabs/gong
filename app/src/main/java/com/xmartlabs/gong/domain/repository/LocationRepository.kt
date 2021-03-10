@@ -17,7 +17,6 @@ import kotlin.time.minutes
 /**
  * Created by mirland on 28/04/20.
  */
-@OptIn(ExperimentalTime::class)
 class LocationRepository(
     private val locationLocalSource: LocationLocalSource,
     private val locationRemoteSource: LocationRemoteSource

@@ -40,10 +40,8 @@ import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.common.extensions.observeResult
 import java.util.Locale
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
 
-@ExperimentalTime
 @Composable
 fun SignInScreen(navController: NavHostController) {
   val viewModel: SignInScreenViewModel = viewModel()
@@ -68,7 +66,6 @@ fun SignInScreen(navController: NavHostController) {
 }
 
 @Suppress("LongMethod")
-@ExperimentalTime
 @Preview
 @Composable
 fun SignInContent(
@@ -85,11 +82,13 @@ fun SignInContent(
         .fillMaxHeight()) {
       val (hiAllTextView, userIdEditText, passwordEditText, signInButton, viewModelTimeTextView) = createRefs()
 
-      Text(text = "Hi all", fontSize = 20.sp, modifier = Modifier.constrainAs(hiAllTextView) {
-        end.linkTo(parent.end)
-        start.linkTo(parent.start)
-        top.linkTo(parent.top, margin = 150.dp)
-      })
+      Text(text = "Hi all",
+          fontSize = 20.sp,
+          modifier = Modifier.constrainAs(hiAllTextView) {
+            end.linkTo(parent.end)
+            start.linkTo(parent.start)
+            top.linkTo(parent.top, margin = 150.dp)
+          })
       TextField(
           value = user,
           label = { Text("Username") },
@@ -150,23 +149,22 @@ private fun signIn(
     lifecycleOwner: LifecycleOwner,
     context: Context,
     navController: NavHostController,
-) =
-    with(viewModel) {
-      signIn.observeResult(lifecycleOwner,
-          onFailure = { throwable ->
-            if (throwable is SecurityException) {
-              Toast.makeText(
-                  context,
-                  "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
-                  Toast.LENGTH_SHORT
-              ).show()
-            }
-          },
-          onSuccess = {
-            navController.navigate(Screens.WELCOME) {
-              popUpTo(Screens.SIGN_IN) { inclusive = true }
-            }
-          }
-      )
-      viewModel.signIn()
-    }
+) = with(viewModel) {
+  signIn.observeResult(lifecycleOwner,
+      onFailure = { throwable ->
+        if (throwable is SecurityException) {
+          Toast.makeText(
+              context,
+              "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
+              Toast.LENGTH_SHORT
+          ).show()
+        }
+      },
+      onSuccess = {
+        navController.navigate(Screens.WELCOME) {
+          popUpTo(Screens.SIGN_IN) { inclusive = true }
+        }
+      }
+  )
+  viewModel.signIn()
+}
