@@ -10,15 +10,15 @@ import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.Result
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
 import com.xmartlabs.gong.domain.usecase.TimeTrackerUseCase
-import org.koin.java.KoinJavaComponent.inject
 import java.util.Date
 
 /**
  * Created by mirland on 25/04/20.
  */
-class SignInScreenViewModel : ViewModel() {
-  private val signInUseCase: SignInUseCase by inject(SignInUseCase::class.java)
-  private val timeTrackerUseCase: TimeTrackerUseCase by inject(TimeTrackerUseCase::class.java)
+class SignInScreenViewModel(
+    private val signInUseCase: SignInUseCase,
+    private val timeTrackerUseCase: TimeTrackerUseCase,
+) : ViewModel() {
 
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
   val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))

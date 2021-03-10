@@ -162,9 +162,7 @@ dependencies {
     implementation deps.compose.viewModel
     implementation deps.firebase.crashlytics
     implementation deps.koin.android
-    implementation deps.koin.fragments
-    implementation deps.koin.scope
-    implementation deps.koin.viewModel
+    implementation deps.koin.compose
     implementation deps.kotlin.core
     implementation deps.kotlin.coroutines.core
     implementation deps.kotlin.reflect

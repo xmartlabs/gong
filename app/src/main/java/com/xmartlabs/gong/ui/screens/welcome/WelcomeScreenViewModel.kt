@@ -7,14 +7,14 @@ import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.Result
 import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
-import org.koin.java.KoinJavaComponent.inject
 
 /**
  * Created by mirland on 25/04/20.
  */
-class WelcomeScreenViewModel : ViewModel() {
-  private val getLocationUseCase: GetLocationUseCase by inject(GetLocationUseCase::class.java)
-  private val loadUserUseCase: LoadUserUseCase by inject(LoadUserUseCase::class.java)
+class WelcomeScreenViewModel(
+    private val getLocationUseCase: GetLocationUseCase,
+    private val loadUserUseCase: LoadUserUseCase
+) : ViewModel() {
 
   val userLiveData: LiveData<Result<User?>> = loadUserUseCase.invokeAsLiveData(Unit)
 

@@ -17,10 +17,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.toShortString
 import com.xmartlabs.gong.device.common.getOrNull
+import org.koin.androidx.compose.getViewModel
 
 /**
  * Created by mirland on 25/04/20.
@@ -28,7 +28,7 @@ import com.xmartlabs.gong.device.common.getOrNull
 
 @Composable
 fun WelcomeScreen() {
-  val viewModel: WelcomeScreenViewModel = viewModel()
+  val viewModel: WelcomeScreenViewModel = getViewModel()
   Scaffold(
       topBar = { GongTopBar() },
   ) {

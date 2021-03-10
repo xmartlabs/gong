@@ -14,6 +14,7 @@ object DiAppModules {
       RepositoryDiModuleProvider.sources,
       RepositoryDiModuleProvider.stores,
       UseCaseDiModule.useCases,
+      ViewModelDiModule.viewModels,
   )
 
   fun provideModules(navigationLogger: NavigationLogger) =

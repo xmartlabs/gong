@@ -31,20 +31,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.device.common.getOrNull
 import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.common.extensions.observeResult
+import org.koin.androidx.compose.getViewModel
 import java.util.Locale
 import kotlin.time.Duration
 import kotlin.time.milliseconds
 
 @Composable
 fun SignInScreen(navController: NavHostController) {
-  val viewModel: SignInScreenViewModel = viewModel()
+  val viewModel: SignInScreenViewModel = getViewModel()
   val user by viewModel.userLiveData.observeAsState(initial = "")
   val password by viewModel.passwordLiveData.observeAsState(initial = "")
   val time by viewModel.viewModelTime.observeAsState()
