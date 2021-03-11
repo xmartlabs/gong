@@ -12,7 +12,6 @@ import com.xmartlabs.gong.R
 import com.xmartlabs.gong.ui.screens.signin.SignInScreen
 import com.xmartlabs.gong.ui.screens.splash.SplashScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
-import kotlin.time.ExperimentalTime
 
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
