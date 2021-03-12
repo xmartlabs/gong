@@ -8,42 +8,79 @@
     >
 
     <TextView
-        android:id="@+id/hiAllTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Welcome"
+        app:layout_constraintBottom_toTopOf="@id/hiAllTextView"
+        app:layout_constraintStart_toStartOf="@id/hiAllTextView"
+        tools:ignore="HardcodedText"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        />
+
+    <TextView
+        android:id="@+id/hiAllTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="150dp"
-        android:text="Hi all"
-        android:textSize="20sp"
+        android:text="Sign in"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText"
+        style="@style/TextAppearance.MaterialComponents.Headline1"
         />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/userIdEditText"
-        android:layout_width="200dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userIdTextInputLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="User id"
-        android:inputType="text"
-        android:maxLines="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hiAllTextView"
         tools:ignore="HardcodedText"
-        />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userIdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            tools:ignore="HardcodedText"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwridTextInputLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="textPassword"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userIdEditText"
+        app:layout_constraintTop_toBottomOf="@id/userIdTextInputLayout"
         tools:ignore="HardcodedText"
-        />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/viewModelTimeTextView"
@@ -60,12 +97,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:padding="10dp"
-        android:text="Sign In"
+        android:padding="20dp"
+        android:text="continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText"
+        style="@style/Widget.MaterialComponents.Button"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
