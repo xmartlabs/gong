@@ -21,14 +21,4 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-
-    </style>
-
-    <style name="AppTheme.ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextAppearance">@style/Toolbar.TitleText</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:background">@color/pink</item>
-        <item name="titleTextColor">@android:color/white</item>
-    </style>
 </resources>
