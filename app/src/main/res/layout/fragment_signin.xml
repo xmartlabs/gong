@@ -58,7 +58,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwridTextInputLayout"
+        android:id="@+id/passwordTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Password"
