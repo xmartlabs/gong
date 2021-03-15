@@ -1,13 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/roboto</item>
         <item name="android:colorPrimary">@color/primaryColor</item>
         <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorOnPrimary">@color/onPrimaryColor</item>
+        <item name="colorOnSecondary">@color/onSecondaryColor</item>
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorOnSurface">@color/onSurfaceColor</item>
+        <item name="colorOnBackground">@color/onBackgroundColor</item>
     </style>
 
     <style name="AppTheme.Launcher" parent="AppTheme.NoActionBar">
@@ -31,4 +35,5 @@
         <item name="android:background">@color/pink</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
+
 </resources>
