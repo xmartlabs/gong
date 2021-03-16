@@ -37,7 +37,6 @@ versions.compose = "1.0.0-beta01"
 versions.composeConstraintLayout = "1.0.0-alpha03"
 versions.composeNavigation = "1.0.0-alpha08"
 versions.composeViewModel = "1.0.0-alpha02"
-versions.debugDb = "1.0.6"
 versions.dependencyUpdates = '0.33.0'
 versions.detekt = "1.11.2"
 versions.firebase_crashlyticsPlugin = '2.3.0'
@@ -72,7 +71,6 @@ ext.versions = versions
 
 def deps = [:]
 deps.coil = "io.coil-kt:coil:$versions.coil"
-deps.debugDb = "com.amitshekhar.android:debug-db:$versions.debugDb"
 deps.gson = "com.google.code.gson:gson:$versions.gson"
 deps.junit = "junit:junit:$versions.junit"
 deps.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"

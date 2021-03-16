@@ -124,7 +124,6 @@ dependencies {
     androidTestImplementation deps.androidX.test.junit
     androidTestImplementation deps.androidX.test.espresso
 
-    debugImplementation deps.debugDb
     debugImplementation deps.leakcanary
 
     devImplementation deps.androidSwissKnife.navigationDebug
