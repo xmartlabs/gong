@@ -198,7 +198,6 @@ static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.mavenCentral()
     handler.gradlePluginPortal()
-    handler.maven { url 'https://maven.fabric.io/public' }
     handler.jcenter()
     handler.maven { url "https://jitpack.io" }
 }
