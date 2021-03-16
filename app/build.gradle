@@ -97,7 +97,7 @@ android {
 
     lintOptions {
         lintConfig file("lint.xml")
-        disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning"
+        disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning", "ObsoleteLintCustomCheck"
         fatal 'StopShip'
         warningsAsErrors true
     }
