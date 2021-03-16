@@ -1,8 +1,8 @@
 package com.xmartlabs.gong.device.di
 
-import com.xmartlabs.gong.ui.screens.signin.SignInFragmentViewModel
-import com.xmartlabs.gong.ui.screens.splash.SplashFragmentViewModel
-import com.xmartlabs.gong.ui.screens.welcome.WelcomeFragmentViewModel
+import com.xmartlabs.gong.ui.screens.signin.SignInScreenViewModel
+import com.xmartlabs.gong.ui.screens.splash.SplashScreenViewModel
+import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -11,8 +11,8 @@ import org.koin.dsl.module
  */
 object ViewModelDiModule {
   val viewModels = module {
-    viewModel { SignInFragmentViewModel(get(), get()) }
-    viewModel { SplashFragmentViewModel(get()) }
-    viewModel { WelcomeFragmentViewModel(get(), get()) }
+    viewModel { SignInScreenViewModel(get(), get()) }
+    viewModel { SplashScreenViewModel(get()) }
+    viewModel { WelcomeScreenViewModel(get(), get()) }
   }
 }

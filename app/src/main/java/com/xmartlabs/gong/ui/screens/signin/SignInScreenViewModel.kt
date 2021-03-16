@@ -15,17 +15,18 @@ import java.util.Date
 /**
  * Created by mirland on 25/04/20.
  */
-class SignInFragmentViewModel(
+class SignInScreenViewModel(
     private val signInUseCase: SignInUseCase,
-    timeTrackerUseCase: TimeTrackerUseCase
+    private val timeTrackerUseCase: TimeTrackerUseCase,
 ) : ViewModel() {
+
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
   val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
       .asLiveData()
   val signIn: LiveData<Result<User>> = signInMutableLiveData
       .switchMap { params -> signInUseCase.invokeAsLiveData(params) }
 
-  val userMutableLiveData = MutableLiveData<String>()
+  private val userMutableLiveData = MutableLiveData<String>()
   val userLiveData = userMutableLiveData
 
   var passwordMutableLiveData = MutableLiveData<String>()

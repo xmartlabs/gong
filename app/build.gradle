@@ -3,7 +3,6 @@ buildscript {
     dependencies {
         classpath buildscriptDeps.firebaseCrashlyticsPlugin
         classpath buildscriptDeps.snapshotPublisher
-        classpath buildscriptDeps.navigationSafeArgPlugin
     }
 }
 
@@ -14,7 +13,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+//apply plugin: 'androidx.navigation.safeargs.kotlin' TODO enable when compatible
 
 if (getEnvVariable('KEYSTORE_FILE') != null) {
     // Avoid Signing not ready issues in Gradle Play Publisher plugin
@@ -26,10 +25,6 @@ if (getEnvVariable('KEYSTORE_FILE') != null) {
 
 // TODO: Enable Crashlytics
 // apply plugin: 'com.google.firebase.crashlytics'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
 
 android {
     compileSdkVersion androidVersions.compileSdk
@@ -98,7 +93,7 @@ android {
 
     lintOptions {
         lintConfig file("lint.xml")
-        disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning"
+        disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning", "ObsoleteLintCustomCheck"
         fatal 'StopShip'
         warningsAsErrors true
     }
@@ -116,7 +111,7 @@ android {
         useIR = true
         languageVersion = "1.4"
         jvmTarget = '1.8'
-        freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xopt-in=kotlin.RequiresOptIn"]
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xopt-in=kotlin.RequiresOptIn", "-Xopt-in=kotlin.time.ExperimentalTime"]
     }
 
     composeOptions {
@@ -129,7 +124,6 @@ dependencies {
     androidTestImplementation deps.androidX.test.junit
     androidTestImplementation deps.androidX.test.espresso
 
-    debugImplementation deps.debugDb
     debugImplementation deps.leakcanary
 
     devImplementation deps.androidSwissKnife.navigationDebug
@@ -148,30 +142,31 @@ dependencies {
     implementation deps.androidX.navigation.ui
     implementation deps.androidX.recyclerview
     implementation deps.androidX.room.coreKtx
-    implementation deps.androidX.tooling
     implementation deps.androidX.transition
     implementation deps.androidX.viewPager2
     implementation deps.coil
     implementation deps.compose.compiler
+    implementation deps.compose.constraintLayout
+    implementation deps.compose.foundation
     implementation deps.compose.liveData
+    implementation deps.compose.navigation
     implementation deps.compose.material
     implementation deps.compose.runtime
+    implementation deps.compose.tooling
     implementation deps.compose.ui
-    implementation deps.compose.foundation
+    implementation deps.compose.viewModel
     implementation deps.firebase.crashlytics
     implementation deps.koin.android
-    implementation deps.koin.fragments
-    implementation deps.koin.scope
-    implementation deps.koin.viewModel
+    implementation deps.koin.compose
     implementation deps.kotlin.core
     implementation deps.kotlin.coroutines.core
     implementation deps.kotlin.reflect
+    implementation deps.okIo
     implementation deps.okhttp3.core
     implementation deps.okhttp3.loggingIntercepror
     implementation deps.okhttp3.ok2CurlInterceptor
     implementation deps.okhttp3.stetho
     implementation deps.okhttp3.urlconnection
-    implementation deps.okIo
     implementation deps.once
     implementation deps.retrofit2.core
     implementation deps.retrofit2.gsonAdapter

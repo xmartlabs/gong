@@ -1,6 +1,5 @@
 package com.xmartlabs.gong.ui.common
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
@@ -10,12 +9,11 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.xmartlabs.gong.device.logger.NavigationLogger
 import com.xmartlabs.swissknife.navigation.extensions.navigateSafe
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Created by mirland on 14/05/20.
@@ -60,11 +58,6 @@ open class NavRouterImpl : NavRouter, KoinComponent {
 
   override fun navigate(resId: Int, args: Bundle?, navOptions: NavOptions?, navExtras: Navigator.Extras?) =
       navController.navigateSafe(resId, args, navOptions, navExtras)
-}
-
-class ActivityNavRouter : NavRouterImpl() {
-  fun setupNavController(activity: Activity, @IdRes navControllerId: Int) =
-      setupNavController(activity.findNavController(navControllerId))
 }
 
 class FragmentNavRouter(fragment: Fragment) : NavRouterImpl() {

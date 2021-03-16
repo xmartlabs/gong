@@ -6,13 +6,11 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
 /**
  * Created by mirland on 28/04/20.
  */
-@OptIn(ExperimentalTime::class)
 object NetworkLayerCreator {
   @SuppressWarnings("MagicNumber")
   private val HTTP_CONNECT_TIMEOUT = 20.seconds

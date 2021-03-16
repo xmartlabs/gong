@@ -7,13 +7,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.Date
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 import kotlin.time.milliseconds
 
 /**
  * Created by mirland on 27/04/20.
  */
-@OptIn(ExperimentalTime::class)
 class TimeTrackerUseCase(
     dispatcher: CoroutineDispatcher
 ) : FlowCoroutineUseCase<TimeTrackerUseCase.Params, Duration>(dispatcher) {

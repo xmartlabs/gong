@@ -11,10 +11,11 @@ import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 /**
  * Created by mirland on 25/04/20.
  */
-class WelcomeFragmentViewModel(
-    getLocationUseCase: GetLocationUseCase,
-    loadUserUseCase: LoadUserUseCase
+class WelcomeScreenViewModel(
+    private val getLocationUseCase: GetLocationUseCase,
+    private val loadUserUseCase: LoadUserUseCase
 ) : ViewModel() {
+
   val userLiveData: LiveData<Result<User?>> = loadUserUseCase.invokeAsLiveData(Unit)
 
   val locationLiveData: LiveData<Result<Location>> = getLocationUseCase.invokeAsLiveData(Unit)
