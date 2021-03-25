@@ -86,7 +86,7 @@ fun SignInContent(
             .fillMaxSize()
             .padding(start = 15.dp, end = 15.dp)
     ) {
-      val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton, viewModelTimeText) = createRefs()
+      val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton) = createRefs()
 
       Text(
           text = "Welcome",

@@ -35,6 +35,7 @@ fun RoundedCornersTextField(
   )
 }
 
+@Preview
 @Composable
 fun RoundedCornersPasswordTextField(
     modifier: Modifier = Modifier,
