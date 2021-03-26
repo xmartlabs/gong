@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import com.xmartlabs.gong.R
 
 object Themes {
-
   @Composable
   fun GongTheme(
       darkTheme: Boolean = isSystemInDarkTheme(),
@@ -33,63 +32,52 @@ object Themes {
 }
 
 object GongColors {
-  val background = Color(0xfff0f3fa)
-  val backgroundDark = Color(0xff121212)
-  val error = Color(0xffd32f2f)
-  val errorDark = Color(0xffcf6679)
-  val onBackgroundDark = Color(0xffffffff)
-  val onBackgroundLight = Color(0xff1b2130)
-  val onError = Color(0xffffffff)
-  val onErrorDark = Color(0xff000000)
-  val onPrimary = Color(0xffffffff)
-  val onPrimaryDark = Color(0xff000000)
-  val onSecondary = Color(0xffffffff)
-  val onSecondaryDark = Color(0xff000000)
-  val onSurface = Color(0xff000000)
-  val onSurfaceDark = Color(0xffffffff)
-  val primary = Color(0xffe91e63)
-  val primaryDark = Color(0xfff48fb0)
-  val primaryVariant = Color(0xffc2185b)
-  val primaryVariantDark = Color(0xffc2185b)
-  val secondary = Color(0xffffc107)
-  val secondaryDark = Color(0xffffe082)
-  val secondaryVariant = Color(0xffdda600)
-  val secondaryVariantDark = Color(0xffffe082)
-  val surface = Color(0xffffffff)
-  val surfaceDark = Color(0xff121212)
+  val whiteLilac = Color(0xfff0f3fa)
+  val grayCod = Color(0xff121212)
+  val redPersian = Color(0xffd32f2f)
+  val redChestnut = Color(0xffcf6679)
+  val white = Color(0xffffffff)
+  val blueMirage = Color(0xff1b2130)
+  val black = Color(0xff000000)
+  val pinkAmaranth = Color(0xffe91e63)
+  val pinkMauvelous = Color(0xfff48fb0)
+  val pinkMaroon = Color(0xffc2185b)
+  val yellowAmber = Color(0xffffc107)
+  val yellowSalomie = Color(0xffffe082)
+  val yellowCorn = Color(0xffdda600)
 
   val mediumEmphasisGray = Color(0xff808080)
   val inputGray = Color(0xfff8f9fa)
   val transparent = Color(0x00000000)
 
   val lightThemeColors = lightColors(
-      primary = primary,
-      primaryVariant = primaryVariant,
-      secondary = secondary,
-      secondaryVariant = secondaryVariant,
-      background = background,
-      surface = surface,
-      onPrimary = onPrimary,
-      onSecondary = onSecondary,
-      onBackground = onBackgroundLight,
-      onSurface = onSurface,
-      error = error,
-      onError = onError,
+      primary = pinkAmaranth,
+      primaryVariant = pinkMaroon,
+      secondary = yellowAmber,
+      secondaryVariant = yellowCorn,
+      background = whiteLilac,
+      surface = white,
+      onPrimary = white,
+      onSecondary = white,
+      onBackground = blueMirage,
+      onSurface = black,
+      error = redPersian,
+      onError = white,
   )
 
   val darkThemeColors = darkColors(
-      primary = primaryDark,
-      primaryVariant = primaryVariantDark,
-      secondary = secondaryDark,
-      secondaryVariant = secondaryVariantDark,
-      background = backgroundDark,
-      surface = surfaceDark,
-      onPrimary = onPrimaryDark,
-      onSecondary = onSecondaryDark,
-      onBackground = onBackgroundDark,
-      onSurface = onSurfaceDark,
-      error = errorDark,
-      onError = onErrorDark,
+      primary = pinkMauvelous,
+      primaryVariant = pinkMaroon,
+      secondary = yellowSalomie,
+      secondaryVariant = yellowSalomie,
+      background = grayCod,
+      surface = grayCod,
+      onPrimary = black,
+      onSecondary = black,
+      onBackground = white,
+      onSurface = white,
+      error = redChestnut,
+      onError = black,
   )
 }
 
