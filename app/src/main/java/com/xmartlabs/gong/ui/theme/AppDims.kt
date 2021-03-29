@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 private const val SMALL_DEVICE_SCREEN_WIDTH_DP = 300
 
 @Stable
-class AppDims(
+data class AppDims(
     val textSizeSmall: TextUnit,
     val textSizeMedium: TextUnit,
     val textSizeRegular: TextUnit,

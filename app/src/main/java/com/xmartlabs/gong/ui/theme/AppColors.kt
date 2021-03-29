@@ -46,6 +46,7 @@ class AppColors(
     get() = materialColors.isLight
 }
 
+@Suppress("MagicNumber")
 private object AppCustomColors {
   val WHITE_LILAC = Color(0xfff0f3fa)
   val GRAY_COD = Color(0xff121212)
