@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.toShortString
 import com.xmartlabs.gong.device.common.getOrNull
-import com.xmartlabs.gong.ui.Themes
+import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 
 /**
@@ -35,7 +35,7 @@ fun WelcomeScreen() {
   val locationResult by viewModel.locationLiveData.observeAsState()
   val location = locationResult?.getOrNull()
   val locationString = location?.toShortString() ?: ""
-  Themes.GongTheme {
+  AppTheme {
     WelcomeContent(
         userName = userResult?.getOrNull()?.name ?: "",
         locationString = locationString,
@@ -74,7 +74,7 @@ fun WelcomeContent(
 @Preview
 @Composable
 fun WelcomePreview() {
-  Themes.GongTheme {
+  AppTheme {
     WelcomeContent()
   }
 }
@@ -82,7 +82,7 @@ fun WelcomePreview() {
 @Preview
 @Composable
 fun WelcomePreviewDark() {
-  Themes.GongTheme(darkTheme = true) {
+  AppTheme(darkTheme = true) {
     WelcomeContent()
   }
 }
