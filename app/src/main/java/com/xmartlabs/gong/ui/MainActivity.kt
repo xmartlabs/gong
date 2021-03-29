@@ -8,14 +8,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.xmartlabs.gong.R
 import com.xmartlabs.gong.ui.screens.signin.SignInScreen
 import com.xmartlabs.gong.ui.screens.splash.SplashScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
-    setTheme(R.style.AppTheme_NoActionBar)
     super.onCreate(savedInstanceState)
     setContent {
       GongNavigationManager()
