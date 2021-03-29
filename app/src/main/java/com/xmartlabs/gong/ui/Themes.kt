@@ -31,6 +31,7 @@ object Themes {
   }
 }
 
+@Suppress("MagicNumber")
 object GongColors {
   val whiteLilac = Color(0xfff0f3fa)
   val grayCod = Color(0xff121212)
@@ -81,6 +82,7 @@ object GongColors {
   )
 }
 
+@Suppress("MagicNumber")
 object Typographies {
   private val robotoFamily = FontFamily(
       Font(resId = R.font.roboto_regular, weight = FontWeight.Normal, style = FontStyle.Normal),
