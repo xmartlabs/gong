@@ -35,7 +35,7 @@ private val LocalAppDims = staticCompositionLocalOf {
 }
 
 private val LocalAppTypography = staticCompositionLocalOf {
-  detDefaultAppTypography()
+  defaultAppTypography()
 }
 
 @Composable
@@ -45,7 +45,7 @@ fun AppTheme(
 ) {
   val appColors = appColors(darkTheme = darkTheme)
   val appDims = appDims()
-  val appTypography = getAppTypography(appDims, appColors)
+  val appTypography = appTypography(appDims, appColors)
   CompositionLocalProvider(
       LocalAppDims provides appDims,
       LocalAppColors provides appColors,

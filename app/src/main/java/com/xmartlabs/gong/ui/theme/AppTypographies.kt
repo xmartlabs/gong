@@ -63,10 +63,10 @@ data class AppTypography(
     get() = materialTypography.overline
 }
 
-fun detDefaultAppTypography() = getAppTypography(defaultAppDims(), defaultAppColors())
+fun defaultAppTypography() = appTypography(defaultAppDims(), defaultAppColors())
 
-fun getAppTypography(dims: AppDims, colors: AppColors): AppTypography {
-  val regularTextSize = TextStyle(
+fun appTypography(dims: AppDims, colors: AppColors): AppTypography {
+  val baseTextStyle = TextStyle(
       fontFamily = AppFontFamilies.Roboto,
       fontWeight = FontWeight.Normal,
       fontSize = dims.textSizeRegular,
@@ -74,13 +74,13 @@ fun getAppTypography(dims: AppDims, colors: AppColors): AppTypography {
   )
 
   return AppTypography(
-      primaryButton = regularTextSize.copy(fontWeight = FontWeight.Bold),
-      linkButton = regularTextSize.copy(color = colors.linkColor),
+      primaryButton = baseTextStyle.copy(fontWeight = FontWeight.Bold),
+      linkButton = baseTextStyle.copy(color = colors.linkColor),
       materialTypography = Typography(
-          body1 = regularTextSize,
-          h1 = regularTextSize.copy(fontSize = dims.textSizeH1),
-          h2 = regularTextSize.copy(fontSize = dims.textSizeH2),
-          h3 = regularTextSize.copy(fontSize = dims.textSizeH3),
+          body1 = baseTextStyle,
+          h1 = baseTextStyle.copy(fontSize = dims.textSizeH1),
+          h2 = baseTextStyle.copy(fontSize = dims.textSizeH2),
+          h3 = baseTextStyle.copy(fontSize = dims.textSizeH3),
           subtitle1 = TextStyle(
               fontFamily = AppFontFamilies.Roboto,
               fontWeight = FontWeight.Bold,
