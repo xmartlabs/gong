@@ -18,15 +18,15 @@ object AppTheme {
     @ReadOnlyComposable
     get() = LocalAppColors.current
 
-  val typography: AppTypography
-    @Composable
-    @ReadOnlyComposable
-    get() = LocalAppTypography.current
-
   val shapes: AppShapes
     @Composable
     @ReadOnlyComposable
     get() = LocalAppShapes.current
+
+  val typography: AppTypography
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalAppTypography.current
 }
 
 private val LocalAppColors = staticCompositionLocalOf {
@@ -37,12 +37,12 @@ private val LocalAppDims = staticCompositionLocalOf {
   defaultAppDims()
 }
 
-private val LocalAppTypography = staticCompositionLocalOf {
-  defaultAppTypography()
-}
-
 private val LocalAppShapes = staticCompositionLocalOf {
   defaultAppShapes()
+}
+
+private val LocalAppTypography = staticCompositionLocalOf {
+  defaultAppTypography()
 }
 
 @Composable
@@ -55,8 +55,9 @@ fun AppTheme(
     content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(
-      LocalAppDims provides dims,
       LocalAppColors provides colors,
+      LocalAppDims provides dims,
+      LocalAppShapes provides shapes,
       LocalAppTypography provides typography,
   ) {
     MaterialTheme(

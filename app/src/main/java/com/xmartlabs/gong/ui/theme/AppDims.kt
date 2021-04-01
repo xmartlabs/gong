@@ -2,7 +2,7 @@ package com.xmartlabs.gong.ui.theme
 
 import androidx.annotation.Dimension
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 @Dimension(unit = Dimension.DP)
 private const val SMALL_DEVICE_SCREEN_WIDTH_DP = 300
 
-@Stable
+@Immutable
 data class AppDims(
     val textSizeSmall: TextUnit,
     val textSizeMedium: TextUnit,

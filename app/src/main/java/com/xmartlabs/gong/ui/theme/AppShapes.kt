@@ -3,13 +3,13 @@ package com.xmartlabs.gong.ui.theme
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.unit.dp
 
 /**
  * Created by mirland on 31/3/21.
  */
-@Stable
+@Immutable
 data class AppShapes(
     val roundedBox: CornerBasedShape = RoundedCornerShape(8.dp),
     val materialShapes: Shapes = Shapes(),

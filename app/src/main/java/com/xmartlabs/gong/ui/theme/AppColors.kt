@@ -4,14 +4,13 @@ import androidx.compose.material.Colors
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 
 /**
  * Created by mirland on 26/3/21.
  */
-@Immutable
+@Stable
 class AppColors(
     val linkTextColor: Color,
     val subtitleTextColor: Color,
@@ -137,8 +136,6 @@ private object AppCustomColors {
 
   val YELLOW_CORN = Color(0xffdda600)
   val MEDIUM_EMPHASIS_GRAY = Color(0xff808080)
-
-  val INPUT_GRAY = Color(0xfff8f9fa)
 }
 
 // To expose one, but it shouldn't be necessary, the colors should be used from the app color theme
