@@ -23,11 +23,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
-import com.xmartlabs.gong.ui.theme.AppTheme
 import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.common.extensions.observeResult
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
+import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 import java.util.Locale
 
@@ -38,20 +38,18 @@ fun SignInScreen(navController: NavHostController) {
   val password by viewModel.passwordLiveData.observeAsState(initial = "")
   val lifecycleOwner = LocalLifecycleOwner.current
   val context = LocalContext.current
-  AppTheme {
-    SignInContent(
-        user = user,
-        password = password,
-        onUserEdited = { viewModel.updateUser(it) },
-        onPasswordEdited = { viewModel.updatePassword(it) },
-        onSignInButtonClicked = {
-          signIn(viewModel = viewModel,
-              lifecycleOwner = lifecycleOwner,
-              context = context,
-              navController = navController)
-        }
-    )
-  }
+  SignInContent(
+      user = user,
+      password = password,
+      onUserEdited = { viewModel.updateUser(it) },
+      onPasswordEdited = { viewModel.updatePassword(it) },
+      onSignInButtonClicked = {
+        signIn(viewModel = viewModel,
+            lifecycleOwner = lifecycleOwner,
+            context = context,
+            navController = navController)
+      }
+  )
 }
 
 @Preview
@@ -86,7 +84,6 @@ fun SignInContent(
             .padding(start = 15.dp, end = 15.dp)
     ) {
       val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton) = createRefs()
-
       Text(
           text = "Welcome",
           style = AppTheme.typography.subtitle1,

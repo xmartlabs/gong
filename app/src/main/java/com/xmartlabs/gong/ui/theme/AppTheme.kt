@@ -1,13 +1,11 @@
 package com.xmartlabs.gong.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.unit.dp
 
 object AppTheme {
   val dims: AppDims
@@ -24,6 +22,11 @@ object AppTheme {
     @Composable
     @ReadOnlyComposable
     get() = LocalAppTypography.current
+
+  val shapes: AppShapes
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalAppShapes.current
 }
 
 private val LocalAppColors = staticCompositionLocalOf {
@@ -38,27 +41,29 @@ private val LocalAppTypography = staticCompositionLocalOf {
   defaultAppTypography()
 }
 
+private val LocalAppShapes = staticCompositionLocalOf {
+  defaultAppShapes()
+}
+
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    dims: AppDims = appDims(),
+    colors: AppColors = appColors(darkTheme = darkTheme),
+    typography: AppTypography = appTypography(dims, colors),
+    shapes: AppShapes = appShapes(),
     content: @Composable () -> Unit,
 ) {
-  val appColors = appColors(darkTheme = darkTheme)
-  val appDims = appDims()
-  val appTypography = appTypography(appDims, appColors)
   CompositionLocalProvider(
-      LocalAppDims provides appDims,
-      LocalAppColors provides appColors,
-      LocalAppTypography provides appTypography,
+      LocalAppDims provides dims,
+      LocalAppColors provides colors,
+      LocalAppTypography provides typography,
   ) {
     MaterialTheme(
-        colors = appColors.materialColors,
-        typography = appTypography.materialTypography,
+        colors = colors.materialColors,
+        typography = typography.materialTypography,
+        shapes = shapes.materialShapes,
         content = content,
     )
   }
-}
-
-object Shapes {
-  val roundedBox = RoundedCornerShape(8.dp)
 }

@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
  */
 @Immutable
 class AppColors(
-    val linkColor: Color,
+    val linkTextColor: Color,
     val subtitleTextColor: Color,
 
     val materialColors: Colors
@@ -44,6 +44,78 @@ class AppColors(
     get() = materialColors.onError
   val isLight: Boolean
     get() = materialColors.isLight
+
+  @Suppress("LongParameterList")
+  constructor(
+      linkTextColor: Color,
+      subtitleTextColor: Color,
+      primary: Color,
+      primaryVariant: Color,
+      secondary: Color,
+      secondaryVariant: Color,
+      background: Color,
+      surface: Color,
+      error: Color,
+      onPrimary: Color,
+      onSecondary: Color,
+      onBackground: Color,
+      onSurface: Color,
+      onError: Color,
+      isLight: Boolean
+  ) : this(
+      linkTextColor = linkTextColor,
+      subtitleTextColor = subtitleTextColor,
+      materialColors = Colors(
+          primary = primary,
+          primaryVariant = primaryVariant,
+          secondary = secondary,
+          secondaryVariant = secondaryVariant,
+          background = background,
+          surface = surface,
+          error = error,
+          onPrimary = onPrimary,
+          onSecondary = onSecondary,
+          onBackground = onBackground,
+          onSurface = onSurface,
+          onError = onError,
+          isLight = isLight,
+      )
+  )
+
+  @Suppress("unused", "DataClassContainsFunctions")
+  fun copy(
+      linkTextColor: Color = this.linkTextColor,
+      subtitleTextColor: Color = this.subtitleTextColor,
+      primary: Color = this.primary,
+      primaryVariant: Color = this.primaryVariant,
+      secondary: Color = this.secondary,
+      secondaryVariant: Color = this.secondaryVariant,
+      background: Color = this.background,
+      surface: Color = this.surface,
+      error: Color = this.error,
+      onPrimary: Color = this.onPrimary,
+      onSecondary: Color = this.onSecondary,
+      onBackground: Color = this.onBackground,
+      onSurface: Color = this.onSurface,
+      onError: Color = this.onError,
+      isLight: Boolean = this.isLight
+  ): AppColors = AppColors(
+      linkTextColor = linkTextColor,
+      subtitleTextColor = subtitleTextColor,
+      primary = primary,
+      primaryVariant = primaryVariant,
+      secondary = secondary,
+      secondaryVariant = secondaryVariant,
+      background = background,
+      surface = surface,
+      error = error,
+      onPrimary = onPrimary,
+      onSecondary = onSecondary,
+      onBackground = onBackground,
+      onSurface = onSurface,
+      onError = onError,
+      isLight = isLight,
+  )
 }
 
 @Suppress("MagicNumber")
@@ -85,7 +157,7 @@ fun appColors(darkTheme: Boolean): AppColors =
 fun defaultAppColors() = lightAppColors
 
 private val darkAppColors = AppColors(
-    linkColor = AppCustomColors.PINK_AMARANTH,
+    linkTextColor = AppCustomColors.PINK_AMARANTH,
     subtitleTextColor = AppCustomColors.WHITE,
     materialColors = darkColors(
         primary = AppCustomColors.PINK_MAUVELOUS,
@@ -104,7 +176,7 @@ private val darkAppColors = AppColors(
 )
 
 private val lightAppColors = AppColors(
-    linkColor = AppCustomColors.YELLOW_AMBER,
+    linkTextColor = AppCustomColors.YELLOW_AMBER,
     subtitleTextColor = AppCustomColors.MEDIUM_EMPHASIS_GRAY,
     materialColors = lightColors(
         primary = AppCustomColors.PINK_AMARANTH,

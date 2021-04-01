@@ -20,7 +20,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.xmartlabs.gong.R
-import com.xmartlabs.gong.ui.theme.Shapes
+import com.xmartlabs.gong.ui.theme.AppTheme
 
 @Preview
 @Composable
@@ -35,7 +35,7 @@ fun RoundedCornersTextField(
       label = label,
       onValueChange = onValueChange,
       textStyle = MaterialTheme.typography.body1,
-      shape = Shapes.roundedBox,
+      shape = AppTheme.shapes.roundedBox,
       colors = textFieldColors(
           focusedIndicatorColor = Color.Transparent,
           unfocusedIndicatorColor = Color.Transparent,
@@ -58,7 +58,7 @@ fun RoundedCornersPasswordTextField(
       label = label,
       onValueChange = onValueChange,
       textStyle = MaterialTheme.typography.body1,
-      shape = Shapes.roundedBox,
+      shape = AppTheme.shapes.roundedBox,
       colors = textFieldColors(
           focusedIndicatorColor = Color.Transparent,
           unfocusedIndicatorColor = Color.Transparent,

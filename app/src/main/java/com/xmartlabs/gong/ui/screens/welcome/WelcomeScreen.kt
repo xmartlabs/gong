@@ -35,12 +35,10 @@ fun WelcomeScreen() {
   val locationResult by viewModel.locationLiveData.observeAsState()
   val location = locationResult?.getOrNull()
   val locationString = location?.toShortString() ?: ""
-  AppTheme {
-    WelcomeContent(
-        userName = userResult?.getOrNull()?.name ?: "",
-        locationString = locationString,
-    )
-  }
+  WelcomeContent(
+      userName = userResult?.getOrNull()?.name ?: "",
+      locationString = locationString,
+  )
 }
 
 @Composable

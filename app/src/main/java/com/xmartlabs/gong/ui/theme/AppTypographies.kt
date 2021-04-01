@@ -61,6 +61,77 @@ data class AppTypography(
 
   val overline: TextStyle
     get() = materialTypography.overline
+
+  constructor(
+      primaryButton: TextStyle,
+      linkButton: TextStyle,
+      h1: TextStyle,
+      h2: TextStyle,
+      h3: TextStyle,
+      h4: TextStyle,
+      h5: TextStyle,
+      h6: TextStyle,
+      subtitle1: TextStyle,
+      subtitle2: TextStyle,
+      body1: TextStyle,
+      body2: TextStyle,
+      button: TextStyle,
+      caption: TextStyle,
+      overline: TextStyle,
+  ) : this(
+      primaryButton = primaryButton,
+      linkButton = linkButton,
+      materialTypography = Typography(
+          h1 = h1,
+          h2 = h2,
+          h3 = h3,
+          h4 = h4,
+          h5 = h5,
+          h6 = h6,
+          subtitle1 = subtitle1,
+          subtitle2 = subtitle2,
+          body1 = body1,
+          body2 = body2,
+          button = button,
+          caption = caption,
+          overline = overline,
+      )
+  )
+
+  @Suppress("unused", "DataClassContainsFunctions")
+  fun copy(
+      primaryButton: TextStyle = this.primaryButton,
+      linkButton: TextStyle = this.linkButton,
+      h1: TextStyle = this.h1,
+      h2: TextStyle = this.h2,
+      h3: TextStyle = this.h3,
+      h4: TextStyle = this.h4,
+      h5: TextStyle = this.h5,
+      h6: TextStyle = this.h6,
+      subtitle1: TextStyle = this.subtitle1,
+      subtitle2: TextStyle = this.subtitle2,
+      body1: TextStyle = this.body1,
+      body2: TextStyle = this.body2,
+      button: TextStyle = this.button,
+      caption: TextStyle = this.caption,
+      overline: TextStyle = this.overline,
+  ) = AppTypography(
+      primaryButton = primaryButton,
+      linkButton = linkButton,
+      h1 = h1,
+      h2 = h2,
+      h3 = h3,
+      h4 = h4,
+      h5 = h5,
+      h6 = h6,
+      subtitle1 = subtitle1,
+      subtitle2 = subtitle2,
+      body1 = body1,
+      body2 = body2,
+      button = button,
+      caption = caption,
+      overline = overline,
+  )
 }
 
 fun defaultAppTypography() = appTypography(defaultAppDims(), defaultAppColors())
@@ -75,7 +146,7 @@ fun appTypography(dims: AppDims, colors: AppColors): AppTypography {
 
   return AppTypography(
       primaryButton = baseTextStyle.copy(fontWeight = FontWeight.Bold),
-      linkButton = baseTextStyle.copy(color = colors.linkColor),
+      linkButton = baseTextStyle.copy(color = colors.linkTextColor),
       materialTypography = Typography(
           body1 = baseTextStyle,
           h1 = baseTextStyle.copy(fontSize = dims.textSizeH1),
