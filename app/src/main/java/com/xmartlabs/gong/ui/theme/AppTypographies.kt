@@ -21,7 +21,7 @@ data class AppTypography(
     val primaryButton: TextStyle,
     val linkButton: TextStyle,
 
-    val materialTypography: Typography
+    val materialTypography: Typography,
 ) {
   val h1: TextStyle
     get() = materialTypography.h1

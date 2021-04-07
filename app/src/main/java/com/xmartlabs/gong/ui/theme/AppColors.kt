@@ -15,7 +15,7 @@ class AppColors(
     val linkTextColor: Color,
     val subtitleTextColor: Color,
 
-    val materialColors: Colors
+    val materialColors: Colors,
 ) {
   val primary: Color
     get() = materialColors.primary
@@ -60,7 +60,7 @@ class AppColors(
       onBackground: Color,
       onSurface: Color,
       onError: Color,
-      isLight: Boolean
+      isLight: Boolean,
   ) : this(
       linkTextColor = linkTextColor,
       subtitleTextColor = subtitleTextColor,
@@ -97,7 +97,7 @@ class AppColors(
       onBackground: Color = this.onBackground,
       onSurface: Color = this.onSurface,
       onError: Color = this.onError,
-      isLight: Boolean = this.isLight
+      isLight: Boolean = this.isLight,
   ): AppColors = AppColors(
       linkTextColor = linkTextColor,
       subtitleTextColor = subtitleTextColor,
