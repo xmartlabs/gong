@@ -11,12 +11,15 @@ import androidx.navigation.compose.rememberNavController
 import com.xmartlabs.gong.ui.screens.signin.SignInScreen
 import com.xmartlabs.gong.ui.screens.splash.SplashScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
+import com.xmartlabs.gong.ui.theme.AppTheme
 
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      GongNavigationManager()
+      AppTheme {
+        GongNavigationManager()
+      }
     }
   }
 

@@ -23,12 +23,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
-import com.xmartlabs.gong.ui.GongColors
 import com.xmartlabs.gong.ui.Screens
-import com.xmartlabs.gong.ui.Themes
 import com.xmartlabs.gong.ui.common.extensions.observeResult
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
+import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 import java.util.Locale
 
@@ -39,26 +38,24 @@ fun SignInScreen(navController: NavHostController) {
   val password by viewModel.passwordLiveData.observeAsState(initial = "")
   val lifecycleOwner = LocalLifecycleOwner.current
   val context = LocalContext.current
-  Themes.GongTheme {
-    SignInContent(
-        user = user,
-        password = password,
-        onUserEdited = { viewModel.updateUser(it) },
-        onPasswordEdited = { viewModel.updatePassword(it) },
-        onSignInButtonClicked = {
-          signIn(viewModel = viewModel,
-              lifecycleOwner = lifecycleOwner,
-              context = context,
-              navController = navController)
-        }
-    )
-  }
+  SignInContent(
+      user = user,
+      password = password,
+      onUserEdited = { viewModel.updateUser(it) },
+      onPasswordEdited = { viewModel.updatePassword(it) },
+      onSignInButtonClicked = {
+        signIn(viewModel = viewModel,
+            lifecycleOwner = lifecycleOwner,
+            context = context,
+            navController = navController)
+      }
+  )
 }
 
 @Preview
 @Composable
 fun SignInLightPreview() {
-  Themes.GongTheme {
+  AppTheme {
     SignInContent()
   }
 }
@@ -66,7 +63,7 @@ fun SignInLightPreview() {
 @Preview
 @Composable
 fun SignInDarkPreview() {
-  Themes.GongTheme(darkTheme = true) {
+  AppTheme(darkTheme = true) {
     SignInContent()
   }
 }
@@ -87,10 +84,9 @@ fun SignInContent(
             .padding(start = 15.dp, end = 15.dp)
     ) {
       val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton) = createRefs()
-
       Text(
           text = "Welcome",
-          style = MaterialTheme.typography.subtitle1.copy(color = GongColors.mediumEmphasisGray),
+          style = AppTheme.typography.subtitle1,
           modifier = Modifier.constrainAs(welcomeText) {
             bottom.linkTo(signInText.top)
             start.linkTo(signInText.start)

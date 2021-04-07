@@ -14,13 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.xmartlabs.gong.R
-import com.xmartlabs.gong.ui.GongColors
-import com.xmartlabs.gong.ui.Shapes
+import com.xmartlabs.gong.ui.theme.AppTheme
 
 @Preview
 @Composable
@@ -35,10 +35,10 @@ fun RoundedCornersTextField(
       label = label,
       onValueChange = onValueChange,
       textStyle = MaterialTheme.typography.body1,
-      shape = Shapes.roundedBox,
+      shape = AppTheme.shapes.roundedBox,
       colors = textFieldColors(
-          focusedIndicatorColor = GongColors.transparent,
-          unfocusedIndicatorColor = GongColors.transparent,
+          focusedIndicatorColor = Color.Transparent,
+          unfocusedIndicatorColor = Color.Transparent,
       ),
       modifier = modifier.fillMaxWidth(),
   )
@@ -58,10 +58,10 @@ fun RoundedCornersPasswordTextField(
       label = label,
       onValueChange = onValueChange,
       textStyle = MaterialTheme.typography.body1,
-      shape = Shapes.roundedBox,
+      shape = AppTheme.shapes.roundedBox,
       colors = textFieldColors(
-          focusedIndicatorColor = GongColors.transparent,
-          unfocusedIndicatorColor = GongColors.transparent,
+          focusedIndicatorColor = Color.Transparent,
+          unfocusedIndicatorColor = Color.Transparent,
       ),
       visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
       keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
