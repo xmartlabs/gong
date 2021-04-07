@@ -52,11 +52,22 @@ fun SignInScreen(navController: NavHostController) {
   )
 }
 
+@Composable
+private fun SignInContentPreview(
+    user: String = "xmartlabs",
+    password: String = "xmartlabs",
+) = SignInContent(user,
+    password = password,
+    onUserEdited = { },
+    onPasswordEdited = { },
+    onSignInButtonClicked = { }
+)
+
 @Preview
 @Composable
-fun SignInLightPreview() {
+private fun SignInLightPreview() {
   AppTheme {
-    SignInContent()
+    SignInContentPreview()
   }
 }
 

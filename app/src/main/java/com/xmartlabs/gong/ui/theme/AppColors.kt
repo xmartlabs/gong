@@ -117,43 +117,19 @@ class AppColors(
   )
 }
 
-@Suppress("MagicNumber")
-private object AppCustomColors {
-  val WHITE_LILAC = Color(0xfff0f3fa)
-  val GRAY_COD = Color(0xff121212)
-  val RED_PERSIAN = Color(0xffd32f2f)
-  val RED_CHESTNUT = Color(0xffcf6679)
-  val WHITE = Color(0xffffffff)
-  val BLUE_MIRAGE = Color(0xff1b2130)
-  val BLACK = Color(0xff000000)
-  val PINK_AMARANTH = Color(0xffe91e63)
-
-  val PINK_MAUVELOUS = Color(0xfff48fb0)
-
-  val PINK_MAROON = Color(0xffc2185b)
-  val YELLOW_AMBER = Color(0xffffc107)
-  val YELLOW_SALOMIE = Color(0xffffe082)
-
-  val YELLOW_CORN = Color(0xffdda600)
-  val MEDIUM_EMPHASIS_GRAY = Color(0xff808080)
+enum class AppColorPalette {
+  PINK,
 }
 
-// To expose one, but it shouldn't be necessary, the colors should be used from the app color theme
-@Stable
-val Color.Companion.WhiteLilac
-  get() = AppCustomColors.WHITE_LILAC
-
 @Composable
-fun appColors(darkTheme: Boolean): AppColors =
-    if (darkTheme) {
-      darkAppColors
-    } else {
-      lightAppColors
+fun appColors(colorPalette: AppColorPalette, darkTheme: Boolean): AppColors =
+    when (colorPalette) {
+      AppColorPalette.PINK -> if (darkTheme) darkPinkColors else lightPinkColors
     }
 
-fun defaultAppColors() = lightAppColors
+fun defaultAppColors() = lightPinkColors
 
-private val darkAppColors = AppColors(
+private val darkPinkColors = AppColors(
     linkTextColor = AppCustomColors.PINK_AMARANTH,
     subtitleTextColor = AppCustomColors.WHITE,
     materialColors = darkColors(
@@ -172,9 +148,9 @@ private val darkAppColors = AppColors(
     )
 )
 
-private val lightAppColors = AppColors(
+private val lightPinkColors = AppColors(
     linkTextColor = AppCustomColors.YELLOW_AMBER,
-    subtitleTextColor = AppCustomColors.MEDIUM_EMPHASIS_GRAY,
+    subtitleTextColor = AppCustomColors.GRAY_MEDIUM_EMPHASIS,
     materialColors = lightColors(
         primary = AppCustomColors.PINK_AMARANTH,
         primaryVariant = AppCustomColors.PINK_MAROON,
@@ -190,3 +166,26 @@ private val lightAppColors = AppColors(
         onError = AppCustomColors.WHITE,
     )
 )
+
+@Suppress("MagicNumber")
+private object AppCustomColors {
+  val BLACK = Color(0xff000000)
+  val BLUE_MIRAGE = Color(0xff1b2130)
+  val GRAY_COD = Color(0xff121212)
+  val GRAY_MEDIUM_EMPHASIS = Color(0xff808080)
+  val PINK_AMARANTH = Color(0xffe91e63)
+  val PINK_MAROON = Color(0xffc2185b)
+  val PINK_MAUVELOUS = Color(0xfff48fb0)
+  val RED_CHESTNUT = Color(0xffcf6679)
+  val RED_PERSIAN = Color(0xffd32f2f)
+  val WHITE = Color(0xffffffff)
+  val WHITE_LILAC = Color(0xfff0f3fa)
+  val YELLOW_AMBER = Color(0xffffc107)
+  val YELLOW_CORN = Color(0xffdda600)
+  val YELLOW_SALOMIE = Color(0xffffe082)
+}
+
+// To expose one color, but it shouldn't be necessary, the colors should be used from the app color theme
+@Stable
+val Color.Companion.WhiteLilac
+  get() = AppCustomColors.WHITE_LILAC

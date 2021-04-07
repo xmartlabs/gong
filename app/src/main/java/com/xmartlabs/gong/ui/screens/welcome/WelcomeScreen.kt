@@ -42,9 +42,15 @@ fun WelcomeScreen() {
 }
 
 @Composable
-fun WelcomeContent(
+private fun WelcomeContentPreview(
     userName: String = "xmartlabs",
     locationString: String = "Uruguay",
+) = WelcomeContent(userName, locationString)
+
+@Composable
+fun WelcomeContent(
+    userName: String,
+    locationString: String,
 ) {
   Scaffold(
       topBar = { GongTopBar() },
@@ -73,7 +79,7 @@ fun WelcomeContent(
 @Composable
 fun WelcomePreview() {
   AppTheme {
-    WelcomeContent()
+    WelcomeContentPreview()
   }
 }
 
@@ -81,7 +87,7 @@ fun WelcomePreview() {
 @Composable
 fun WelcomePreviewDark() {
   AppTheme(darkTheme = true) {
-    WelcomeContent()
+    WelcomeContentPreview()
   }
 }
 
