@@ -12,8 +12,8 @@ buildscript {
     apply from: 'versions.gradle'
     addRepos(repositories)
     dependencies {
+        classpath buildscriptDeps.androidGradle
         classpath buildscriptDeps.dependencyUpdates
-        classpath buildscriptDeps.gradle
         classpath buildscriptDeps.detekt
         classpath buildscriptDeps.googleServices
         classpath buildscriptDeps.kotlin

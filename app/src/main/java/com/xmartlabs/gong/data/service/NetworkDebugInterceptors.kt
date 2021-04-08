@@ -2,7 +2,6 @@ package com.xmartlabs.gong.data.service
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.moczul.ok2curl.CurlInterceptor
-import com.moczul.ok2curl.logger.Loggable
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
@@ -18,7 +17,7 @@ object NetworkDebugInterceptors {
   fun createDebugInterceptors(
       useOkHttpInterceptor: Boolean,
       useCurlInterceptor: Boolean,
-      useStethoInterceptor: Boolean
+      useStethoInterceptor: Boolean,
   ): List<Interceptor> = mutableListOf<Interceptor>()
       .apply {
         if (useStethoInterceptor) add(createStethoInterceptor())
@@ -26,14 +25,15 @@ object NetworkDebugInterceptors {
         if (useOkHttpInterceptor) add(createOkHttpInterceptor())
       }
 
-  private fun createCurlInterceptor() = CurlInterceptor(Loggable { message ->
+  private fun createCurlInterceptor() = CurlInterceptor { message ->
     Timber.tag(OK_2_CURL_INTERCEPTOR_LOGGER_TAG)
         .d(message.sanitize())
-  })
+  }
 
-  private fun createOkHttpInterceptor() = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-    override fun log(message: String) = Timber.tag(OK_HTTP_INTERCEPTOR_LOGGER_TAG).d(message.sanitize())
-  }).apply { level = HttpLoggingInterceptor.Level.BODY }
+  private fun createOkHttpInterceptor() = HttpLoggingInterceptor { message ->
+    Timber.tag(OK_HTTP_INTERCEPTOR_LOGGER_TAG)
+        .d(message.sanitize())
+  }.apply { level = HttpLoggingInterceptor.Level.BODY }
 
   private fun createStethoInterceptor() = StethoInterceptor()
 

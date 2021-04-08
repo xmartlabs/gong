@@ -47,9 +47,24 @@ private val LocalAppTypography = staticCompositionLocalOf {
 
 @Composable
 fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     dims: AppDims = appDims(),
-    colors: AppColors = appColors(darkTheme = darkTheme),
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    colorPalette: AppColorPalette = AppColorPalette.PINK,
+    typography: AppTypography = appTypography(dims, appColors(colorPalette = colorPalette, darkTheme = darkTheme)),
+    shapes: AppShapes = appShapes(),
+    content: @Composable () -> Unit,
+) = AppTheme(
+    dims = dims,
+    colors = appColors(colorPalette = colorPalette, darkTheme = darkTheme),
+    typography = typography,
+    shapes = shapes,
+    content = content
+)
+
+@Composable
+fun AppTheme(
+    dims: AppDims = appDims(),
+    colors: AppColors = appColors(colorPalette = AppColorPalette.PINK, darkTheme = isSystemInDarkTheme()),
     typography: AppTypography = appTypography(dims, colors),
     shapes: AppShapes = appShapes(),
     content: @Composable () -> Unit,
