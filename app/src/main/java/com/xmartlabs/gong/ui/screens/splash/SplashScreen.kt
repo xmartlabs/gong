@@ -7,14 +7,14 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.Screens
-import com.xmartlabs.gong.ui.common.extensions.observeResult
+import com.xmartlabs.gong.ui.common.extensions.observeStateResult
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun SplashScreen(navController: NavHostController) {
   val viewModel: SplashScreenViewModel = getViewModel()
   val lifecycleOwner = LocalLifecycleOwner.current
-  viewModel.currentSessionTypeLiveData.observeResult(lifecycleOwner,
+  viewModel.currentSessionTypeLiveData.observeStateResult(lifecycleOwner,
       onFailure = { ex -> throw IllegalStateException("Invalid state", ex) },
       onSuccess = { sessionType ->
         when (sessionType) {

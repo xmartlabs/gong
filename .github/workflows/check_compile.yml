@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache files
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2
         with:
           path: |
             ~/.gradle/caches
@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache files
-        uses: actions/cache@v2.1.0
+        uses: actions/cache@v2
         with:
           path: |
             ~/.gradle/caches

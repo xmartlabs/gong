@@ -19,6 +19,9 @@
     "org.koin:koin-androidx-scope",
     "org.koin:koin-androidx-viewmodel"
   ],
+  "ignorePaths": [
+    "./.github/"
+  ],
   "labels": [
     "dependencies"
   ],

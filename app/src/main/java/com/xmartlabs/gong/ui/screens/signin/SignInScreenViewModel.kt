@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.xmartlabs.gong.data.model.User
-import com.xmartlabs.gong.device.common.Result
+import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
 import com.xmartlabs.gong.domain.usecase.TimeTrackerUseCase
 import java.util.Date
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 /**
  * Created by mirland on 25/04/20.
@@ -21,9 +23,10 @@ class SignInScreenViewModel(
 ) : ViewModel() {
 
   private val signInMutableLiveData = MutableLiveData<SignInUseCase.Params>()
-  val viewModelTime = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
+  @OptIn(ExperimentalTime::class)
+  val viewModelTime: LiveData<Result<Duration>> = timeTrackerUseCase.invoke(TimeTrackerUseCase.Params(Date()))
       .asLiveData()
-  val signIn: LiveData<Result<User>> = signInMutableLiveData
+  val signIn: LiveData<ProcessState<User>> = signInMutableLiveData
       .switchMap { params -> signInUseCase.invokeAsLiveData(params) }
 
   private val userMutableLiveData = MutableLiveData<String>()

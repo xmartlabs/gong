@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.toShortString
-import com.xmartlabs.gong.device.common.getOrNull
+import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 
@@ -36,7 +36,7 @@ fun WelcomeScreen() {
   val location = locationResult?.getOrNull()
   val locationString = location?.toShortString() ?: ""
   WelcomeContent(
-      userName = userResult?.getOrNull()?.name ?: "",
+      userName = (userResult as? ProcessState.Finish)?.result?.getOrNull()?.name ?: "",
       locationString = locationString,
   )
 }

@@ -2,7 +2,7 @@ package com.xmartlabs.gong.domain.usecase.common
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
-import com.xmartlabs.gong.device.common.Result
+import com.xmartlabs.gong.device.common.ProcessState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -15,11 +15,11 @@ import timber.log.Timber
  * https://github.com/google/iosched/blob/ee7f31c16f2d1e1f20f479b384dccb205e3e9584/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/CoroutineUseCase.kt
  */
 abstract class CoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) {
-  fun invokeAsLiveData(params: P): LiveData<Result<R>> = invokeAsFlow(params).asLiveData()
+  fun invokeAsLiveData(params: P): LiveData<ProcessState<R>> = invokeAsFlow(params).asLiveData()
 
-  fun invokeAsFlow(params: P): Flow<Result<R>> = flow {
-    emit(Result.Loading)
-    emit(invoke(params))
+  fun invokeAsFlow(params: P): Flow<ProcessState<R>> = flow {
+    emit(ProcessState.Loading)
+    emit(ProcessState.Finish(invoke(params)))
   }
 
   suspend operator fun invoke(params: P): Result<R> = try {
@@ -28,12 +28,12 @@ abstract class CoroutineUseCase<in P, R>(private val coroutineDispatcher: Corout
     // In tests, this becomes a TestCoroutineDispatcher
     withContext(coroutineDispatcher) {
       execute(params).let {
-        Result.Success(it)
+        Result.success(it)
       }
     }
   } catch (throwable: Throwable) {
     Timber.w(throwable)
-    Result.Failure(throwable)
+    Result.failure(throwable)
   }
 
   /**

@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.ui.Screens
-import com.xmartlabs.gong.ui.common.extensions.observeResult
+import com.xmartlabs.gong.ui.common.extensions.observeStateResult
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
 import com.xmartlabs.gong.ui.theme.AppTheme
@@ -161,7 +161,7 @@ private fun signIn(
     context: Context,
     navController: NavHostController,
 ) = with(viewModel) {
-  signIn.observeResult(lifecycleOwner,
+  signIn.observeStateResult(lifecycleOwner,
       onFailure = { throwable ->
         if (throwable is SecurityException) {
           Toast.makeText(
