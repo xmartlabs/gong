@@ -1,24 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="android:colorPrimary">@color/primaryColor</item>
-        <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-    </style>
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar" />
 
-    <style name="AppTheme.Launcher" parent="AppTheme.NoActionBar">
+    <style name="AppTheme.Launcher" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch_screen</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item tools:targetApi="m" name="android:windowLightStatusBar">false</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

@@ -1,8 +1,8 @@
 package com.xmartlabs.gong.ui
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -13,7 +13,7 @@ import com.xmartlabs.gong.ui.screens.splash.SplashScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 import com.xmartlabs.gong.ui.theme.AppTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {

@@ -11,8 +11,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.toShortString
-import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 
@@ -31,13 +30,10 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun WelcomeScreen() {
   val viewModel: WelcomeScreenViewModel = getViewModel()
-  val userResult by viewModel.userLiveData.observeAsState()
-  val locationResult by viewModel.locationLiveData.observeAsState()
-  val location = locationResult?.getOrNull()
-  val locationString = location?.toShortString() ?: ""
+  val state by viewModel.state.collectAsState()
   WelcomeContent(
-      userName = (userResult as? ProcessState.Finish)?.result?.getOrNull()?.name ?: "",
-      locationString = locationString,
+      userName = state.userName,
+      locationString = state.location?.toShortString() ?: "",
   )
 }
 

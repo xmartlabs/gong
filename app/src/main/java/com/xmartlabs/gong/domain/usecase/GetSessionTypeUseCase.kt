@@ -12,8 +12,7 @@ class GetSessionTypeUseCase(
     dispatcher: CoroutineDispatcher
 ) : CoroutineUseCase<Unit, SessionType>(dispatcher) {
   override suspend fun execute(params: Unit): SessionType =
-      sessionRepository.isUserLogged()
-          .let { isUserLogged -> if (isUserLogged) SessionType.LOGGED else SessionType.NOT_LOGGED }
+    if (sessionRepository.isUserLogged()) SessionType.LOGGED else SessionType.NOT_LOGGED
 }
 
 enum class SessionType {

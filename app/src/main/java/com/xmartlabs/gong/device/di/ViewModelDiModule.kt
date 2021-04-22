@@ -11,7 +11,7 @@ import org.koin.dsl.module
  */
 object ViewModelDiModule {
   val viewModels = module {
-    viewModel { SignInScreenViewModel(get(), get()) }
+    viewModel { SignInScreenViewModel(get()) }
     viewModel { SplashScreenViewModel(get()) }
     viewModel { WelcomeScreenViewModel(get(), get()) }
   }
