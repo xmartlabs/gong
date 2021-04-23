@@ -93,6 +93,9 @@ android {
     lintOptions {
         lintConfig file("lint.xml")
         disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning", "ObsoleteLintCustomCheck"
+        // Timber linter doesn't work with AGP 7.0.0-alpha13 https://github.com/JakeWharton/timber/issues/408
+        disable "LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber",
+                "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"
         fatal 'StopShip'
         warningsAsErrors true
     }
