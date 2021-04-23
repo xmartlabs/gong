@@ -5,8 +5,6 @@
 
     <style name="AppTheme.Launcher" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch_screen</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item tools:targetApi="m" name="android:windowLightStatusBar">false</item>
     </style>
 
 </resources>

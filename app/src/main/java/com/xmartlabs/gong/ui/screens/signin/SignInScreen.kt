@@ -37,7 +37,7 @@ fun SignInScreen(navController: NavHostController) {
   val context = LocalContext.current
   // We only want the event stream to be attached once
   // even if there are multiple re-compositions
-  LaunchedEffect("asd") {
+  LaunchedEffect(null) {
     viewModel.oneShotEvents
         .onEach { event ->
           when (event) {
