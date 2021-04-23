@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">@color/pink</color>
-    <color name="primaryDarkColor">@color/pink_dark</color>
-    <color name="onSurfaceColor">@color/black</color>
-    <color name="onBackgroundColor">@color/black</color>
-    <color name="onPrimaryColor">@color/white</color>
-    <color name="onSecondaryColor">@color/white</color>
-
     <color name="pink">#e91e63</color>
-    <color name="pink_dark">#c2185b</color>
-    <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
 </resources>
