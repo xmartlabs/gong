@@ -4,6 +4,8 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -12,8 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -95,6 +103,7 @@ fun SignInDarkPreview() {
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Suppress("LongMethod")
 @Composable
 fun SignInContent(
@@ -104,6 +113,9 @@ fun SignInContent(
     onPasswordEdited: (String) -> Unit,
     onSignInButtonClicked: () -> Unit,
 ) {
+  val focusRequester = remember { FocusRequester() }
+  val keyboardController = LocalSoftwareKeyboardController.current
+
   Scaffold {
     ConstraintLayout(
         modifier = Modifier
@@ -132,6 +144,11 @@ fun SignInContent(
           value = user,
           label = { Text("Username") },
           onValueChange = onUserEdited,
+          singleLine = true,
+          keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+          keyboardActions = KeyboardActions(
+              onNext = { focusRequester.requestFocus() }
+          ),
           modifier = Modifier
               .constrainAs(userIdEditText) {
                 end.linkTo(parent.end)
@@ -143,7 +160,13 @@ fun SignInContent(
           value = password,
           label = { Text("Password") },
           onValueChange = onPasswordEdited,
+          singleLine = true,
+          keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+          keyboardActions = KeyboardActions(
+              onDone = { keyboardController?.hide() }
+          ),
           modifier = Modifier
+              .focusRequester(focusRequester)
               .constrainAs(passwordEditText) {
                 end.linkTo(parent.end)
                 start.linkTo(parent.start)
