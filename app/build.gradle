@@ -6,14 +6,15 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.application'
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-parcelize"
+    id "kotlin-kapt"
+}
+
 apply from: rootProject.file('scripts/versioning.gradle')
 apply from: rootProject.file('scripts/read_properties.gradle')
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'org.jetbrains.kotlin.android.extensions'
-//apply plugin: 'androidx.navigation.safeargs.kotlin' TODO enable when compatible
 
 if (getEnvVariable('KEYSTORE_FILE') != null) {
     // Avoid Signing not ready issues in Gradle Play Publisher plugin
@@ -105,10 +106,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    androidExtensions {
-        experimental = true
-    }
-
     kotlinOptions {
         useIR = true
         languageVersion = "1.5"
@@ -126,7 +123,6 @@ android {
         ]
     }
     composeOptions {
-        kotlinCompilerVersion versions.kotlin
         kotlinCompilerExtensionVersion versions.compose
     }
 }

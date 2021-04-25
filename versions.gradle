@@ -189,7 +189,6 @@ buildscriptDeps.firebaseCrashlyticsPlugin = "com.google.firebase:firebase-crashl
 buildscriptDeps.googleServices = "com.google.gms:google-services:$versions.googleServices"
 buildscriptDeps.androidGradle = "com.android.tools.build:gradle:$versions.androidGradle"
 buildscriptDeps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-buildscriptDeps.kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
 buildscriptDeps.navigationSafeArgPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.archNavigationArchComponent"
 buildscriptDeps.snapshotPublisher = "com.github.xmartlabs:android-snapshot-publisher:$versions.snapshotPublisher"
 ext.buildscriptDeps = buildscriptDeps
