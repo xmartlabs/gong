@@ -57,3 +57,24 @@ inline fun <T> ProcessResult<T>.onSuccess(action: (value: T) -> Unit): ProcessRe
   if (this is ProcessState.Success<T>) action(data)
   return this
 }
+
+fun ProcessState<*>.isLoading(): Boolean {
+  contract {
+    returns(true) implies (this@isLoading is ProcessState.Loading)
+  }
+  return this is ProcessState.Loading
+}
+
+fun <T> ProcessState<T>.isSuccess(): Boolean {
+  contract {
+    returns(true) implies (this@isSuccess is ProcessState.Success<T>)
+  }
+  return this is ProcessState.Success<T>
+}
+
+fun ProcessState<*>.isFailure(): Boolean {
+  contract {
+    returns(true) implies (this@isFailure is ProcessState.Failure)
+  }
+  return this is ProcessState.Failure
+}

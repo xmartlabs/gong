@@ -81,11 +81,10 @@ abstract class BaseViewModel<Action, OneShotEvent, State>(initialState: State) :
   }
 
   protected inline fun <T> Flow<ProcessState<T>>.watchProcessState(
-      crossinline action: suspend (ProcessState<T>) -> Unit
-  ) =
-      viewModelScope.launch {
-        collect(action)
-      }
+      crossinline action: suspend (ProcessState<T>) -> Unit,
+  ) = viewModelScope.launch {
+    collect(action)
+  }
 
   protected inline fun <T> Flow<ProcessState<T>>.watchProcessResult(crossinline action: (ProcessResult<T>) -> Unit) =
       viewModelScope.launch {

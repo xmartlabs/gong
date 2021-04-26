@@ -2,7 +2,6 @@ package com.xmartlabs.gong.domain.usecase.common
 
 import com.xmartlabs.gong.device.common.ProcessResult
 import com.xmartlabs.gong.device.common.ProcessState
-import com.xmartlabs.gong.device.common.asProcessState
 import com.xmartlabs.gong.device.common.onFailure
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -16,10 +15,8 @@ import timber.log.Timber
  * https://github.com/google/iosched/blob/ee7f31c16f2d1e1f20f479b384dccb205e3e9584/shared/src/main/java/com/google/samples/apps/iosched/shared/domain/CoroutineUseCase.kt
  */
 abstract class CoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) {
-  fun invokeAsFlow(params: P): Flow<ProcessState<R>> = flow {
-    emit(ProcessState.Loading)
-    emit(invoke(params).asProcessState())
-  }
+  fun invokeAsFlow(params: P): Flow<ProcessState<R>> = flow { emit(invoke(params)) }
+          .mapResultToProcessState()
 
   suspend operator fun invoke(params: P): ProcessResult<R> =
       withContext(coroutineDispatcher) {

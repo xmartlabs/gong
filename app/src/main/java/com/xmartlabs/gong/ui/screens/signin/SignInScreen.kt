@@ -1,5 +1,6 @@
 package com.xmartlabs.gong.ui.screens.signin
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,15 +54,7 @@ fun SignInScreen(navController: NavHostController) {
               navController.navigate(Screens.WELCOME) {
                 popUpTo(Screens.SIGN_IN) { inclusive = true }
               }
-            is SignInViewModelEvent.SignInError -> {
-              if (event.throwable is SecurityException) {
-                Toast.makeText(
-                    context,
-                    "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
-                    Toast.LENGTH_SHORT
-                ).show()
-              }
-            }
+            is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
           }
         }
         .collect()
@@ -74,6 +67,17 @@ fun SignInScreen(navController: NavHostController) {
       onPasswordEdited = { viewModel.submitAction(SignInUiAction.ChangePassword(it)) },
       onSignInButtonClicked = { viewModel.submitAction(SignInUiAction.SignIn) }
   )
+}
+
+private fun showSignInError(throwable: Throwable, context: Context) {
+  if (throwable is SecurityException) {
+    // In a real project, the string should be defined as a string resource.
+    Toast.makeText(
+        context,
+        "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
+        Toast.LENGTH_SHORT
+    ).show()
+  }
 }
 
 @Composable
