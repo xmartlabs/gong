@@ -5,51 +5,79 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.ui.Screens
-import com.xmartlabs.gong.ui.common.extensions.observeStateResult
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
 import com.xmartlabs.gong.ui.theme.AppTheme
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.getViewModel
 import java.util.Locale
 
 @Composable
 fun SignInScreen(navController: NavHostController) {
   val viewModel: SignInScreenViewModel = getViewModel()
-  val user by viewModel.userLiveData.observeAsState(initial = "")
-  val password by viewModel.passwordLiveData.observeAsState(initial = "")
-  val lifecycleOwner = LocalLifecycleOwner.current
+  val state by viewModel.state.collectAsState()
   val context = LocalContext.current
+  // We only want the event stream to be attached once
+  // even if there are multiple re-compositions
+  LaunchedEffect(null) {
+    viewModel.oneShotEvents
+        .onEach { event ->
+          when (event) {
+            SignInViewModelEvent.NavigateToDashboard ->
+              navController.navigate(Screens.WELCOME) {
+                popUpTo(Screens.SIGN_IN) { inclusive = true }
+              }
+            is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
+          }
+        }
+        .collect()
+  }
+
   SignInContent(
-      user = user,
-      password = password,
-      onUserEdited = { viewModel.updateUser(it) },
-      onPasswordEdited = { viewModel.updatePassword(it) },
-      onSignInButtonClicked = {
-        signIn(viewModel = viewModel,
-            lifecycleOwner = lifecycleOwner,
-            context = context,
-            navController = navController)
-      }
+      user = state.userName,
+      password = state.password,
+      onUserEdited = { viewModel.submitAction(SignInUiAction.ChangeUserName(it)) },
+      onPasswordEdited = { viewModel.submitAction(SignInUiAction.ChangePassword(it)) },
+      onSignInButtonClicked = { viewModel.submitAction(SignInUiAction.SignIn) }
   )
+}
+
+private fun showSignInError(throwable: Throwable, context: Context) {
+  if (throwable is SecurityException) {
+    // In a real project, the string should be defined as a string resource.
+    Toast.makeText(
+        context,
+        "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
+        Toast.LENGTH_SHORT
+    ).show()
+  }
 }
 
 @Composable
@@ -75,19 +103,23 @@ private fun SignInLightPreview() {
 @Composable
 fun SignInDarkPreview() {
   AppTheme(darkTheme = true) {
-    SignInContent()
+    SignInContentPreview()
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Suppress("LongMethod")
 @Composable
 fun SignInContent(
-    user: String = "xmartlabs",
-    password: String = "xmartlabs",
-    onUserEdited: (String) -> Unit = {},
-    onPasswordEdited: (String) -> Unit = {},
-    onSignInButtonClicked: () -> Unit = {},
+    user: String,
+    password: String,
+    onUserEdited: (String) -> Unit,
+    onPasswordEdited: (String) -> Unit,
+    onSignInButtonClicked: () -> Unit,
 ) {
+  val focusRequester = remember { FocusRequester() }
+  val keyboardController = LocalSoftwareKeyboardController.current
+
   Scaffold {
     ConstraintLayout(
         modifier = Modifier
@@ -116,6 +148,11 @@ fun SignInContent(
           value = user,
           label = { Text("Username") },
           onValueChange = onUserEdited,
+          singleLine = true,
+          keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+          keyboardActions = KeyboardActions(
+              onNext = { focusRequester.requestFocus() }
+          ),
           modifier = Modifier
               .constrainAs(userIdEditText) {
                 end.linkTo(parent.end)
@@ -127,7 +164,13 @@ fun SignInContent(
           value = password,
           label = { Text("Password") },
           onValueChange = onPasswordEdited,
+          singleLine = true,
+          keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+          keyboardActions = KeyboardActions(
+              onDone = { keyboardController?.hide() }
+          ),
           modifier = Modifier
+              .focusRequester(focusRequester)
               .constrainAs(passwordEditText) {
                 end.linkTo(parent.end)
                 start.linkTo(parent.start)
@@ -153,29 +196,4 @@ fun SignInContent(
       }
     }
   }
-}
-
-private fun signIn(
-    viewModel: SignInScreenViewModel,
-    lifecycleOwner: LifecycleOwner,
-    context: Context,
-    navController: NavHostController,
-) = with(viewModel) {
-  signIn.observeStateResult(lifecycleOwner,
-      onFailure = { throwable ->
-        if (throwable is SecurityException) {
-          Toast.makeText(
-              context,
-              "password or username is wrong, try with userId = 'xmartlabs', password 'xmartlabs'",
-              Toast.LENGTH_SHORT
-          ).show()
-        }
-      },
-      onSuccess = {
-        navController.navigate(Screens.WELCOME) {
-          popUpTo(Screens.SIGN_IN) { inclusive = true }
-        }
-      }
-  )
-  viewModel.signIn()
 }

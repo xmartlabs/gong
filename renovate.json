@@ -12,7 +12,6 @@
     "com.squareup.retrofit2:adapter-rxjava2",
     "com.squareup.retrofit2:converter-gson",
     "io.gitlab.arturbosch.detekt:detekt-formatting",
-    "org.jetbrains.kotlin:kotlin-android-extensions",
     "org.jetbrains.kotlin:kotlin-gradle-plugin",
     "org.jetbrains.kotlin:kotlin-reflect",
     "org.koin:koin-androidx-fragment",

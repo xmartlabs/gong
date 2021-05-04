@@ -1,6 +1,7 @@
 package com.xmartlabs.gong.ui.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconToggleButton
@@ -13,8 +14,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -28,6 +29,9 @@ fun RoundedCornersTextField(
     modifier: Modifier = Modifier,
     value: String = "",
     label: @Composable () -> Unit = {},
+    singleLine: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(),
     onValueChange: (String) -> Unit = {},
 ) {
   TextField(
@@ -40,6 +44,9 @@ fun RoundedCornersTextField(
           focusedIndicatorColor = Color.Transparent,
           unfocusedIndicatorColor = Color.Transparent,
       ),
+      singleLine = singleLine,
+      keyboardOptions = keyboardOptions,
+      keyboardActions = keyboardActions,
       modifier = modifier.fillMaxWidth(),
   )
 }
@@ -50,6 +57,9 @@ fun RoundedCornersPasswordTextField(
     modifier: Modifier = Modifier,
     value: String = "",
     label: @Composable () -> Unit = {},
+    singleLine: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(),
     onValueChange: (String) -> Unit = {},
 ) {
   var passwordShown by remember { mutableStateOf(false) }
@@ -64,7 +74,9 @@ fun RoundedCornersPasswordTextField(
           unfocusedIndicatorColor = Color.Transparent,
       ),
       visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
-      keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+      singleLine = singleLine,
+      keyboardActions = keyboardActions,
+      keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Password),
       trailingIcon = {
         IconToggleButton(checked = passwordShown, onCheckedChange = { passwordShown = !passwordShown }) {
           Icon(
