@@ -133,8 +133,8 @@ dependencies {
 
     debugImplementation deps.leakcanary
 
-    implementation deps.androidSwissKnife.core
-    implementation deps.androidSwissKnife.dataStore
+    implementation libs.swissKnife.core
+    implementation libs.swissKnife.dataStore
     implementation deps.androidX.room.coreKtx
     implementation deps.coil
     implementation deps.compose.compiler
