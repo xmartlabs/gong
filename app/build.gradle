@@ -128,10 +128,9 @@ android {
 }
 
 dependencies {
-    androidTestImplementation deps.androidX.test.junit
-    androidTestImplementation deps.androidX.test.espresso
+    androidTestImplementation libs.bundles.androidXTest
 
-    debugImplementation deps.leakcanary
+    debugImplementation libs.leakcanary
 
     implementation libs.androidXRoom.coreKtx
     implementation libs.firebase.crashlytics
@@ -141,12 +140,10 @@ dependencies {
     implementation libs.bundles.compose
     implementation libs.bundles.utils
     implementation libs.bundles.kotlin
-    implementation libs.bundles.okhttp3
-
-    implementation deps.retrofit2.core
-    implementation deps.retrofit2.gsonAdapter
+    implementation libs.bundles.okHttp
+    implementation libs.bundles.okHttpDebug
 
     kapt libs.androidXRoom.compiler
 
-    testImplementation deps.junit
+    testImplementation libs.junit
 }
