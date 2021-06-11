@@ -37,6 +37,7 @@ The main libraries that we are using are:
 - [Coil](https://coil-kt.github.io/coil/), an image loading library for Android backed by Kotlin Coroutines.
 - [Koin](https://insert-koin.io/), a lightweight dependency injection framework for Kotlin.
 - [OkHttp](https://square.github.io/okhttp/) and [Retrofit](https://square.github.io/retrofit/) for network communication.
+- [Store](https://github.com/dropbox/Store), a library to manage the loading of data from remote and local sources.
 - [AndroidSwissKnife](https://github.com/xmartlabs/AndroidSwissKnife) a set of extensions, helpers, and useful classes.
 - [Timber](https://github.com/JakeWharton/timber) one of the most popular loggers on Android.
 - [Stetho](http://facebook.github.io/stetho/), a sophisticated debug bridge for Android applications.
