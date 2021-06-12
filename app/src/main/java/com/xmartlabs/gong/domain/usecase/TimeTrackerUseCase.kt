@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.Date
 import kotlin.time.Duration
+import kotlin.time.DurationUnit
 import kotlin.time.milliseconds
 
 /**
@@ -21,8 +22,8 @@ class TimeTrackerUseCase(
     while (true) {
       @Suppress("MagicNumber")
       delay(1800)
-      val duration = (Date().time - params.startTime.time).milliseconds
-      println("Duration: ${duration.inMilliseconds} in millis")
+      val duration = Duration.milliseconds((Date().time - params.startTime.time))
+      println("Duration: ${duration.toDouble(DurationUnit.MILLISECONDS)} in millis")
       emit(duration)
     }
   }

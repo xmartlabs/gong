@@ -20,7 +20,7 @@ class UserRemoteSource {
   suspend fun signIn(id: String, password: String) = withContext(Dispatchers.IO) {
     @Suppress("MagicNumber")
     delay(100) // Simulate network delay
-    if (id.toLowerCase(Locale.ROOT) == VALID_ID && password == VALID_PASSWORD) {
+    if (id.lowercase(Locale.ROOT) == VALID_ID && password == VALID_PASSWORD) {
       SignInResponse("auth_token", XMARTLABS_USER)
     } else {
       throw SecurityException("Invalid User")

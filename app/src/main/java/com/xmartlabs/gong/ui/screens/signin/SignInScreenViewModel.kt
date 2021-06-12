@@ -23,8 +23,8 @@ class SignInScreenViewModel(
   }
 
   private suspend fun signIn() {
-    viewModelScope.launchWithState { state ->
-      signInUseCase.invokeAsFlow(SignInUseCase.Params(state.userName, state.password))
+    viewModelScope.launchWithState { currentState ->
+      signInUseCase.invokeAsFlow(SignInUseCase.Params(currentState.userName, currentState.password))
           .watchProcessState { state ->
             setState { copy(isLoading = state == ProcessState.Loading) }
             when (state) {

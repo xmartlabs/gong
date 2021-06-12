@@ -10,18 +10,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.merge
 import java.util.Date
-import kotlin.time.milliseconds
-import kotlin.time.minutes
+import kotlin.time.Duration
 
 /**
  * Created by mirland on 28/04/20.
  */
 class LocationRepository(
     private val locationLocalSource: LocationLocalSource,
-    private val locationRemoteSource: LocationRemoteSource
+    private val locationRemoteSource: LocationRemoteSource,
 ) {
   companion object {
-    private val REFRESH_LOCATION_DURATION = 1.minutes
+    private val REFRESH_LOCATION_DURATION = Duration.minutes(1)
   }
 
   private var lastRequestedLocation: Date? = null
@@ -49,5 +48,5 @@ class LocationRepository(
     return previousRequest == null || previousRequest > REFRESH_LOCATION_DURATION
   }
 
-  private operator fun Date.minus(date: Date) = (time - date.time).milliseconds
+  private operator fun Date.minus(date: Date) = Duration.milliseconds((time - date.time))
 }
