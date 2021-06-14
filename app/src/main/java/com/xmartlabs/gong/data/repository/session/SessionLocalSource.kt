@@ -1,26 +1,33 @@
 package com.xmartlabs.gong.data.repository.session
 
+import androidx.datastore.core.DataStore
 import com.xmartlabs.gong.data.model.User
-import com.xmartlabs.swissknife.datastore.DataStoreSource
+import com.xmartlabs.gong.data.model.service.settings.AppSettings
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * Created by mirland on 03/05/20.
  */
-class SessionLocalSource(private val dataStoreSource: DataStoreSource) {
-  companion object {
-    private const val SESSION_KEY_PREFIX = "session"
-    private const val TOKEN_KEY = "$SESSION_KEY_PREFIX.tokenKey"
-    private const val USER_KEY = "$SESSION_KEY_PREFIX.userKey"
-  }
+class SessionLocalSource(
+    private val sessionDataStore: DataStore<AppSettings>,
+) {
+  private val updateLock = Mutex()
 
-  suspend fun getSessionToken() = dataStoreSource.getEntity<String>(TOKEN_KEY)
+  suspend fun getSessionToken() = sessionDataStore.data
+      .map { it.sessionToken }
       .first()
 
-  fun getSessionUser() = dataStoreSource.getEntity<User>(USER_KEY)
+  fun getSessionUser() = sessionDataStore.data.map { it.sessionUser }
 
-  suspend fun setSession(user: User, token: String) {
-    dataStoreSource.putEntity(TOKEN_KEY, token)
-    dataStoreSource.putEntity(USER_KEY, user)
+  suspend fun setSession(user: User, token: String) = updateLock.withLock {
+    sessionDataStore.updateData {
+      it.copy(
+          sessionToken = token,
+          sessionUser = user,
+      )
+    }
   }
 }

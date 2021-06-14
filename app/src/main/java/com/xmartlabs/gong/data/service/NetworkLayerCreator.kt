@@ -1,10 +1,11 @@
 package com.xmartlabs.gong.data.service
 
-import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import kotlin.time.seconds
 
@@ -27,15 +28,13 @@ object NetworkLayerCreator {
 
   fun createRetrofitInstance(
       baseUrl: String,
-      interceptors: List<Interceptor>
+      interceptors: List<Interceptor>,
   ): Retrofit = Retrofit.Builder()
       .baseUrl(baseUrl)
-      .addConverterFactory(createGsonConverterFactory())
+      .addConverterFactory(createSerializerConverterFactory())
       .client(createOkHttpClient(interceptors))
       .build()
 
-  private fun createGsonConverterFactory() = GsonBuilder()
-      .setDateFormat(API_DATE_FORMAT)
-      .create()
-      .let { GsonConverterFactory.create(it) }
+  private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
+          .asConverterFactory("application/json".toMediaType())
 }
