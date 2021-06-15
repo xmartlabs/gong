@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 import java.util.Date
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
@@ -23,7 +24,7 @@ class TimeTrackerUseCase(
       @Suppress("MagicNumber")
       delay(1800)
       val duration = Duration.milliseconds((Date().time - params.startTime.time))
-      println("Duration: ${duration.toDouble(DurationUnit.MILLISECONDS)} in millis")
+      Timber.d("Duration: %s in millis", duration.toDouble(DurationUnit.MILLISECONDS))
       emit(duration)
     }
   }
