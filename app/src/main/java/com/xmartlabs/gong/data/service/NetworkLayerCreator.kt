@@ -2,6 +2,7 @@ package com.xmartlabs.gong.data.service
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.xmartlabs.gong.device.di.NetworkLoggingInterceptorInjector
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,6 +20,7 @@ object NetworkLayerCreator {
 
   @SuppressWarnings("MagicNumber")
   private val HTTP_READ_TIMEOUT = Duration.seconds(20)
+  private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 
   fun createOkHttpClientBuilder(
       sessionInterceptors: List<Interceptor>,
@@ -40,6 +42,7 @@ object NetworkLayerCreator {
       .client(httpClient)
       .build()
 
+  @OptIn(ExperimentalSerializationApi::class)
   private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
-      .asConverterFactory("application/json".toMediaType())
+      .asConverterFactory(JSON_MEDIA_TYPE)
 }

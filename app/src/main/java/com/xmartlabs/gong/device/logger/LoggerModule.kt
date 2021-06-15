@@ -1,6 +1,5 @@
 package com.xmartlabs.gong.device.logger
 
-import android.content.Context
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xmartlabs.gong.Config
 import timber.log.Timber
@@ -12,7 +11,7 @@ object LoggerModule {
   private var initialized = false
 
   @Synchronized
-  fun initializeModule(context: Context) {
+  fun initializeModule() {
     if (!initialized) {
       initialized = true
       if (Config.ANDROID_SYSTEM_LOG_ENABLED) {
