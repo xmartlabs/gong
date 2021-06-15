@@ -5,7 +5,6 @@ import com.xmartlabs.gong.data.model.service.SignInResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import java.util.Locale
 
 /**
  * Created by mirland on 25/04/20.

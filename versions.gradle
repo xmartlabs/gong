@@ -64,6 +64,7 @@ versions.rxAndroid = "2.1.1"
 versions.rxKotlin = "2.4.0"
 versions.snapshotPublisher = "2.2.0"
 versions.stetho = "1b2c025a14"
+versions.store = "4.0.2-KT15"
 versions.timber = "4.7.1"
 versions.tooLargeTool = "915ad99e83"
 ext.versions = versions
@@ -78,6 +79,7 @@ deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
 deps.okIo = "com.squareup.okio:okio:$versions.okIo"
 deps.once = "com.jonathanfinerty.once:once:$versions.once"
 deps.stetho = "com.github.mathroule.stetho:stetho:$versions.stetho" // https://github.com/facebook/stetho/issues/652
+deps.store = "com.dropbox.mobile.store:store4:$versions.store"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tooLargeTool = "com.github.xmartlabs:toolargetool:$versions.tooLargeTool"
 
