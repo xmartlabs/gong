@@ -21,7 +21,7 @@ class UserRepository(
             response.user
           }
 
-  suspend fun getCurrentUser() = sessionLocalSource.getSessionUser()
+  fun getCurrentUser() = sessionLocalSource.getSessionUser()
 
   suspend fun getUser(userId: String) = userLocalSource.getUser(userId)
 }
