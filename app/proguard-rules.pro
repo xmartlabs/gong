@@ -19,3 +19,24 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+### Start Kotlin serializer
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# kotlinx-serialization-json specific. Add this if you have java.lang.NoClassDefFoundError kotlinx.serialization.json.JsonObjectSerializer
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-keep,includedescriptorclasses class com.xmartlabs.gong.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.xmartlabs.gong.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.xmartlabs.gong.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}
+### End Kotlin serializer

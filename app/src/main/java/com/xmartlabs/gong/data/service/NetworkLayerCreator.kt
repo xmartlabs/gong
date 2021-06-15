@@ -1,10 +1,13 @@
 package com.xmartlabs.gong.data.service
 
-import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.xmartlabs.gong.device.di.NetworkLoggingInterceptorInjector
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration
 
@@ -17,25 +20,29 @@ object NetworkLayerCreator {
 
   @SuppressWarnings("MagicNumber")
   private val HTTP_READ_TIMEOUT = Duration.seconds(20)
-  private const val API_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+  private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 
-  private fun createOkHttpClient(interceptors: List<Interceptor>) = OkHttpClient.Builder()
+  fun createOkHttpClientBuilder(
+      sessionInterceptors: List<Interceptor>,
+      networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
+  ) = OkHttpClient.Builder()
       .connectTimeout(HTTP_CONNECT_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
       .readTimeout(HTTP_READ_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
-      .apply { interceptors.forEach { interceptor -> addNetworkInterceptor(interceptor) } }
-      .build()
+      .also { builder ->
+        sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
+        networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
+      }
 
   fun createRetrofitInstance(
       baseUrl: String,
-      interceptors: List<Interceptor>,
+      httpClient: OkHttpClient,
   ): Retrofit = Retrofit.Builder()
       .baseUrl(baseUrl)
-      .addConverterFactory(createGsonConverterFactory())
-      .client(createOkHttpClient(interceptors))
+      .addConverterFactory(createSerializerConverterFactory())
+      .client(httpClient)
       .build()
 
-  private fun createGsonConverterFactory() = GsonBuilder()
-      .setDateFormat(API_DATE_FORMAT)
-      .create()
-      .let { GsonConverterFactory.create(it) }
+  @OptIn(ExperimentalSerializationApi::class)
+  private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
+      .asConverterFactory(JSON_MEDIA_TYPE)
 }

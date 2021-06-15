@@ -17,15 +17,15 @@ abstract class AppBase : Application() {
     super.onCreate()
 
     setupStrictMode()
-    setupKoinModules()
     setupLoggers()
+    setupKoinModules()
     setupCoil()
     setupOnce()
   }
 
   private fun setupOnce() = Once.initialise(this)
 
-  private fun setupLoggers() = LoggerModule.initializeModule(this)
+  private fun setupLoggers() = LoggerModule.initializeModule()
 
   protected abstract fun setupKoinModules()
 
