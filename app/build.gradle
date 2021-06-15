@@ -170,6 +170,7 @@ dependencies {
     implementation deps.once
     implementation deps.retrofit2.core
     implementation deps.retrofit2.gsonAdapter
+    implementation deps.store
     implementation deps.timber
 
     kapt deps.androidX.room.compiler

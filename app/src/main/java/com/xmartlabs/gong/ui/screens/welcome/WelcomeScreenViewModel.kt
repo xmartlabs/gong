@@ -5,6 +5,7 @@ import com.xmartlabs.gong.data.model.Location
 import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.device.common.getDataOrNull
+import com.xmartlabs.gong.device.extensions.mapToProcessResult
 import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
@@ -21,6 +22,7 @@ class WelcomeScreenViewModel(
   init {
     viewModelScope.launch {
       getLocationUseCase(Unit)
+          .mapToProcessResult()
           .collect { updateLocation(it) }
     }
     viewModelScope.launch {
