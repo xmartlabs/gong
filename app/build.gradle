@@ -11,6 +11,7 @@ plugins {
     id "kotlin-android"
     id "kotlin-parcelize"
     id "kotlin-kapt"
+    id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 apply from: rootProject.file('scripts/versioning.gradle')
@@ -144,8 +145,8 @@ dependencies {
     debugImplementation deps.okhttp3.stetho
 
     implementation deps.androidSwissKnife.core
-    implementation deps.androidSwissKnife.dataStore
     implementation deps.androidX.room.coreKtx
+    implementation deps.androidX.dataStore
     implementation deps.coil
     implementation deps.compose.compiler
     implementation deps.compose.constraintLayout
@@ -160,6 +161,7 @@ dependencies {
     implementation deps.koin.compose
     implementation deps.kotlin.core
     implementation deps.kotlin.coroutines.core
+    implementation deps.kotlin.serialization
     implementation deps.okIo
     implementation deps.okhttp3.core
     implementation deps.okhttp3.loggingIntercepror
@@ -167,7 +169,7 @@ dependencies {
     implementation deps.okhttp3.urlconnection
     implementation deps.once
     implementation deps.retrofit2.core
-    implementation deps.retrofit2.gsonAdapter
+    implementation deps.retrofit2.kotlinSerializer
     implementation deps.store
     implementation deps.timber
 

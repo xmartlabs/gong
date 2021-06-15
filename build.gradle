@@ -17,6 +17,7 @@ buildscript {
         classpath buildscriptDeps.detekt
         classpath buildscriptDeps.googleServices
         classpath buildscriptDeps.kotlin
+        classpath buildscriptDeps.kotlinSerialization
     }
 }
 
