@@ -25,8 +25,12 @@ if (getEnvVariable('KEYSTORE_FILE') != null) {
 // TODO: Enable when the services json is added
 // apply plugin: 'com.google.gms.google-services'
 
-// TODO: Enable Crashlytics
-// apply plugin: 'com.google.firebase.crashlytics'
+// TODO: Setup Crashlytics
+def CRASHLYTICS_ENABLED = false
+if (CRASHLYTICS_ENABLED) {
+    apply plugin: 'com.google.firebase.crashlytics'
+}
+
 
 android {
     compileSdkVersion androidVersions.compileSdk
@@ -42,6 +46,7 @@ android {
         multiDexEnabled true
         // Used to define some constants like the share preferences's file name.
         buildConfigField 'String', 'APP_NAME', '"Gong"'
+        buildConfigField 'boolean', 'CRASHLYTICS_ENABLED', "$CRASHLYTICS_ENABLED"
     }
 
     buildFeatures {
@@ -77,14 +82,12 @@ android {
             buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_DEV_SERVER_URL')
 
             dimension "env"
-            ext.buildTypeCode = 0
             applicationIdSuffix '.dev'
         }
         prod {
             buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_PROD_SERVER_URL')
 
             dimension "env"
-            ext.buildTypeCode = 4
         }
     }
 
@@ -133,6 +136,13 @@ dependencies {
     androidTestImplementation deps.androidX.test.espresso
 
     debugImplementation deps.leakcanary
+    debugImplementation deps.logger.flipper.core
+    debugImplementation deps.logger.flipper.network
+    debugImplementation deps.logger.soloader
+    debugImplementation deps.logger.stetho
+    debugImplementation deps.okhttp3.loggingIntercepror
+    debugImplementation deps.okhttp3.ok2CurlInterceptor
+    debugImplementation deps.okhttp3.stetho
 
     implementation deps.androidSwissKnife.core
     implementation deps.androidX.room.coreKtx
@@ -156,12 +166,11 @@ dependencies {
     implementation deps.okhttp3.core
     implementation deps.okhttp3.loggingIntercepror
     implementation deps.okhttp3.ok2CurlInterceptor
-    implementation deps.okhttp3.stetho
     implementation deps.okhttp3.urlconnection
     implementation deps.once
     implementation deps.retrofit2.core
     implementation deps.retrofit2.kotlinSerializer
-    implementation deps.stetho
+    implementation deps.store
     implementation deps.timber
 
     kapt deps.androidX.room.compiler

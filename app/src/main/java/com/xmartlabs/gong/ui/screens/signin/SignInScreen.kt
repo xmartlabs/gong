@@ -28,8 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
@@ -189,7 +187,7 @@ fun SignInContent(
               }
       ) {
         Text(
-            text = "Sign In".toUpperCase(Locale.ROOT),
+            text = "Sign In".uppercase(Locale.ROOT),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.button,
         )
