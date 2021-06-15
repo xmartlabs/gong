@@ -1,6 +1,7 @@
 package com.xmartlabs.gong.data.service
 
 import com.google.gson.GsonBuilder
+import com.xmartlabs.gong.device.di.NetworkLoggingInterceptorInjector
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -19,19 +20,24 @@ object NetworkLayerCreator {
   private val HTTP_READ_TIMEOUT = 20.seconds
   private const val API_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
 
-  private fun createOkHttpClient(interceptors: List<Interceptor>) = OkHttpClient.Builder()
+  fun createOkHttpClientBuilder(
+      sessionInterceptors: List<Interceptor>,
+      networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
+  ) = OkHttpClient.Builder()
       .connectTimeout(HTTP_CONNECT_TIMEOUT.toLongMilliseconds(), TimeUnit.MILLISECONDS)
       .readTimeout(HTTP_READ_TIMEOUT.toLongMilliseconds(), TimeUnit.MILLISECONDS)
-      .apply { interceptors.forEach { interceptor -> addNetworkInterceptor(interceptor) } }
-      .build()
+      .also { builder ->
+        sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
+        networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
+      }
 
   fun createRetrofitInstance(
       baseUrl: String,
-      interceptors: List<Interceptor>
+      httpClient: OkHttpClient,
   ): Retrofit = Retrofit.Builder()
       .baseUrl(baseUrl)
       .addConverterFactory(createGsonConverterFactory())
-      .client(createOkHttpClient(interceptors))
+      .client(httpClient)
       .build()
 
   private fun createGsonConverterFactory() = GsonBuilder()

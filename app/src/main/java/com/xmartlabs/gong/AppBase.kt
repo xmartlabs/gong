@@ -17,8 +17,8 @@ abstract class AppBase : Application() {
     super.onCreate()
 
     setupStrictMode()
-    setupKoinModules()
     setupLoggers()
+    setupKoinModules()
     setupCoil()
     setupOnce()
   }
