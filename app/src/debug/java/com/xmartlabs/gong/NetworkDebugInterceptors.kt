@@ -43,7 +43,8 @@ object NetworkDebugInterceptors {
   }
 }
 
-inline class DebugNetworkLoggingInterceptorInjector(
+@JvmInline
+value class DebugNetworkLoggingInterceptorInjector(
     private val interceptor: Interceptor,
 ) : NetworkLoggingInterceptorInjector {
   override fun injectNetworkInterceptor(builder: OkHttpClient.Builder) {

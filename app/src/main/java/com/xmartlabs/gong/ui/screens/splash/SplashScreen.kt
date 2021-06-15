@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.popUpTo
 import com.xmartlabs.gong.device.common.getDataOrNull
 import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.Screens

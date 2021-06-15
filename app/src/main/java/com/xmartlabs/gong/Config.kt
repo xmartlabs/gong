@@ -23,5 +23,5 @@ object Config {
 
 private fun String.toFileName() = trim()
     .replace(" +", " ")
-    .toLowerCase(Locale.ROOT)
+    .lowercase(Locale.ROOT)
     .replace(" ", "_")
