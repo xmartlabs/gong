@@ -1,8 +1,9 @@
 package com.xmartlabs.gong.domain.usecase
 
+import com.dropbox.android.external.store4.StoreResponse
 import com.xmartlabs.gong.data.model.Location
 import com.xmartlabs.gong.domain.repository.LocationRepository
-import com.xmartlabs.gong.domain.usecase.common.FlowCoroutineUseCase
+import com.xmartlabs.gong.domain.usecase.common.FlowStoreCoroutineUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +13,6 @@ import kotlinx.coroutines.flow.Flow
 class GetLocationUseCase(
     private val locationRepository: LocationRepository,
     dispatcher: CoroutineDispatcher
-) : FlowCoroutineUseCase<Unit, Location>(dispatcher) {
-  override fun execute(params: Unit): Flow<Location> = locationRepository.getLocation()
+) : FlowStoreCoroutineUseCase<Unit, Location>(dispatcher) {
+  override fun execute(params: Unit): Flow<StoreResponse<Location>> = locationRepository.getLocation()
 }
