@@ -13,10 +13,7 @@ object Config {
   val DEBUG: Boolean = BuildConfig.DEBUG
 
   val ANDROID_SYSTEM_LOG_ENABLED = DEBUG || !PROD
-
-  val STETHO_ENABLED = DEBUG || !PROD
-
-  val CRASHLYTICS_LOG_ENABLED = !DEBUG
+  val CRASHLYTICS_LOG_ENABLED = !DEBUG && BuildConfig.CRASHLYTICS_ENABLED
 
   val SHARED_PREFERENCES_NAME = BuildConfig.APP_NAME.toFileName()
   val DB_NAME = BuildConfig.APP_NAME.toFileName()
