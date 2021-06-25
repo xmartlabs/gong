@@ -59,6 +59,7 @@ function finishGitSetup() {
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
+    git branch -M main
   fi
 }
 
