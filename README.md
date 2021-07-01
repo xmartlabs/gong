@@ -69,12 +69,14 @@ class ExampleViewModel {
 class ExampleScreen {
     .
     .
-    LaunchedEffect(null) {
+    LaunchedEffect(null) {      // this: coroutine
         exampleViewModel.oneShotEvents
             .onEach { event ->
               when (event) {
                 //Do something according to each event
               }
+            }
+    }
 }
 ```
 
