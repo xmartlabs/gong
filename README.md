@@ -87,7 +87,6 @@ It's also a kind of SharedFlow. It's always expected to receive last view state 
   <img src="/images/GongMainV2Arq.png">
 </p>
 
-
 Now, as a way to give you an overview of the other layers and how the interaction with the presentation layer is done, let's review it's components.
 
 To the presentation layer, the `UseCases` are the ones who resolve each invocation from the ViewModels, and they both interact using [coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) library.
