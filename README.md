@@ -21,30 +21,65 @@ There are 4 layers within the application:
 </p>
 
 ## Overview
-In order to understand how all this work together, it's important to talk about each component role inside the Cpresentation layer.
+In order to understand how this work together, it's important to talk about each component's role inside the presentation layer.
 
-First of all, the architecture. It's a combination of the MVI and Redux patterns.
-The MVI patter has three main components: Intent, Model, and View.
-The intent refers to the intention of change the state of the app, so in Gong case it would be the actions, delivered then to viewModel.
-ViewModel represents the model component of the pattern. It is responsible of creation of a new state, which is an immutable data structure.
-At any given moment, there is just one state in the app, which represent a single source of truth.
+First of all, the architecture. It's a combination of the MVI and Redux architecture patterns.
+The MVI pattern has three main components: Intent, Model, and View.
+The intent refers to the intention to change the state of the app, so in Gong's case, it would be the actions, delivered then to ViewModel.
+ViewModel holds the model component of the pattern. It is responsible of creation of a new state, which is an immutable data structure.
+At any given moment, there is only one state in the app, which represents a single source of truth.
 The only way to change the state is to create a new one, triggered by the actions. But when and how is the new state created?
 The Redux pattern comes up at this point. Redux is a pattern and library for managing and updating application state, using events called "actions".
 More precisely, the main components of Redux are State, Action, and Reducer.
 In Gong the composables communicate actions to the viewModels so they can manage and emit the state back to view.
 This ensure state can only be updated in a predictable way.
 Then, inside the model, the reducer is called with a proper action and the latest state and forward its result as an output value of the model.
-Reducer is a function that takes the previous state and action and creates a new state, and in Gong this role is played by the function ‘processAction’, located in viewModels.
+Reducer is a function that takes the previous state and action and creates a new state, and in Gong this role is played by the function `processAction`, located in viewModels.
 
 To continue with the insight of the project, let's see how this is done.
 With the shared flow, actions are broadcast to an unknown number (zero or more) of subscribers.
 In the absence of a subscriber, any posted action is immediately dropped. It is a design pattern to use for actions that must be processed immediately or not at all.
-The viewModel handles each action in the ‘processAction’ method. Whenever an action is added to the "contract", it also has to be added here.
+
+<p align="center">
+  <img src="/images/SharedFlow.png">
+</p>
+
+The ViewModel handles each action in the `processAction` method. Whenever an action is added to the "contract", it also has to be added here.
 So all actions can be managed from the same place.
 With the channel, each event is delivered to a single subscriber.
 An attempt to post an event without subscribers will suspend as soon as the channel buffer becomes full, waiting for a subscriber to appear. Posted events are never dropped by default.
 Then to handle this Ui effects "oneSHotEvents" are used. Because Channels are hot and it is not necessary to show side effect again when orientation changed or UI become visible again.
-Finally, for handling UiState, StateFlow is used. StateFlow is just like LiveData but have initial value. So a state is always present.
+
+<p align="center">
+  <img src="/images/OneToMany_Channel.png">
+</p>
+
+Example:
+`
+class ExampleViewModel {
+    private val oneShotEventsChannel = Channel<OneShotEvent>()
+    val oneShotEvents = oneShotEventsChannel.receiveAsFlow() // expose as flow
+
+    suspend fun sendOneShotEvent(event: OneShotEvent) {
+        oneShotEventsChannel.send(event) // suspends on buffer overflow
+    }
+}
+
+class ExampleScreen {
+    .
+    .
+    LaunchedEffect(null) {
+        exampleViewModel.oneShotEvents
+            .onEach { event ->
+              when (event) {
+                //Do something according to each event
+              }
+}
+`
+
+Finally, for handling `UiState`, `StateFlow` is used.
+`StateFlow` is a state-holder observable flow that emits the current and new state updates to its collectors, similar to a `LiveData` but with an initial value.
+So a state is always present.
 It's also a kind of SharedFlow. It's always expected to receive last view state when UI become visible.
 
 <p align="center">
@@ -54,14 +89,17 @@ It's also a kind of SharedFlow. It's always expected to receive last view state 
 
 Now, as a way to give you an overview of the other layers and how the interaction with the presentation layer is done, let's review it's components.
 
-To the presentation layer, the UseCases are the ones who resolve each invocation from the ViewModels, and they both interact using coroutine library.
-A UseCase is a reusable component that might be used from different ViewModels.
-Same goes for Repositories, a repository can stand on its own without the vm and be re-used from other places.
+To the presentation layer, the `UseCases` are the ones who resolve each invocation from the ViewModels, and they both interact using [coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) library.
+A `UseCase` is a reusable component that might be used from different `ViewModels`.
+The same goes for `Repositories`, a repository can stand on its own without the ViewModel and be re-used from other places.
 All these classes exist with a clear goal and purpose. The logic is split sensibly.
+It is worth to say that these repositories refer to those of the repository pattern.
+Repository design pattern facilitates de-coupling of the business logic and the data access layers in your application with the former not having to have any knowledge on how data persistence would actually take place.
 Repositories have the function of communication between Domain Layer and Data Layer.
 More precisely, with coroutines help, they have to implement the necessary logic so they can call Remote and Local sources methods.
 
 At the end of the chain, as mentioned, Data Layer is found. It is responsible for persisting and obtaining all the data required for the model using different sources.
+`Repositories` use the store library to combine those different sources.
 The remote sources are the ones who manage interaction with the different endpoints.
 The local sources manage data base logic.
 
