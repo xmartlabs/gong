@@ -5,6 +5,7 @@ TEST_MODE_ARG="TEST_MODE"
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
+GIT_BRANCH="main-v2"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 
@@ -46,8 +47,12 @@ function changeProjectName() {
 }
 
 function cloneAndSetupRepository() {
-  git clone --depth=1 $GIT_BASE_PROJECT_URL --quiet
+  git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
+  if [ -n "$GIT_BRANCH" ]; then
+    git checkout "$GIT_BRANCH" --quiet
+    git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
+  fi
 }
 
 function finishGitSetup() {
@@ -56,6 +61,7 @@ function finishGitSetup() {
   git init >/dev/null
   git add -A
   git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
+  git branch -M main
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
@@ -94,6 +100,7 @@ if [ "$1" = "$TEST_MODE_ARG" ]; then
   cp -rf "$REPO_URL" .
   cd "$BASE_PROJECT_NAME" || exit
 else
+  [[ -z "$1" ]] || GIT_BRANCH="$1"
   cloneAndSetupRepository
 fi
 
