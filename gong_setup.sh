@@ -29,16 +29,21 @@ function changeProjectName() {
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
   gong_new_path=$(sed "s/\./\//g" <<<"$BASE_PROJECT_PAKAGE_NAME")
   first_gong_folder=$(sed 's/\..*//' <<<"$BASE_PROJECT_PAKAGE_NAME")
-  cd "app/src/" || exit 1
+
+  cd "app/" || exit 1
+  sed -i "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/" proguard-rules.pro
+  sed -i "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/" proguard-rules.pro
+
+  cd "src/" || exit 1
 
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
   mkdir "$TEMPORAL_FOLDER"
+  
+  for entry in $fileNames 
+  do
+    movePackage entry
+  done
 
-  movePackage "dev"
-  movePackage "prod"
-  movePackage "main"
-  movePackage "androidTest"
-  movePackage "test"
 
   cd ../../../
   mv $BASE_PROJECT_NAME "$PROJECT_NAME"
@@ -46,8 +51,10 @@ function changeProjectName() {
 }
 
 function cloneAndSetupRepository() {
-  git clone --depth=1 $GIT_BASE_PROJECT_URL --quiet
+  git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
+  git checkout main-v2 --quiet
+  git branch --quiet | grep -v "main-v2" | xargs git branch -D --quiet
 }
 
 function finishGitSetup() {
@@ -56,10 +63,10 @@ function finishGitSetup() {
   git init >/dev/null
   git add -A
   git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
+  git branch -M main
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
-    git branch -M main
   fi
 }
 
