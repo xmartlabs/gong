@@ -12,7 +12,7 @@ cd "$TEST_VERIFICATION_FOLDER" || exit
 echo -e "$APP_NAME\n$APP_PACKAGE" |"$PROJECT_FOLDER"/gong_setup.sh $TEST_MODE_ARG "$PROJECT_FOLDER"
 
 cd "$TEST_VERIFICATION_FOLDER/test-foo" || exit 1
-./gradlew clean
+[ -d "./build" ] && ./gradlew clean
 GONG_LINES=$(grep -irnw --exclude={README.md,gong_setup_validation.sh,versions.gradle,*.iml} --exclude-dir={.git,README.md,.gradle,.idea,secrets} $TEST_VERIFICATION_FOLDER -e 'gong')
 
 if [ -n "${GONG_LINES}" ]; then
