@@ -3,8 +3,10 @@
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
+GIT_BRANCH="${BASH_ARGV[0]}"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
+
 
 function movePackage() {
   if [ -d "$TEMPORAL_FOLDER/$first_gong_folder" ]; then rm -Rf "${TEMPORAL_FOLDER:?}/$first_gong_folder"; fi
@@ -23,27 +25,21 @@ function changeProjectName() {
   perl -i -pe "s/\"$BASE_PROJECT_NAME/\"$REAL_PROJECT_NAME/gi" app/build.gradle
 
   # Replace package names
-  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" -o -name "*.pro" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
 
   # Change file structure
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
   gong_new_path=$(sed "s/\./\//g" <<<"$BASE_PROJECT_PAKAGE_NAME")
   first_gong_folder=$(sed 's/\..*//' <<<"$BASE_PROJECT_PAKAGE_NAME")
 
-  cd "app/" || exit 1
-  sed -i "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/" proguard-rules.pro
-  sed -i "s/$BASE_PROJECT_NAME/$REAL_PROJECT_NAME/" proguard-rules.pro
-
-  cd "src/" || exit 1
+  cd "app/src/" || exit 1
 
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
   mkdir "$TEMPORAL_FOLDER"
   
-  for entry in $fileNames 
-  do
-    movePackage entry
+  for folder in */ ; do
+    movePackage "$folder"
   done
-
 
   cd ../../../
   mv $BASE_PROJECT_NAME "$PROJECT_NAME"
@@ -53,8 +49,8 @@ function changeProjectName() {
 function cloneAndSetupRepository() {
   git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
-  git checkout main-v2 --quiet
-  git branch --quiet | grep -v "main-v2" | xargs git branch -D --quiet
+  git checkout "$GIT_BRANCH" --quiet
+  git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
 }
 
 function finishGitSetup() {
