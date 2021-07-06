@@ -18,13 +18,13 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       AppTheme {
-        GongNavigationManager()
+        AppNavigationManager()
       }
     }
   }
 
   @Composable
-  fun GongNavigationManager() {
+  fun AppNavigationManager() {
     val navigationController: NavHostController = rememberNavController()
     NavHost(navController = navigationController, startDestination = Screens.SPLASH) {
       composable(Screens.SPLASH) { SplashScreen(navController = navigationController) }
