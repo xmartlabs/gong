@@ -3,6 +3,7 @@
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
+GIT_BRANCH="$1"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 
@@ -23,22 +24,21 @@ function changeProjectName() {
   perl -i -pe "s/\"$BASE_PROJECT_NAME/\"$REAL_PROJECT_NAME/gi" app/build.gradle
 
   # Replace package names
-  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" -o -name "*.pro" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
 
   # Change file structure
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
   gong_new_path=$(sed "s/\./\//g" <<<"$BASE_PROJECT_PAKAGE_NAME")
   first_gong_folder=$(sed 's/\..*//' <<<"$BASE_PROJECT_PAKAGE_NAME")
+
   cd "app/src/" || exit 1
 
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
   mkdir "$TEMPORAL_FOLDER"
-
-  movePackage "dev"
-  movePackage "prod"
-  movePackage "main"
-  movePackage "androidTest"
-  movePackage "test"
+  
+  for folder in */ ; do
+    movePackage "$folder"
+  done
 
   cd ../../../
   mv $BASE_PROJECT_NAME "$PROJECT_NAME"
@@ -46,8 +46,12 @@ function changeProjectName() {
 }
 
 function cloneAndSetupRepository() {
-  git clone --depth=1 $GIT_BASE_PROJECT_URL --quiet
+  git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
+  if [ -n "$GIT_BRANCH" ]; then
+    git checkout "$GIT_BRANCH" --quiet
+    git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
+  fi
 }
 
 function finishGitSetup() {
@@ -56,6 +60,7 @@ function finishGitSetup() {
   git init >/dev/null
   git add -A
   git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
+  git branch -M main
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
