@@ -3,7 +3,7 @@
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
-GIT_BRANCH="${BASH_ARGV[0]}"
+GIT_BRANCH="$1"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 
