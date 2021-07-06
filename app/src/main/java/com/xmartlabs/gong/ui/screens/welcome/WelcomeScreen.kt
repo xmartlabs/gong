@@ -45,7 +45,7 @@ fun WelcomeContent(
     locationString: String,
 ) {
   Scaffold(
-      topBar = { GongTopBar() },
+      topBar = { AppTopBar() },
   ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -84,7 +84,7 @@ fun WelcomePreviewDark() {
 }
 
 @Composable
-fun GongTopBar() {
+fun AppTopBar() {
   TopAppBar(
       title = { Text(text = stringResource(id = R.string.app_name)) },
   )
