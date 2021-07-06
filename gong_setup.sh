@@ -7,7 +7,6 @@ GIT_BRANCH="${BASH_ARGV[0]}"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 
-
 function movePackage() {
   if [ -d "$TEMPORAL_FOLDER/$first_gong_folder" ]; then rm -Rf "${TEMPORAL_FOLDER:?}/$first_gong_folder"; fi
 
@@ -49,8 +48,10 @@ function changeProjectName() {
 function cloneAndSetupRepository() {
   git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
-  git checkout "$GIT_BRANCH" --quiet
-  git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
+  if [ -n "$GIT_BRANCH" ]; then
+    git checkout "$GIT_BRANCH" --quiet
+    git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
+  fi
 }
 
 function finishGitSetup() {
