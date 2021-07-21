@@ -36,13 +36,11 @@ This ensure state can only be updated in a predictable way.
 Then, inside the model, the reducer is called with a proper action and the latest state and forward its result as an output value of the model.
 Reducer is a function that takes the previous state and action and creates a new state, and in Gong this role is played by the function `processAction`, located in viewModels.
 
+
 To continue with the insight of the project, let's see how this is done.
 With the shared flow, actions are broadcast to an unknown number (zero or more) of subscribers.
 In the absence of a subscriber, any posted action is immediately dropped. It is a design pattern to use for actions that must be processed immediately or not at all.
 
-<p align="center">
-  <img src="/images/SharedFlow.png">
-</p>
 
 The ViewModel handles each action in the `processAction` method. Whenever an action is added to the "contract", it also has to be added here.
 So all actions can be managed from the same place.
@@ -50,44 +48,19 @@ With the channel, each event is delivered to a single subscriber.
 An attempt to post an event without subscribers will suspend as soon as the channel buffer becomes full, waiting for a subscriber to appear. Posted events are never dropped by default.
 Then to handle this Ui effects "oneSHotEvents" are used. Because Channels are hot and it is not necessary to show side effect again when orientation changed or UI become visible again.
 
-<p align="center">
-  <img src="/images/OneToManyChannel.png">
-</p>
-
-Example:
-```
-class ExampleViewModel {
-    private val oneShotEventsChannel = Channel<OneShotEvent>()
-    val oneShotEvents = oneShotEventsChannel.receiveAsFlow() // expose as flow
-
-    suspend fun sendOneShotEvent(event: OneShotEvent) {
-        oneShotEventsChannel.send(event) // suspends on buffer overflow
-    }
-}
-```
-```
-class ExampleScreen {
-    .
-    .
-    LaunchedEffect(null) {      // this: coroutine
-        exampleViewModel.oneShotEvents
-            .onEach { event ->
-              when (event) {
-                //Do something according to each event
-              }
-            }
-    }
-}
-```
 
 Finally, for handling `UiState`, `StateFlow` is used.
 `StateFlow` is a state-holder observable flow that emits the current and new state updates to its collectors, similar to a `LiveData` but with an initial value.
 So a state is always present.
 It's also a kind of SharedFlow. It's always expected to receive last view state when UI become visible.
 
+
+Gong's Workflow example:
+
 <p align="center">
-  <img src="/images/GongMainV2Arq.png">
+  <img height="250" src="/images/workFlow.png" >
 </p>
+
 
 Now, as a way to give you an overview of the other layers and how the interaction with the presentation layer is done, let's review it's components.
 
