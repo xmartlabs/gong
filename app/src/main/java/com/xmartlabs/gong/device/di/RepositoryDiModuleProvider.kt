@@ -16,7 +16,6 @@ import com.xmartlabs.gong.domain.repository.LocationRepository
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.repository.UserRepository
 import org.koin.dsl.module
-import org.koin.dsl.single
 
 /**
  * Created by mirland on 25/04/20.
@@ -36,15 +35,15 @@ object RepositoryDiModuleProvider {
     single { get<AppDatabase>().locationDao() }
   }
   val sources = module {
-    single<LocationRemoteSource>()
-    single<LocationLocalSource>()
-    single<UserLocalSource>()
-    single<UserRemoteSource>()
-    single<SessionLocalSource>()
+    single { LocationRemoteSource(get()) }
+    single { LocationLocalSource(get()) }
+    single { UserLocalSource() }
+    single { UserRemoteSource() }
+    single { SessionLocalSource(get()) }
   }
   val repositories = module {
-    single<LocationRepository>()
-    single<UserRepository>()
-    single<SessionRepository>()
+    single { LocationRepository(get(), get()) }
+    single { UserRepository(get(), get(), get()) }
+    single { SessionRepository(get()) }
   }
 }
