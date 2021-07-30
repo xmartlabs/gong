@@ -26,66 +26,66 @@ import com.xmartlabs.gong.ui.theme.AppTheme
 @Preview
 @Composable
 fun RoundedCornersTextField(
-    modifier: Modifier = Modifier,
-    value: String = "",
-    label: @Composable () -> Unit = {},
-    singleLine: Boolean = false,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions(),
-    onValueChange: (String) -> Unit = {},
+  modifier: Modifier = Modifier,
+  value: String = "",
+  label: @Composable () -> Unit = {},
+  singleLine: Boolean = false,
+  keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+  keyboardActions: KeyboardActions = KeyboardActions(),
+  onValueChange: (String) -> Unit = {},
 ) {
   TextField(
-      value = value,
-      label = label,
-      onValueChange = onValueChange,
-      textStyle = MaterialTheme.typography.body1,
-      shape = AppTheme.shapes.roundedBox,
-      colors = textFieldColors(
-          focusedIndicatorColor = Color.Transparent,
-          unfocusedIndicatorColor = Color.Transparent,
-      ),
-      singleLine = singleLine,
-      keyboardOptions = keyboardOptions,
-      keyboardActions = keyboardActions,
-      modifier = modifier.fillMaxWidth(),
+    value = value,
+    label = label,
+    onValueChange = onValueChange,
+    textStyle = MaterialTheme.typography.body1,
+    shape = AppTheme.shapes.roundedBox,
+    colors = textFieldColors(
+      focusedIndicatorColor = Color.Transparent,
+      unfocusedIndicatorColor = Color.Transparent,
+    ),
+    singleLine = singleLine,
+    keyboardOptions = keyboardOptions,
+    keyboardActions = keyboardActions,
+    modifier = modifier.fillMaxWidth(),
   )
 }
 
 @Preview
 @Composable
 fun RoundedCornersPasswordTextField(
-    modifier: Modifier = Modifier,
-    value: String = "",
-    label: @Composable () -> Unit = {},
-    singleLine: Boolean = false,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions(),
-    onValueChange: (String) -> Unit = {},
+  modifier: Modifier = Modifier,
+  value: String = "",
+  label: @Composable () -> Unit = {},
+  singleLine: Boolean = false,
+  keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+  keyboardActions: KeyboardActions = KeyboardActions(),
+  onValueChange: (String) -> Unit = {},
 ) {
   var passwordShown by remember { mutableStateOf(false) }
   TextField(
-      value = value,
-      label = label,
-      onValueChange = onValueChange,
-      textStyle = MaterialTheme.typography.body1,
-      shape = AppTheme.shapes.roundedBox,
-      colors = textFieldColors(
-          focusedIndicatorColor = Color.Transparent,
-          unfocusedIndicatorColor = Color.Transparent,
-      ),
-      visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
-      singleLine = singleLine,
-      keyboardActions = keyboardActions,
-      keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Password),
-      trailingIcon = {
-        IconToggleButton(checked = passwordShown, onCheckedChange = { passwordShown = !passwordShown }) {
-          Icon(
-              painter =
-              painterResource(id = if (!passwordShown) R.drawable.ic_show_password else R.drawable.ic_hide_password),
-              contentDescription = null,
-          )
-        }
-      },
-      modifier = modifier.fillMaxWidth(),
+    value = value,
+    label = label,
+    onValueChange = onValueChange,
+    textStyle = MaterialTheme.typography.body1,
+    shape = AppTheme.shapes.roundedBox,
+    colors = textFieldColors(
+      focusedIndicatorColor = Color.Transparent,
+      unfocusedIndicatorColor = Color.Transparent,
+    ),
+    visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
+    singleLine = singleLine,
+    keyboardActions = keyboardActions,
+    keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Password),
+    trailingIcon = {
+      IconToggleButton(checked = passwordShown, onCheckedChange = { passwordShown = !passwordShown }) {
+        Icon(
+          painter =
+          painterResource(id = if (!passwordShown) R.drawable.ic_show_password else R.drawable.ic_hide_password),
+          contentDescription = null,
+        )
+      }
+    },
+    modifier = modifier.fillMaxWidth(),
   )
 }

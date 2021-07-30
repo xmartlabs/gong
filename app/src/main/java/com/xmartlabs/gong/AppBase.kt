@@ -31,18 +31,18 @@ abstract class AppBase : Application() {
 
   private fun setupCoil() {
     val imageLoader = ImageLoader.Builder(this)
-        .apply { if (BuildConfig.DEBUG) logger(DebugLogger()) }
-        .build()
+      .apply { if (BuildConfig.DEBUG) logger(DebugLogger()) }
+      .build()
     Coil.setImageLoader(imageLoader)
   }
 
   private fun setupStrictMode() {
     if (Config.DEBUG) {
       val builder = StrictMode.ThreadPolicy.Builder()
-          .detectDiskReads()
-          .detectDiskWrites()
-          .detectNetwork()
-          .penaltyLog()
+        .detectDiskReads()
+        .detectDiskWrites()
+        .detectNetwork()
+        .penaltyLog()
       StrictMode.setThreadPolicy(builder.build())
       StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder().apply {
         detectActivityLeaks()

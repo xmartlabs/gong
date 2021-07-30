@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.flowOn
 abstract class FlowStoreCoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
   @OptIn(ExperimentalCoroutinesApi::class)
   operator fun invoke(params: P): Flow<StoreResponse<R>> = execute(params)
-      .flowOn(coroutineDispatcher)
+    .flowOn(coroutineDispatcher)
 
   fun invokeAsProcessResult(params: P) = execute(params)
-      .mapToProcessResult()
+    .mapToProcessResult()
 
   /**
    * Override this to set the code to be executed.

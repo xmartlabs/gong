@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class AppSettings(
-    val sessionToken: String? = null,
-    val sessionUser: User? = null,
+  val sessionToken: String? = null,
+  val sessionUser: User? = null,
 )

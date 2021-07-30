@@ -22,6 +22,6 @@ object Config {
 }
 
 private fun String.toFileName() = trim()
-    .replace(" +", " ")
-    .lowercase(Locale.ROOT)
-    .replace(" ", "_")
+  .replace(" +", " ")
+  .lowercase(Locale.ROOT)
+  .replace(" ", "_")

@@ -7,14 +7,14 @@ import org.koin.core.module.Module
  */
 object DiAppModules {
   private val modules: List<Module> =
-      DispatchersDiModule.dispatchers +
-          LoggingDiModule.logging +
-          NetworkDiModule.network +
-          RepositoryDiModuleProvider.repositories +
-          RepositoryDiModuleProvider.sources +
-          RepositoryDiModuleProvider.stores +
-          UseCaseDiModule.useCases +
-          ViewModelDiModule.viewModels
+    DispatchersDiModule.dispatchers +
+        LoggingDiModule.logging +
+        NetworkDiModule.network +
+        RepositoryDiModuleProvider.repositories +
+        RepositoryDiModuleProvider.sources +
+        RepositoryDiModuleProvider.stores +
+        UseCaseDiModule.useCases +
+        ViewModelDiModule.viewModels
 
   fun provideModules() = modules
 }

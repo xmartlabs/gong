@@ -31,7 +31,7 @@ sealed interface ProcessResult<out T> {
 
 @Suppress("UNCHECKED_CAST")
 fun <T> ProcessState<T>.asResult(): ProcessResult<T>? =
-    this as? ProcessResult<T>
+  this as? ProcessResult<T>
 
 fun <T> ProcessResult<T>.getDataOrNull() = (this as? ProcessState.Success<T>)?.data
 

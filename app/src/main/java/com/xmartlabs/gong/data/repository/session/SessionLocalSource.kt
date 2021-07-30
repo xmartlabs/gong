@@ -12,21 +12,21 @@ import kotlinx.coroutines.sync.withLock
  * Created by mirland on 03/05/20.
  */
 class SessionLocalSource(
-    private val sessionDataStore: DataStore<AppSettings>,
+  private val sessionDataStore: DataStore<AppSettings>,
 ) {
   private val updateLock = Mutex()
 
   suspend fun getSessionToken() = sessionDataStore.data
-      .map { it.sessionToken }
-      .first()
+    .map { it.sessionToken }
+    .first()
 
   fun getSessionUser() = sessionDataStore.data.map { it.sessionUser }
 
   suspend fun setSession(user: User, token: String) = updateLock.withLock {
     sessionDataStore.updateData {
       it.copy(
-          sessionToken = token,
-          sessionUser = user,
+        sessionToken = token,
+        sessionUser = user,
       )
     }
   }

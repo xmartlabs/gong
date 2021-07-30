@@ -16,13 +16,13 @@ import timber.log.Timber
  */
 abstract class CoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default) {
   fun invokeAsFlow(params: P): Flow<ProcessState<R>> = flow { emit(invoke(params)) }
-          .mapResultToProcessState()
+    .mapResultToProcessState()
 
   suspend operator fun invoke(params: P): ProcessResult<R> =
-      withContext(coroutineDispatcher) {
-        ProcessResult.runCatching { execute(params) }
-            .onFailure { Timber.w(it) }
-      }
+    withContext(coroutineDispatcher) {
+      ProcessResult.runCatching { execute(params) }
+        .onFailure { Timber.w(it) }
+    }
 
   /**
    * Override this to set the code to be executed.

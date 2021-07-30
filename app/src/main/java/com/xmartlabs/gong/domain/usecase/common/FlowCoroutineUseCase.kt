@@ -14,13 +14,13 @@ import timber.log.Timber
 abstract class FlowCoroutineUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
   @OptIn(ExperimentalCoroutinesApi::class)
   operator fun invoke(params: P): Flow<ProcessState<R>> = execute(params)
-      .mapToProcessState()
-      .onEach { processState ->
-        if (processState is ProcessState.Failure) {
-          Timber.w(processState.exception)
-        }
+    .mapToProcessState()
+    .onEach { processState ->
+      if (processState is ProcessState.Failure) {
+        Timber.w(processState.exception)
       }
-      .flowOn(coroutineDispatcher)
+    }
+    .flowOn(coroutineDispatcher)
 
   /**
    * Override this to set the code to be executed.

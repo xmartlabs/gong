@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.first
  * Created by mirland on 25/04/20.
  */
 class LoadUserUseCase(
-    private val userRepository: UserRepository,
-    dispatcher: CoroutineDispatcher
+  private val userRepository: UserRepository,
+  dispatcher: CoroutineDispatcher,
 ) : CoroutineUseCase<Unit, User?>(dispatcher) {
   override suspend fun execute(params: Unit): User? =
-      userRepository.getCurrentUser()
-          .first()
+    userRepository.getCurrentUser()
+      .first()
 }

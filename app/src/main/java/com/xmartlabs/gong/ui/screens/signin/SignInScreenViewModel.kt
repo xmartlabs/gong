@@ -9,7 +9,7 @@ import com.xmartlabs.gong.ui.common.BaseViewModel
  * Created by mirland on 25/04/20.
  */
 class SignInScreenViewModel(
-    private val signInUseCase: SignInUseCase,
+  private val signInUseCase: SignInUseCase,
 ) : BaseViewModel<
     SignInUiAction,
     SignInViewModelEvent,
@@ -25,13 +25,13 @@ class SignInScreenViewModel(
   private suspend fun signIn() {
     viewModelScope.launchWithState { currentState ->
       signInUseCase.invokeAsFlow(SignInUseCase.Params(currentState.userName, currentState.password))
-          .watchProcessState { state ->
-            setState { copy(isLoading = state == ProcessState.Loading) }
-            when (state) {
-              is ProcessState.Failure -> sendOneShotEvent(SignInViewModelEvent.SignInError(state.exception))
-              is ProcessState.Success -> sendOneShotEvent(SignInViewModelEvent.NavigateToDashboard)
-            }
+        .watchProcessState { state ->
+          setState { copy(isLoading = state == ProcessState.Loading) }
+          when (state) {
+            is ProcessState.Failure -> sendOneShotEvent(SignInViewModelEvent.SignInError(state.exception))
+            is ProcessState.Success -> sendOneShotEvent(SignInViewModelEvent.NavigateToDashboard)
           }
+        }
     }
   }
 }

@@ -9,13 +9,12 @@ import timber.log.Timber
 import java.util.Date
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
-import kotlin.time.milliseconds
 
 /**
  * Created by mirland on 27/04/20.
  */
 class TimeTrackerUseCase(
-    dispatcher: CoroutineDispatcher
+  dispatcher: CoroutineDispatcher,
 ) : FlowCoroutineUseCase<TimeTrackerUseCase.Params, Duration>(dispatcher) {
   data class Params(val startTime: Date)
 

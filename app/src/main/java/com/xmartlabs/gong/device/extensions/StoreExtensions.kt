@@ -48,7 +48,7 @@ inline fun <T, E> StoreResponse<T>.map(mapper: (T) -> E): StoreResponse<E> = whe
 fun StoreResponse<*>.errorOrNull() = (this as? StoreResponse.Error)?.exception
 
 fun <T> Flow<StoreResponse<T>>.filterSuccess(
-    emitErrorsMutableFlow: MutableSharedFlow<StoreResponse.Error>? = null,
+  emitErrorsMutableFlow: MutableSharedFlow<StoreResponse.Error>? = null,
 ) = mapNotNull { state ->
   if (state is StoreResponse.Error) {
     emitErrorsMutableFlow?.emit(state)
@@ -57,26 +57,26 @@ fun <T> Flow<StoreResponse<T>>.filterSuccess(
 }
 
 inline fun <T> Flow<StoreResponse<T>>.filterSuccessTrackingErrors(crossinline messageCallback: (Throwable) -> String) =
-    trackError(messageCallback)
-        .filterSuccess()
+  trackError(messageCallback)
+    .filterSuccess()
 
 inline fun <T> Flow<StoreResponse<T>>.trackError(crossinline messageCallback: (Throwable) -> String) =
-    onEach { response ->
-      val error = response.errorOrNull()
-      if (error != null) {
-        Timber.w(error, messageCallback.invoke(error))
-      }
+  onEach { response ->
+    val error = response.errorOrNull()
+    if (error != null) {
+      Timber.w(error, messageCallback.invoke(error))
     }
+  }
 
 fun <T> Flow<StoreResponse<T>>.mapToProcessResult(): Flow<ProcessState<T>> =
-    mapNotNull { response: StoreResponse<T> ->
-      when (response) {
-        is StoreResponse.Data<T> -> ProcessState.Success(response.requireData())
-        is StoreResponse.Loading -> ProcessState.Loading
-        is StoreResponse.NoNewData -> null
-        is StoreResponse.Error -> ProcessState.Failure(response.exception)
-      }
+  mapNotNull { response: StoreResponse<T> ->
+    when (response) {
+      is StoreResponse.Data<T> -> ProcessState.Success(response.requireData())
+      is StoreResponse.Loading -> ProcessState.Loading
+      is StoreResponse.NoNewData -> null
+      is StoreResponse.Error -> ProcessState.Failure(response.exception)
     }
+  }
 
 fun <T> MutableStateFlow<T?>.toSimpleEntitySourceOfTruth() = object : SourceOfTruth<Unit, T, T> {
   override suspend fun delete(key: Unit) {

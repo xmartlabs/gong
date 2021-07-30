@@ -24,13 +24,13 @@ object RepositoryDiModuleProvider {
   val stores = module {
     single {
       get<Context>().createDataStore(
-          fileName = Config.APP_SETTINGS_SHARED_PREFERENCES_NAME,
-          serializer = JsonDataStoreEntitySerializer(AppSettings.serializer(), ::AppSettings),
+        fileName = Config.APP_SETTINGS_SHARED_PREFERENCES_NAME,
+        serializer = JsonDataStoreEntitySerializer(AppSettings.serializer(), ::AppSettings),
       )
     }
     single {
       Room.databaseBuilder(get(), AppDatabase::class.java, Config.DB_NAME)
-          .build()
+        .build()
     }
     single { get<AppDatabase>().locationDao() }
   }

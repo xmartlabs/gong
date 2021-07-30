@@ -16,18 +16,18 @@ import kotlinx.coroutines.launch
  * Created by mirland on 25/04/20.
  */
 class WelcomeScreenViewModel(
-    getLocationUseCase: GetLocationUseCase,
-    loadUserUseCase: LoadUserUseCase,
+  getLocationUseCase: GetLocationUseCase,
+  loadUserUseCase: LoadUserUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
   init {
     viewModelScope.launch {
       getLocationUseCase(Unit)
-          .mapToProcessResult()
-          .collect { updateLocation(it) }
+        .mapToProcessResult()
+        .collect { updateLocation(it) }
     }
     viewModelScope.launch {
       loadUserUseCase.invokeAsFlow(Unit)
-          .collect { updateUserInfo(it) }
+        .collect { updateUserInfo(it) }
     }
   }
 

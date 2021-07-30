@@ -23,26 +23,26 @@ object NetworkLayerCreator {
   private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 
   fun createOkHttpClientBuilder(
-      sessionInterceptors: List<Interceptor>,
-      networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
+    sessionInterceptors: List<Interceptor>,
+    networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
   ) = OkHttpClient.Builder()
-      .connectTimeout(HTTP_CONNECT_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
-      .readTimeout(HTTP_READ_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
-      .also { builder ->
-        sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
-        networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
-      }
+    .connectTimeout(HTTP_CONNECT_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
+    .readTimeout(HTTP_READ_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
+    .also { builder ->
+      sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
+      networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
+    }
 
   fun createRetrofitInstance(
-      baseUrl: String,
-      httpClient: OkHttpClient,
+    baseUrl: String,
+    httpClient: OkHttpClient,
   ): Retrofit = Retrofit.Builder()
-      .baseUrl(baseUrl)
-      .addConverterFactory(createSerializerConverterFactory())
-      .client(httpClient)
-      .build()
+    .baseUrl(baseUrl)
+    .addConverterFactory(createSerializerConverterFactory())
+    .client(httpClient)
+    .build()
 
   @OptIn(ExperimentalSerializationApi::class)
   private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
-      .asConverterFactory(JSON_MEDIA_TYPE)
+    .asConverterFactory(JSON_MEDIA_TYPE)
 }

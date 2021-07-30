@@ -18,7 +18,7 @@ sealed class SignInUiAction {
 
 @Immutable
 data class SignInViewState(
-    val userName: String = "",
-    val password: String = "",
-    val isLoading: Boolean = false,
+  val userName: String = "",
+  val password: String = "",
+  val isLoading: Boolean = false,
 )

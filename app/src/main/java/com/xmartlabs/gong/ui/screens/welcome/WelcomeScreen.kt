@@ -28,40 +28,40 @@ fun WelcomeScreen() {
   val viewModel: WelcomeScreenViewModel = getViewModel()
   val state by viewModel.state.collectAsState()
   WelcomeContent(
-      userName = state.userName,
-      locationString = state.location?.toShortString() ?: "",
+    userName = state.userName,
+    locationString = state.location?.toShortString() ?: "",
   )
 }
 
 @Composable
 private fun WelcomeContentPreview(
-    userName: String = "xmartlabs",
-    locationString: String = "Uruguay",
+  userName: String = "xmartlabs",
+  locationString: String = "Uruguay",
 ) = WelcomeContent(userName, locationString)
 
 @Composable
 fun WelcomeContent(
-    userName: String,
-    locationString: String,
+  userName: String,
+  locationString: String,
 ) {
   Scaffold(
-      topBar = { AppTopBar() },
+    topBar = { AppTopBar() },
   ) {
     Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
+      verticalArrangement = Arrangement.Center,
+      modifier = Modifier.fillMaxSize()
     ) {
       Text(
-          text = "Hi $userName",
-          style = MaterialTheme.typography.h3,
-          modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = "Hi $userName",
+        style = MaterialTheme.typography.h3,
+        modifier = Modifier.align(Alignment.CenterHorizontally),
       )
       Text(
-          text = "You signed in from: $locationString!",
-          style = MaterialTheme.typography.body2,
-          modifier = Modifier
-              .align(Alignment.CenterHorizontally)
-              .alpha(if (locationString.isNotBlank()) 1f else 0f)
+        text = "You signed in from: $locationString!",
+        style = MaterialTheme.typography.body2,
+        modifier = Modifier
+          .align(Alignment.CenterHorizontally)
+          .alpha(if (locationString.isNotBlank()) 1f else 0f)
       )
     }
   }
@@ -86,6 +86,6 @@ fun WelcomePreviewDark() {
 @Composable
 fun AppTopBar() {
   TopAppBar(
-      title = { Text(text = stringResource(id = R.string.app_name)) },
+    title = { Text(text = stringResource(id = R.string.app_name)) },
   )
 }

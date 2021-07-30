@@ -47,39 +47,39 @@ private val LocalAppTypography = staticCompositionLocalOf {
 
 @Composable
 fun AppTheme(
-    dims: AppDims = appDims(),
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    colorPalette: AppColorPalette = AppColorPalette.PINK,
-    typography: AppTypography = appTypography(dims, appColors(colorPalette = colorPalette, darkTheme = darkTheme)),
-    shapes: AppShapes = appShapes(),
-    content: @Composable () -> Unit,
+  dims: AppDims = appDims(),
+  darkTheme: Boolean = isSystemInDarkTheme(),
+  colorPalette: AppColorPalette = AppColorPalette.PINK,
+  typography: AppTypography = appTypography(dims, appColors(colorPalette = colorPalette, darkTheme = darkTheme)),
+  shapes: AppShapes = appShapes(),
+  content: @Composable () -> Unit,
 ) = AppTheme(
-    dims = dims,
-    colors = appColors(colorPalette = colorPalette, darkTheme = darkTheme),
-    typography = typography,
-    shapes = shapes,
-    content = content
+  dims = dims,
+  colors = appColors(colorPalette = colorPalette, darkTheme = darkTheme),
+  typography = typography,
+  shapes = shapes,
+  content = content
 )
 
 @Composable
 fun AppTheme(
-    dims: AppDims = appDims(),
-    colors: AppColors = appColors(colorPalette = AppColorPalette.PINK, darkTheme = isSystemInDarkTheme()),
-    typography: AppTypography = appTypography(dims, colors),
-    shapes: AppShapes = appShapes(),
-    content: @Composable () -> Unit,
+  dims: AppDims = appDims(),
+  colors: AppColors = appColors(colorPalette = AppColorPalette.PINK, darkTheme = isSystemInDarkTheme()),
+  typography: AppTypography = appTypography(dims, colors),
+  shapes: AppShapes = appShapes(),
+  content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(
-      LocalAppColors provides colors,
-      LocalAppDims provides dims,
-      LocalAppShapes provides shapes,
-      LocalAppTypography provides typography,
+    LocalAppColors provides colors,
+    LocalAppDims provides dims,
+    LocalAppShapes provides shapes,
+    LocalAppTypography provides typography,
   ) {
     MaterialTheme(
-        colors = colors.materialColors,
-        typography = typography.materialTypography,
-        shapes = shapes.materialShapes,
-        content = content,
+      colors = colors.materialColors,
+      typography = typography.materialTypography,
+      shapes = shapes.materialShapes,
+      content = content,
     )
   }
 }

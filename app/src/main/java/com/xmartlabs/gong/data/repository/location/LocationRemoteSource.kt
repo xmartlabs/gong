@@ -8,5 +8,5 @@ import java.util.Date
  */
 class LocationRemoteSource(private val locationApi: LocationServiceApi) {
   suspend fun getLocation() = locationApi.getLocation()
-      .copy(timestamp = Date())
+    .copy(timestamp = Date())
 }
