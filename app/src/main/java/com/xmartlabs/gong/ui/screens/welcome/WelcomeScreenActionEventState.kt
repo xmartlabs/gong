@@ -12,6 +12,6 @@ sealed class WelcomeUiAction
 
 @Immutable
 data class WelcomeViewState(
-  val userName: String = "",
-  val location: Location? = null,
+    val userName: String = "",
+    val location: Location? = null,
 )

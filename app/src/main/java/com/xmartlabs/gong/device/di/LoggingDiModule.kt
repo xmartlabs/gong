@@ -7,5 +7,5 @@ import org.koin.core.module.Module
  * Created by mirland on 25/04/20.
  */
 object LoggingDiModule {
-  val logging: Module = LoggerTools.provideKoinDebugModule()
+    val logging: Module = LoggerTools.provideKoinDebugModule()
 }

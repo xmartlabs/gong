@@ -12,21 +12,21 @@ import java.io.OutputStream
  * Created by mirland on 02/10/20.
  */
 class JsonDataStoreEntitySerializer<T>(
-  private val serializer: KSerializer<T>,
-  private val defaultValueCreator: () -> T,
+    private val serializer: KSerializer<T>,
+    private val defaultValueCreator: () -> T,
 ) : Serializer<T> {
-  override val defaultValue: T
-    get() = defaultValueCreator()
+    override val defaultValue: T
+        get() = defaultValueCreator()
 
-  override fun readFrom(input: InputStream): T = try {
-    Json.decodeFromString(
-      serializer,
-      input.readBytes().decodeToString()
-    )
-  } catch (serializationException: SerializationException) {
-    throw CorruptionException("Unable to deserialize", serializationException)
-  }
+    override fun readFrom(input: InputStream): T = try {
+        Json.decodeFromString(
+            serializer,
+            input.readBytes().decodeToString()
+        )
+    } catch (serializationException: SerializationException) {
+        throw CorruptionException("Unable to deserialize", serializationException)
+    }
 
-  override fun writeTo(t: T, output: OutputStream) =
-    output.write(Json.encodeToString(serializer, t).encodeToByteArray())
+    override fun writeTo(t: T, output: OutputStream) =
+        output.write(Json.encodeToString(serializer, t).encodeToByteArray())
 }

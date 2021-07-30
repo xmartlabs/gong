@@ -12,180 +12,180 @@ import androidx.compose.ui.graphics.Color
  */
 @Stable
 class AppColors(
-  val linkTextColor: Color,
-  val subtitleTextColor: Color,
+    val linkTextColor: Color,
+    val subtitleTextColor: Color,
 
-  val materialColors: Colors,
+    val materialColors: Colors,
 ) {
-  val primary: Color
-    get() = materialColors.primary
-  val primaryVariant: Color
-    get() = materialColors.primaryVariant
-  val secondary: Color
-    get() = materialColors.secondary
-  val secondaryVariant: Color
-    get() = materialColors.secondaryVariant
-  val background: Color
-    get() = materialColors.background
-  val surface: Color
-    get() = materialColors.surface
-  val error: Color
-    get() = materialColors.error
-  val onPrimary: Color
-    get() = materialColors.onPrimary
-  val onSecondary: Color
-    get() = materialColors.onSecondary
-  val onBackground: Color
-    get() = materialColors.onBackground
-  val onSurface: Color
-    get() = materialColors.onSurface
-  val onError: Color
-    get() = materialColors.onError
-  val isLight: Boolean
-    get() = materialColors.isLight
+    val primary: Color
+        get() = materialColors.primary
+    val primaryVariant: Color
+        get() = materialColors.primaryVariant
+    val secondary: Color
+        get() = materialColors.secondary
+    val secondaryVariant: Color
+        get() = materialColors.secondaryVariant
+    val background: Color
+        get() = materialColors.background
+    val surface: Color
+        get() = materialColors.surface
+    val error: Color
+        get() = materialColors.error
+    val onPrimary: Color
+        get() = materialColors.onPrimary
+    val onSecondary: Color
+        get() = materialColors.onSecondary
+    val onBackground: Color
+        get() = materialColors.onBackground
+    val onSurface: Color
+        get() = materialColors.onSurface
+    val onError: Color
+        get() = materialColors.onError
+    val isLight: Boolean
+        get() = materialColors.isLight
 
-  @Suppress("LongParameterList")
-  constructor(
-    linkTextColor: Color,
-    subtitleTextColor: Color,
-    primary: Color,
-    primaryVariant: Color,
-    secondary: Color,
-    secondaryVariant: Color,
-    background: Color,
-    surface: Color,
-    error: Color,
-    onPrimary: Color,
-    onSecondary: Color,
-    onBackground: Color,
-    onSurface: Color,
-    onError: Color,
-    isLight: Boolean,
-  ) : this(
-    linkTextColor = linkTextColor,
-    subtitleTextColor = subtitleTextColor,
-    materialColors = Colors(
-      primary = primary,
-      primaryVariant = primaryVariant,
-      secondary = secondary,
-      secondaryVariant = secondaryVariant,
-      background = background,
-      surface = surface,
-      error = error,
-      onPrimary = onPrimary,
-      onSecondary = onSecondary,
-      onBackground = onBackground,
-      onSurface = onSurface,
-      onError = onError,
-      isLight = isLight,
+    @Suppress("LongParameterList")
+    constructor(
+        linkTextColor: Color,
+        subtitleTextColor: Color,
+        primary: Color,
+        primaryVariant: Color,
+        secondary: Color,
+        secondaryVariant: Color,
+        background: Color,
+        surface: Color,
+        error: Color,
+        onPrimary: Color,
+        onSecondary: Color,
+        onBackground: Color,
+        onSurface: Color,
+        onError: Color,
+        isLight: Boolean,
+    ) : this(
+        linkTextColor = linkTextColor,
+        subtitleTextColor = subtitleTextColor,
+        materialColors = Colors(
+            primary = primary,
+            primaryVariant = primaryVariant,
+            secondary = secondary,
+            secondaryVariant = secondaryVariant,
+            background = background,
+            surface = surface,
+            error = error,
+            onPrimary = onPrimary,
+            onSecondary = onSecondary,
+            onBackground = onBackground,
+            onSurface = onSurface,
+            onError = onError,
+            isLight = isLight,
+        )
     )
-  )
 
-  @Suppress("unused", "DataClassContainsFunctions")
-  fun copy(
-    linkTextColor: Color = this.linkTextColor,
-    subtitleTextColor: Color = this.subtitleTextColor,
-    primary: Color = this.primary,
-    primaryVariant: Color = this.primaryVariant,
-    secondary: Color = this.secondary,
-    secondaryVariant: Color = this.secondaryVariant,
-    background: Color = this.background,
-    surface: Color = this.surface,
-    error: Color = this.error,
-    onPrimary: Color = this.onPrimary,
-    onSecondary: Color = this.onSecondary,
-    onBackground: Color = this.onBackground,
-    onSurface: Color = this.onSurface,
-    onError: Color = this.onError,
-    isLight: Boolean = this.isLight,
-  ): AppColors = AppColors(
-    linkTextColor = linkTextColor,
-    subtitleTextColor = subtitleTextColor,
-    primary = primary,
-    primaryVariant = primaryVariant,
-    secondary = secondary,
-    secondaryVariant = secondaryVariant,
-    background = background,
-    surface = surface,
-    error = error,
-    onPrimary = onPrimary,
-    onSecondary = onSecondary,
-    onBackground = onBackground,
-    onSurface = onSurface,
-    onError = onError,
-    isLight = isLight,
-  )
+    @Suppress("unused", "DataClassContainsFunctions")
+    fun copy(
+        linkTextColor: Color = this.linkTextColor,
+        subtitleTextColor: Color = this.subtitleTextColor,
+        primary: Color = this.primary,
+        primaryVariant: Color = this.primaryVariant,
+        secondary: Color = this.secondary,
+        secondaryVariant: Color = this.secondaryVariant,
+        background: Color = this.background,
+        surface: Color = this.surface,
+        error: Color = this.error,
+        onPrimary: Color = this.onPrimary,
+        onSecondary: Color = this.onSecondary,
+        onBackground: Color = this.onBackground,
+        onSurface: Color = this.onSurface,
+        onError: Color = this.onError,
+        isLight: Boolean = this.isLight,
+    ): AppColors = AppColors(
+        linkTextColor = linkTextColor,
+        subtitleTextColor = subtitleTextColor,
+        primary = primary,
+        primaryVariant = primaryVariant,
+        secondary = secondary,
+        secondaryVariant = secondaryVariant,
+        background = background,
+        surface = surface,
+        error = error,
+        onPrimary = onPrimary,
+        onSecondary = onSecondary,
+        onBackground = onBackground,
+        onSurface = onSurface,
+        onError = onError,
+        isLight = isLight,
+    )
 }
 
 enum class AppColorPalette {
-  PINK,
+    PINK,
 }
 
 @Composable
 fun appColors(colorPalette: AppColorPalette, darkTheme: Boolean): AppColors =
-  when (colorPalette) {
-    AppColorPalette.PINK -> if (darkTheme) darkPinkColors else lightPinkColors
-  }
+    when (colorPalette) {
+        AppColorPalette.PINK -> if (darkTheme) darkPinkColors else lightPinkColors
+    }
 
 fun defaultAppColors() = lightPinkColors
 
 private val darkPinkColors = AppColors(
-  linkTextColor = AppCustomColors.PINK_AMARANTH,
-  subtitleTextColor = AppCustomColors.WHITE,
-  materialColors = darkColors(
-    primary = AppCustomColors.PINK_MAUVELOUS,
-    primaryVariant = AppCustomColors.PINK_MAROON,
-    secondary = AppCustomColors.YELLOW_SALOMIE,
-    secondaryVariant = AppCustomColors.YELLOW_SALOMIE,
-    background = AppCustomColors.GRAY_COD,
-    surface = AppCustomColors.GRAY_COD,
-    onPrimary = AppCustomColors.BLACK,
-    onSecondary = AppCustomColors.BLACK,
-    onBackground = AppCustomColors.WHITE,
-    onSurface = AppCustomColors.WHITE,
-    error = AppCustomColors.RED_CHESTNUT,
-    onError = AppCustomColors.BLACK,
-  )
+    linkTextColor = AppCustomColors.PINK_AMARANTH,
+    subtitleTextColor = AppCustomColors.WHITE,
+    materialColors = darkColors(
+        primary = AppCustomColors.PINK_MAUVELOUS,
+        primaryVariant = AppCustomColors.PINK_MAROON,
+        secondary = AppCustomColors.YELLOW_SALOMIE,
+        secondaryVariant = AppCustomColors.YELLOW_SALOMIE,
+        background = AppCustomColors.GRAY_COD,
+        surface = AppCustomColors.GRAY_COD,
+        onPrimary = AppCustomColors.BLACK,
+        onSecondary = AppCustomColors.BLACK,
+        onBackground = AppCustomColors.WHITE,
+        onSurface = AppCustomColors.WHITE,
+        error = AppCustomColors.RED_CHESTNUT,
+        onError = AppCustomColors.BLACK,
+    )
 )
 
 private val lightPinkColors = AppColors(
-  linkTextColor = AppCustomColors.YELLOW_AMBER,
-  subtitleTextColor = AppCustomColors.GRAY_MEDIUM_EMPHASIS,
-  materialColors = lightColors(
-    primary = AppCustomColors.PINK_AMARANTH,
-    primaryVariant = AppCustomColors.PINK_MAROON,
-    secondary = AppCustomColors.YELLOW_AMBER,
-    secondaryVariant = AppCustomColors.YELLOW_CORN,
-    background = AppCustomColors.WHITE_LILAC,
-    surface = AppCustomColors.WHITE,
-    onPrimary = AppCustomColors.WHITE,
-    onSecondary = AppCustomColors.WHITE,
-    onBackground = AppCustomColors.BLUE_MIRAGE,
-    onSurface = AppCustomColors.BLACK,
-    error = AppCustomColors.RED_PERSIAN,
-    onError = AppCustomColors.WHITE,
-  )
+    linkTextColor = AppCustomColors.YELLOW_AMBER,
+    subtitleTextColor = AppCustomColors.GRAY_MEDIUM_EMPHASIS,
+    materialColors = lightColors(
+        primary = AppCustomColors.PINK_AMARANTH,
+        primaryVariant = AppCustomColors.PINK_MAROON,
+        secondary = AppCustomColors.YELLOW_AMBER,
+        secondaryVariant = AppCustomColors.YELLOW_CORN,
+        background = AppCustomColors.WHITE_LILAC,
+        surface = AppCustomColors.WHITE,
+        onPrimary = AppCustomColors.WHITE,
+        onSecondary = AppCustomColors.WHITE,
+        onBackground = AppCustomColors.BLUE_MIRAGE,
+        onSurface = AppCustomColors.BLACK,
+        error = AppCustomColors.RED_PERSIAN,
+        onError = AppCustomColors.WHITE,
+    )
 )
 
 @Suppress("MagicNumber")
 private object AppCustomColors {
-  val BLACK = Color(0xff000000)
-  val BLUE_MIRAGE = Color(0xff1b2130)
-  val GRAY_COD = Color(0xff121212)
-  val GRAY_MEDIUM_EMPHASIS = Color(0xff808080)
-  val PINK_AMARANTH = Color(0xffe91e63)
-  val PINK_MAROON = Color(0xffc2185b)
-  val PINK_MAUVELOUS = Color(0xfff48fb0)
-  val RED_CHESTNUT = Color(0xffcf6679)
-  val RED_PERSIAN = Color(0xffd32f2f)
-  val WHITE = Color(0xffffffff)
-  val WHITE_LILAC = Color(0xfff0f3fa)
-  val YELLOW_AMBER = Color(0xffffc107)
-  val YELLOW_CORN = Color(0xffdda600)
-  val YELLOW_SALOMIE = Color(0xffffe082)
+    val BLACK = Color(0xff000000)
+    val BLUE_MIRAGE = Color(0xff1b2130)
+    val GRAY_COD = Color(0xff121212)
+    val GRAY_MEDIUM_EMPHASIS = Color(0xff808080)
+    val PINK_AMARANTH = Color(0xffe91e63)
+    val PINK_MAROON = Color(0xffc2185b)
+    val PINK_MAUVELOUS = Color(0xfff48fb0)
+    val RED_CHESTNUT = Color(0xffcf6679)
+    val RED_PERSIAN = Color(0xffd32f2f)
+    val WHITE = Color(0xffffffff)
+    val WHITE_LILAC = Color(0xfff0f3fa)
+    val YELLOW_AMBER = Color(0xffffc107)
+    val YELLOW_CORN = Color(0xffdda600)
+    val YELLOW_SALOMIE = Color(0xffffe082)
 }
 
 // To expose one color, but it shouldn't be necessary, the colors should be used from the app color theme
 @Stable
 val Color.Companion.WhiteLilac
-  get() = AppCustomColors.WHITE_LILAC
+    get() = AppCustomColors.WHITE_LILAC

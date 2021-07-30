@@ -16,32 +16,32 @@ import kotlinx.coroutines.launch
  * Created by mirland on 25/04/20.
  */
 class WelcomeScreenViewModel(
-  getLocationUseCase: GetLocationUseCase,
-  loadUserUseCase: LoadUserUseCase,
+    getLocationUseCase: GetLocationUseCase,
+    loadUserUseCase: LoadUserUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
-  init {
-    viewModelScope.launch {
-      getLocationUseCase(Unit)
-        .mapToProcessResult()
-        .collect { updateLocation(it) }
+    init {
+        viewModelScope.launch {
+            getLocationUseCase(Unit)
+                .mapToProcessResult()
+                .collect { updateLocation(it) }
+        }
+        viewModelScope.launch {
+            loadUserUseCase.invokeAsFlow(Unit)
+                .collect { updateUserInfo(it) }
+        }
     }
-    viewModelScope.launch {
-      loadUserUseCase.invokeAsFlow(Unit)
-        .collect { updateUserInfo(it) }
-    }
-  }
 
-  private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
-    userProcessState.getDataOrNull()?.let { user ->
-      setState { copy(userName = user.name) }
+    private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
+        userProcessState.getDataOrNull()?.let { user ->
+            setState { copy(userName = user.name) }
+        }
     }
-  }
 
-  private suspend fun updateLocation(locationProcessState: ProcessState<Location>) {
-    locationProcessState.getDataOrNull()?.let { location ->
-      setState { copy(location = location) }
+    private suspend fun updateLocation(locationProcessState: ProcessState<Location>) {
+        locationProcessState.getDataOrNull()?.let { location ->
+            setState { copy(location = location) }
+        }
     }
-  }
 
-  override suspend fun processAction(action: WelcomeUiAction) {}
+    override suspend fun processAction(action: WelcomeUiAction) {}
 }

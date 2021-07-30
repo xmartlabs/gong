@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
  * Created by mirland on 03/05/20.
  */
 class SplashScreenViewModel(getSessionTypeUseCase: GetSessionTypeUseCase) : ViewModel() {
-  val currentSessionTypeStateFlow: StateFlow<ProcessState<SessionType>> =
-    getSessionTypeUseCase.invokeAsFlow(Unit)
-      .stateIn(viewModelScope, SharingStarted.Lazily, ProcessState.Loading)
+    val currentSessionTypeStateFlow: StateFlow<ProcessState<SessionType>> =
+        getSessionTypeUseCase.invokeAsFlow(Unit)
+            .stateIn(viewModelScope, SharingStarted.Lazily, ProcessState.Loading)
 }
