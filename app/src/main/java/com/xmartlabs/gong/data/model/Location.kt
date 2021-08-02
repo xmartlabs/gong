@@ -13,7 +13,8 @@ import java.util.Date
 @Serializable
 data class Location(
     @Transient
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val status: String,
     val country: String,
     val countryCode: String,
@@ -28,7 +29,7 @@ data class Location(
     val org: String,
     val query: String,
     @Transient
-    val timestamp: Date = Date()
+    val timestamp: Date = Date(),
 )
 
 fun Location.toShortString() = listOfNotNull(city, country)

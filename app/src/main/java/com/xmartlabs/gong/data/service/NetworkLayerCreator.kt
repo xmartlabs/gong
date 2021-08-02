@@ -15,34 +15,34 @@ import kotlin.time.Duration
  * Created by mirland on 28/04/20.
  */
 object NetworkLayerCreator {
-  @SuppressWarnings("MagicNumber")
-  private val HTTP_CONNECT_TIMEOUT = Duration.seconds(20)
+    @SuppressWarnings("MagicNumber")
+    private val HTTP_CONNECT_TIMEOUT = Duration.seconds(20)
 
-  @SuppressWarnings("MagicNumber")
-  private val HTTP_READ_TIMEOUT = Duration.seconds(20)
-  private val JSON_MEDIA_TYPE = "application/json".toMediaType()
+    @SuppressWarnings("MagicNumber")
+    private val HTTP_READ_TIMEOUT = Duration.seconds(20)
+    private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 
-  fun createOkHttpClientBuilder(
-      sessionInterceptors: List<Interceptor>,
-      networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
-  ) = OkHttpClient.Builder()
-      .connectTimeout(HTTP_CONNECT_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
-      .readTimeout(HTTP_READ_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
-      .also { builder ->
-        sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
-        networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
-      }
+    fun createOkHttpClientBuilder(
+        sessionInterceptors: List<Interceptor>,
+        networkLoggingInterceptorInjectors: List<NetworkLoggingInterceptorInjector>,
+    ) = OkHttpClient.Builder()
+        .connectTimeout(HTTP_CONNECT_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
+        .readTimeout(HTTP_READ_TIMEOUT.inWholeMilliseconds, TimeUnit.MILLISECONDS)
+        .also { builder ->
+            sessionInterceptors.forEach { interceptor -> builder.addNetworkInterceptor(interceptor) }
+            networkLoggingInterceptorInjectors.forEach { injector -> injector.injectNetworkInterceptor(builder) }
+        }
 
-  fun createRetrofitInstance(
-      baseUrl: String,
-      httpClient: OkHttpClient,
-  ): Retrofit = Retrofit.Builder()
-      .baseUrl(baseUrl)
-      .addConverterFactory(createSerializerConverterFactory())
-      .client(httpClient)
-      .build()
+    fun createRetrofitInstance(
+        baseUrl: String,
+        httpClient: OkHttpClient,
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .addConverterFactory(createSerializerConverterFactory())
+        .client(httpClient)
+        .build()
 
-  @OptIn(ExperimentalSerializationApi::class)
-  private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
-      .asConverterFactory(JSON_MEDIA_TYPE)
+    @OptIn(ExperimentalSerializationApi::class)
+    private fun createSerializerConverterFactory() = Json { ignoreUnknownKeys = true }
+        .asConverterFactory(JSON_MEDIA_TYPE)
 }

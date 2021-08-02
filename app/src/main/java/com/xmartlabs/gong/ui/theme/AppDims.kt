@@ -35,9 +35,9 @@ data class AppDims(
 
 @Composable
 fun appDims() = if (LocalConfiguration.current.screenWidthDp < SMALL_DEVICE_SCREEN_WIDTH_DP) {
-  smallDeviceAppDims
+    smallDeviceAppDims
 } else {
-  regularAppDims
+    regularAppDims
 }
 
 fun defaultAppDims() = regularAppDims

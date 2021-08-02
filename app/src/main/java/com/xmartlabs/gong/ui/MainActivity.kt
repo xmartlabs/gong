@@ -14,22 +14,22 @@ import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 import com.xmartlabs.gong.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-      AppTheme {
-        AppNavigationManager()
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppTheme {
+                AppNavigationManager()
+            }
+        }
     }
-  }
 
-  @Composable
-  fun AppNavigationManager() {
-    val navigationController: NavHostController = rememberNavController()
-    NavHost(navController = navigationController, startDestination = Screens.SPLASH) {
-      composable(Screens.SPLASH) { SplashScreen(navController = navigationController) }
-      composable(Screens.SIGN_IN) { SignInScreen(navController = navigationController) }
-      composable(Screens.WELCOME) { WelcomeScreen() }
+    @Composable
+    fun AppNavigationManager() {
+        val navigationController: NavHostController = rememberNavController()
+        NavHost(navController = navigationController, startDestination = Screens.SPLASH) {
+            composable(Screens.SPLASH) { SplashScreen(navController = navigationController) }
+            composable(Screens.SIGN_IN) { SignInScreen(navController = navigationController) }
+            composable(Screens.WELCOME) { WelcomeScreen() }
+        }
     }
-  }
 }

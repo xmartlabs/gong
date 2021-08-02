@@ -18,34 +18,35 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 object LoggerTools {
-  private val networkFlipperPlugin = NetworkFlipperPlugin()
+    private val networkFlipperPlugin = NetworkFlipperPlugin()
 
-  fun provideKoinDebugModule() = module {
-    single(named("FlipperInterceptor")) {
-      DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createFlipperInterceptor(networkFlipperPlugin))
-    } bind NetworkLoggingInterceptorInjector::class
-    single(named("CurlInterceptor")) {
-      DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createCurlInterceptor())
-    } bind NetworkLoggingInterceptorInjector::class
-    single<NetworkLoggingInterceptorInjector>(named("LoggingInterceptor")) {
-      DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createOkHttpInterceptor())
-    } bind NetworkLoggingInterceptorInjector::class
-    single(createdAtStart = true) { setupFlipper(get()) }
-  }
+    fun provideKoinDebugModule() = module {
+        single(named("FlipperInterceptor")) {
+            DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createFlipperInterceptor(
+                networkFlipperPlugin))
+        } bind NetworkLoggingInterceptorInjector::class
+        single(named("CurlInterceptor")) {
+            DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createCurlInterceptor())
+        } bind NetworkLoggingInterceptorInjector::class
+        single<NetworkLoggingInterceptorInjector>(named("LoggingInterceptor")) {
+            DebugNetworkLoggingInterceptorInjector(NetworkDebugInterceptors.createOkHttpInterceptor())
+        } bind NetworkLoggingInterceptorInjector::class
+        single(createdAtStart = true) { setupFlipper(get()) }
+    }
 
-  private fun setupFlipper(context: Context): FlipperClient {
-    SoLoader.init(context, false)
-    return AndroidFlipperClient.getInstance(context)
-        .also { client ->
-          if (FlipperUtils.shouldEnableFlipper(context)) {
-            client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
-            client.addPlugin(NavigationFlipperPlugin.getInstance())
-            client.addPlugin(networkFlipperPlugin)
-            client.addPlugin(DatabasesFlipperPlugin(context))
-            client.addPlugin(SharedPreferencesFlipperPlugin(context))
-            client.addPlugin(CrashReporterPlugin.getInstance())
-            client.start()
-          }
-        }
-  }
+    private fun setupFlipper(context: Context): FlipperClient {
+        SoLoader.init(context, false)
+        return AndroidFlipperClient.getInstance(context)
+            .also { client ->
+                if (FlipperUtils.shouldEnableFlipper(context)) {
+                    client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
+                    client.addPlugin(NavigationFlipperPlugin.getInstance())
+                    client.addPlugin(networkFlipperPlugin)
+                    client.addPlugin(DatabasesFlipperPlugin(context))
+                    client.addPlugin(SharedPreferencesFlipperPlugin(context))
+                    client.addPlugin(CrashReporterPlugin.getInstance())
+                    client.start()
+                }
+            }
+    }
 }

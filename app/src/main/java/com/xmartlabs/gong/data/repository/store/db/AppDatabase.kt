@@ -11,5 +11,5 @@ import com.xmartlabs.gong.data.model.Location
 @Database(entities = [Location::class], version = 1)
 @TypeConverters(RoomConverters::class)
 abstract class AppDatabase : RoomDatabase() {
-  abstract fun locationDao(): LocationDao
+    abstract fun locationDao(): LocationDao
 }

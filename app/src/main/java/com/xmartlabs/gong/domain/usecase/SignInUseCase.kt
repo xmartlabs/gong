@@ -10,9 +10,9 @@ import kotlinx.coroutines.CoroutineDispatcher
  */
 class SignInUseCase(
     private val userRepository: UserRepository,
-    dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher,
 ) : CoroutineUseCase<SignInUseCase.Params, User>(dispatcher) {
-  data class Params(val id: String, val password: String)
+    data class Params(val id: String, val password: String)
 
-  override suspend fun execute(params: Params): User = userRepository.signIn(params.id, params.password)
+    override suspend fun execute(params: Params): User = userRepository.signIn(params.id, params.password)
 }
