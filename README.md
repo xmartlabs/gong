@@ -104,7 +104,7 @@ The main libraries that we are using are:
 To use this template, you can use the [gong_setup.sh](/gong_setup.sh) script that automatizes the setup process.
 You can run it remotely executing the following command:
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/main-v2/gong_setup.sh) main-v2
+bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/main/gong_setup.sh)
 ```
 
 It will clone and setup all variables that you need.
