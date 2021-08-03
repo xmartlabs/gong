@@ -25,12 +25,12 @@ import org.koin.androidx.compose.getViewModel
  */
 @Composable
 fun WelcomeScreen() {
-  val viewModel: WelcomeScreenViewModel = getViewModel()
-  val state by viewModel.state.collectAsState()
-  WelcomeContent(
-      userName = state.userName,
-      locationString = state.location?.toShortString() ?: "",
-  )
+    val viewModel: WelcomeScreenViewModel = getViewModel()
+    val state by viewModel.state.collectAsState()
+    WelcomeContent(
+        userName = state.userName,
+        locationString = state.location?.toShortString() ?: "",
+    )
 }
 
 @Composable
@@ -44,48 +44,48 @@ fun WelcomeContent(
     userName: String,
     locationString: String,
 ) {
-  Scaffold(
-      topBar = { GongTopBar() },
-  ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
+    Scaffold(
+        topBar = { AppTopBar() },
     ) {
-      Text(
-          text = "Hi $userName",
-          style = MaterialTheme.typography.h3,
-          modifier = Modifier.align(Alignment.CenterHorizontally),
-      )
-      Text(
-          text = "You signed in from: $locationString!",
-          style = MaterialTheme.typography.body2,
-          modifier = Modifier
-              .align(Alignment.CenterHorizontally)
-              .alpha(if (locationString.isNotBlank()) 1f else 0f)
-      )
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(
+                text = "Hi $userName",
+                style = MaterialTheme.typography.h3,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
+            Text(
+                text = "You signed in from: $locationString!",
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .alpha(if (locationString.isNotBlank()) 1f else 0f)
+            )
+        }
     }
-  }
 }
 
 @Preview
 @Composable
 fun WelcomePreview() {
-  AppTheme {
-    WelcomeContentPreview()
-  }
+    AppTheme {
+        WelcomeContentPreview()
+    }
 }
 
 @Preview
 @Composable
 fun WelcomePreviewDark() {
-  AppTheme(darkTheme = true) {
-    WelcomeContentPreview()
-  }
+    AppTheme(darkTheme = true) {
+        WelcomeContentPreview()
+    }
 }
 
 @Composable
-fun GongTopBar() {
-  TopAppBar(
-      title = { Text(text = stringResource(id = R.string.app_name)) },
-  )
+fun AppTopBar() {
+    TopAppBar(
+        title = { Text(text = stringResource(id = R.string.app_name)) },
+    )
 }

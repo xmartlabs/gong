@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.first
  */
 class LoadUserUseCase(
     private val userRepository: UserRepository,
-    dispatcher: CoroutineDispatcher
+    dispatcher: CoroutineDispatcher,
 ) : CoroutineUseCase<Unit, User?>(dispatcher) {
-  override suspend fun execute(params: Unit): User? =
-      userRepository.getCurrentUser()
-          .first()
+    override suspend fun execute(params: Unit): User? =
+        userRepository.getCurrentUser()
+            .first()
 }

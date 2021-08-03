@@ -5,20 +5,20 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class App : AppBase() {
-  companion object {
-    lateinit var instance: App
-      private set
-  }
-
-  override fun setupKoinModules() {
-    startKoin {
-      androidContext(this@App)
-      modules(DiAppModules.provideModules())
+    companion object {
+        lateinit var instance: App
+            private set
     }
-  }
 
-  override fun onCreate() {
-    instance = this
-    super.onCreate()
-  }
+    override fun setupKoinModules() {
+        startKoin {
+            androidContext(this@App)
+            modules(DiAppModules.provideModules())
+        }
+    }
+
+    override fun onCreate() {
+        instance = this
+        super.onCreate()
+    }
 }

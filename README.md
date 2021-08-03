@@ -92,6 +92,7 @@ The main libraries that we are using are:
 - [Coil](https://coil-kt.github.io/coil/), an image loading library for Android backed by Kotlin Coroutines.
 - [Koin](https://insert-koin.io/), a lightweight dependency injection framework for Kotlin.
 - [OkHttp](https://square.github.io/okhttp/) and [Retrofit](https://square.github.io/retrofit/) for network communication.
+- [Store](https://github.com/dropbox/Store), helps to manage the loading of data from different sources.
 - [AndroidSwissKnife](https://github.com/xmartlabs/AndroidSwissKnife) a set of extensions, helpers, and useful classes.
 - [Timber](https://github.com/JakeWharton/timber) one of the most popular loggers on Android.
 - [Stetho](http://facebook.github.io/stetho/), a sophisticated debug bridge for Android applications.
@@ -103,7 +104,7 @@ The main libraries that we are using are:
 To use this template, you can use the [gong_setup.sh](/gong_setup.sh) script that automatizes the setup process.
 You can run it remotely executing the following command:
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/master/gong_setup.sh)
+bash <(curl -s https://raw.githubusercontent.com/xmartlabs/gong/main-v2/gong_setup.sh) main-v2
 ```
 
 It will clone and setup all variables that you need.
