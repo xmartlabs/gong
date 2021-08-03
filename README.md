@@ -2,8 +2,8 @@
   <img src="/images/banner.png">
 </p>
 
-![Run lints and compile](https://github.com/xmartlabs/gong/workflows/Run%20lints%20and%20compile/badge.svg)
-[![codebeat badge](https://codebeat.co/badges/a92c68f9-c5e1-4e9f-8f67-ace7e51371d1)](https://codebeat.co/projects/github-com-xmartlabs-gong-master)
+[![Run lints and compile](https://github.com/xmartlabs/gong/actions/workflows/check_compile.yml/badge.svg)](https://github.com/xmartlabs/gong/actions/workflows/check_compile.yml)
+[![codebeat badge](https://codebeat.co/badges/0df37a3d-d95b-4605-bccb-98ade4232398)](https://codebeat.co/projects/github-com-xmartlabs-gong-main)
 
 **Gong** is [Xmartlabs](https://xmartlabs.com/)' official Android template project, written in Kotlin, and focused on providing a solid app architecture.
 One of the main objectives of this project is to supply a good starting point for all new android apps, which lets you move forward fast using the latest Android Components and libraries.
