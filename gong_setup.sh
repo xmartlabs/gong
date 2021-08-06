@@ -60,6 +60,13 @@ function finishGitSetup() {
   rm -rf .git
   git init >/dev/null
   git add -A
+
+  # Add excluded files
+  git add .idea/codeStyles/Project.xml -f
+  git add .idea/codeStyles/codeStyleConfig.xml -f
+  git add .idea/dictionaries/project_dictionary.xml -f
+  git add .idea/navEditor.xml -f
+
   git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
   git branch -M main
 
