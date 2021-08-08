@@ -1,5 +1,6 @@
 [versions]
 
+androidGradle = "7.0.0"
 androidSwissKnife = "44f27ec213"
 androidXRoom = "2.3.0"
 androidXTestEspresso = "3.3.0"
@@ -10,16 +11,21 @@ composeConstraintLayout = "1.0.0-alpha05"
 composeMaterial = "1.0.0-beta05"
 composeNavigation = "1.0.0-alpha10"
 composeViewModel = "1.0.0-alpha04"
+dependencyUpdates = '0.38.0'
+detekt = "1.16.0"
 firebaseCrashlytics = "17.4.0"
+firebaseCrashlyticsPlugin = '2.5.2'
+googleServices = "4.3.5"
 junit = "4.13.2"
 koin = "3.0.1"
 kotlin = "1.4.32"
 kotlinCoroutines = "1.4.3"
 leakcanary = "2.7"
 ok2CurlInterceptor = "0.7.0"
-okhttp3 = "4.9.1"
 okIo = "2.10.0"
+okhttp3 = "4.9.1"
 once = "1.3.0"
+snapshotPublisher = "2.2.0"
 stetho = "1b2c025a14"
 timber = "4.7.1"
 retrofit2 = "2.9.0"
@@ -41,17 +47,19 @@ once = { module = "com.jonathanfinerty.once:once", version.ref = "once" }
 stetho = { module = "com.github.mathroule.stetho:stetho", version.ref = "stetho" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
-compose-compiler = { module ="androidx.compose.compiler:compiler", version.ref = "compose" }
-compose-constraintLayout = { module ="androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintLayout" }
-compose-foundation = { module ="androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material = { module ="androidx.compose.material:material", version.ref = "composeMaterial" }
-compose-navigation = { module ="androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
-compose-runtime = { module ="androidx.compose.runtime:runtime", version.ref = "compose" }
-compose-tooling = { module ="androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui = { module ="androidx.compose.ui:ui", version.ref = "compose" }
-compose-viewmodel = { module ="androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewModel" }
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose" }
+compose-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintLayout" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "composeMaterial" }
+compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
+compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewModel" }
 
-firebase-crashlytics = { module ="com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
@@ -71,12 +79,20 @@ okhttp3-stetho = { module = "com.github.mathroule.stetho:stetho-okhttp3", versio
 retrofit2-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
 retrofit2-gsonAdapter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit2" }
 
+gp-androidGradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
+gp-dependencyUpdates = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "dependencyUpdates" }
+gp-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+gp-firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+gp-googleServices = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+gp-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gp-snapshotPublisher = { module = "com.github.xmartlabs:android-snapshot-publisher", version.ref = "snapshotPublisher" }
+
 [bundles]
 
 androidSwissKnife = ["swissKnife-core", "swissKnife-dataStore"]
 androidXTest = ["androidXTest-espresso", "androidXTest-junit"]
 compose = ["compose-compiler", "compose-constraintLayout", "compose-foundation", "compose-material",
-  "compose-navigation", "compose-runtime", "compose-tooling", "compose-ui", "compose-viewmodel"]
+    "compose-navigation", "compose-runtime", "compose-tooling", "compose-ui", "compose-viewmodel"]
 kotlin = ["kotlin-core", "kotlin-coroutines"]
 okHttp = ["okhttp3-core", "okhttp3-urlConnection", "okIo", "retrofit2-core", "retrofit2-gsonAdapter"]
 okHttpDebug = ["okhttp3-logginInterceptor", "okhttp3-ok2CurlInterceptor", "okhttp3-stetho"]

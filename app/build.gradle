@@ -1,11 +1,3 @@
-buildscript {
-    addRepos(repositories)
-    dependencies {
-        classpath buildscriptDeps.firebaseCrashlyticsPlugin
-        classpath buildscriptDeps.snapshotPublisher
-    }
-}
-
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -123,7 +115,7 @@ android {
         ]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion versions.compose
+        kotlinCompilerExtensionVersion libs.versions.compose.get()
     }
 }
 
@@ -135,6 +127,7 @@ dependencies {
     implementation libs.androidXRoom.coreKtx
     implementation libs.firebase.crashlytics
     implementation libs.koin.compose
+    implementation libs.timber
 
     implementation libs.bundles.androidSwissKnife
     implementation libs.bundles.compose
