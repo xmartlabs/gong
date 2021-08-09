@@ -1,7 +1,6 @@
 package com.xmartlabs.gong.device.di
 
-import android.content.Context
-import androidx.datastore.createDataStore
+import androidx.datastore.dataStore
 import androidx.room.Room
 import com.xmartlabs.gong.Config
 import com.xmartlabs.gong.data.model.service.settings.AppSettings
@@ -23,10 +22,9 @@ import org.koin.dsl.module
 object RepositoryDiModuleProvider {
     val stores = module {
         single {
-            get<Context>().createDataStore(
-                fileName = Config.APP_SETTINGS_SHARED_PREFERENCES_NAME,
-                serializer = JsonDataStoreEntitySerializer(AppSettings.serializer(), ::AppSettings),
-            )
+            dataStore(fileName = Config.APP_SETTINGS_SHARED_PREFERENCES_NAME,
+                serializer = JsonDataStoreEntitySerializer(AppSettings.serializer(), ::AppSettings)
+            ).getValue(get(), this::javaClass)
         }
         single {
             Room.databaseBuilder(get(), AppDatabase::class.java, Config.DB_NAME)
