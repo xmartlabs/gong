@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     id "kotlin-parcelize"
     id "kotlin-kapt"
+    id "org.jetbrains.kotlin.plugin.serialization"
 }
 
 apply from: rootProject.file('scripts/versioning.gradle')
@@ -16,8 +17,12 @@ if (getEnvVariable('KEYSTORE_FILE') != null) {
 // TODO: Enable when the services json is added
 // apply plugin: 'com.google.gms.google-services'
 
-// TODO: Enable Crashlytics
-// apply plugin: 'com.google.firebase.crashlytics'
+// TODO: Setup Crashlytics
+def CRASHLYTICS_ENABLED = false
+if (CRASHLYTICS_ENABLED) {
+    apply plugin: 'com.google.firebase.crashlytics'
+}
+
 
 android {
     compileSdkVersion androidVersions.compileSdk
@@ -33,6 +38,7 @@ android {
         multiDexEnabled true
         // Used to define some constants like the share preferences's file name.
         buildConfigField 'String', 'APP_NAME', '"Gong"'
+        buildConfigField 'boolean', 'CRASHLYTICS_ENABLED', "$CRASHLYTICS_ENABLED"
     }
 
     buildFeatures {
@@ -68,14 +74,12 @@ android {
             buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_DEV_SERVER_URL')
 
             dimension "env"
-            ext.buildTypeCode = 0
             applicationIdSuffix '.dev'
         }
         prod {
             buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_PROD_SERVER_URL')
 
             dimension "env"
-            ext.buildTypeCode = 4
         }
     }
 
@@ -115,7 +119,7 @@ android {
         ]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.get()
+        kotlinCompilerExtensionVersion libs.versions.compose.core.get()
     }
 }
 
@@ -123,20 +127,24 @@ dependencies {
     androidTestImplementation libs.bundles.androidXTest
 
     debugImplementation libs.leakcanary
+    debugImplementation libs.bundles.networking.debug
+    debugImplementation libs.bundles.flipper
 
-    implementation libs.androidXRoom.coreKtx
+    implementation libs.androidX.room.core
+    implementation libs.androidX.dataStore
+    implementation libs.coil
+    implementation libs.once
     implementation libs.firebase.crashlytics
     implementation libs.koin.compose
     implementation libs.timber
+    implementation libs.store
 
     implementation libs.bundles.androidSwissKnife
     implementation libs.bundles.compose
-    implementation libs.bundles.utils
     implementation libs.bundles.kotlin
-    implementation libs.bundles.okHttp
-    implementation libs.bundles.okHttpDebug
+    implementation libs.bundles.networking.core
 
-    kapt libs.androidXRoom.compiler
+    kapt libs.androidX.room.compiler
 
     testImplementation libs.junit
 }

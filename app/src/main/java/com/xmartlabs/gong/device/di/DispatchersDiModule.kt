@@ -9,12 +9,12 @@ import org.koin.dsl.module
  */
 val DEFAULT_DISPATCHER = StringQualifier("DEFAULT_DISPATCHER")
 val IO_DISPATCHER = StringQualifier("IO_DISPATCHER")
-val MAIN_DISPATCHER = StringQualifier("DEFAULT_DISPATCHER")
+val MAIN_DISPATCHER = StringQualifier("MAIN_DISPATCHER")
 
 object DispatchersDiModule {
     val dispatchers = module {
-    single(DEFAULT_DISPATCHER) { Dispatchers.Default }
-    single(IO_DISPATCHER) { Dispatchers.IO }
-    single(MAIN_DISPATCHER) { Dispatchers.Main }
-  }
+        single(DEFAULT_DISPATCHER) { Dispatchers.Default }
+        single(IO_DISPATCHER) { Dispatchers.IO }
+        single(MAIN_DISPATCHER) { Dispatchers.Main }
+    }
 }

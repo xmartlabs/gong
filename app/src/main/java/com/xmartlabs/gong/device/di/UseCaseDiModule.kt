@@ -11,11 +11,11 @@ import org.koin.dsl.module
  * Created by mirland on 25/04/20.
  */
 object UseCaseDiModule {
-  val useCases = module {
-    factory { GetLocationUseCase(get(), get(DEFAULT_DISPATCHER)) }
-    factory { GetSessionTypeUseCase(get(), get(DEFAULT_DISPATCHER)) }
-    factory { LoadUserUseCase(get(), get(DEFAULT_DISPATCHER)) }
-    factory { SignInUseCase(get(), get(DEFAULT_DISPATCHER)) }
-    factory { TimeTrackerUseCase(get(DEFAULT_DISPATCHER)) }
-  }
+    val useCases = module {
+        factory { GetLocationUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { GetSessionTypeUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { LoadUserUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { SignInUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { TimeTrackerUseCase(get(DEFAULT_DISPATCHER)) }
+    }
 }

@@ -1,8 +1,11 @@
 #!/bin/bash
 
+TEST_MODE_ARG="TEST_MODE"
+
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
+GIT_BRANCH="main-v2"
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 
@@ -23,7 +26,7 @@ function changeProjectName() {
   perl -i -pe "s/\"$BASE_PROJECT_NAME/\"$REAL_PROJECT_NAME/gi" app/build.gradle
 
   # Replace package names
-  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
+  find . -type f \( -name "*.xml" -o -name "*.gradle" -o -name "*.kt" -o -name "*.java" -o -name "*.pro" \) -exec perl -i -pe "s/$BASE_PROJECT_PAKAGE_NAME/$PACKAGE_NAME/g" {} \;
 
   # Change file structure
   new_path=$(sed "s/\./\//g" <<<"$PACKAGE_NAME")
@@ -34,11 +37,9 @@ function changeProjectName() {
   if [ -d "$TEMPORAL_FOLDER" ]; then rm -Rf $TEMPORAL_FOLDER; fi
   mkdir "$TEMPORAL_FOLDER"
 
-  movePackage "dev"
-  movePackage "prod"
-  movePackage "main"
-  movePackage "androidTest"
-  movePackage "test"
+  for folder in */ ; do
+    movePackage "$folder"
+  done
 
   cd ../../../
   mv $BASE_PROJECT_NAME "$PROJECT_NAME"
@@ -46,8 +47,12 @@ function changeProjectName() {
 }
 
 function cloneAndSetupRepository() {
-  git clone --depth=1 $GIT_BASE_PROJECT_URL --quiet
+  git clone $GIT_BASE_PROJECT_URL --quiet
   cd "$BASE_PROJECT_NAME" || exit 1
+  if [ -n "$GIT_BRANCH" ]; then
+    git checkout "$GIT_BRANCH" --quiet
+    git branch --quiet | grep -v "$GIT_BRANCH" | xargs git branch -D --quiet
+  fi
 }
 
 function finishGitSetup() {
@@ -55,7 +60,15 @@ function finishGitSetup() {
   rm -rf .git
   git init >/dev/null
   git add -A
+
+  # Add excluded files
+  git add .idea/codeStyles/Project.xml -f
+  git add .idea/codeStyles/codeStyleConfig.xml -f
+  git add .idea/dictionaries/project_dictionary.xml -f
+  git add .idea/navEditor.xml -f
+
   git commit -m "Initial commit - Based On Gong $currentCommitHash" --quiet
+  git branch -M main
 
   if [ -n "$NEW_REMOTE_URL" ]; then
     git remote add origin "$NEW_REMOTE_URL"
@@ -63,9 +76,7 @@ function finishGitSetup() {
 }
 
 function removeUnusedFiles() {
-  rm "$SCRIPT_NAME"
-  rm ".github/CODEOWNERS"
-  rm "LICENSE"
+  rm "$SCRIPT_NAME" "gong_setup_validation.sh" ".github/CODEOWNERS" "LICENSE" ".github/workflows/check_setup_script.yml"
 }
 
 if [ -d "$BASE_PROJECT_NAME" ]; then echo "Gong temporal director error, please delete '$BASE_PROJECT_NAME' folder" && exit 1; fi
@@ -89,7 +100,16 @@ echo "what is the git remote url? (optional parameter)"
 read -r NEW_REMOTE_URL
 
 echo "Start clone repository process..."
-cloneAndSetupRepository
+if [ "$1" = "$TEST_MODE_ARG" ]; then
+  echo -e "TEST MODE\n\n"
+  REPO_URL="$2"
+
+  cp -rf "$REPO_URL" .
+  cd "$BASE_PROJECT_NAME" || exit
+else
+  [[ -z "$1" ]] || GIT_BRANCH="$1"
+  cloneAndSetupRepository
+fi
 
 echo "Rename project files..."
 changeProjectName

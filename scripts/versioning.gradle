@@ -37,7 +37,7 @@ android.applicationVariants.all { variant ->
 
                 def versionCode = baseMayorNumber * versionMajor +
                         baseMinorNumber * versionMinor +
-                        basePatchNumber * versionPatch + flavor.ext.buildTypeCode
+                        basePatchNumber * versionPatch
 
                 def apkName = project + separator + versionName + "($versionCode)" + separator + flavorName + separator + buildType + ".apk"
                 output.outputFileName = apkName

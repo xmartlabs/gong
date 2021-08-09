@@ -34,21 +34,21 @@ fun RoundedCornersTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     onValueChange: (String) -> Unit = {},
 ) {
-  TextField(
-      value = value,
-      label = label,
-      onValueChange = onValueChange,
-      textStyle = MaterialTheme.typography.body1,
-      shape = AppTheme.shapes.roundedBox,
-      colors = textFieldColors(
-          focusedIndicatorColor = Color.Transparent,
-          unfocusedIndicatorColor = Color.Transparent,
-      ),
-      singleLine = singleLine,
-      keyboardOptions = keyboardOptions,
-      keyboardActions = keyboardActions,
-      modifier = modifier.fillMaxWidth(),
-  )
+    TextField(
+        value = value,
+        label = label,
+        onValueChange = onValueChange,
+        textStyle = MaterialTheme.typography.body1,
+        shape = AppTheme.shapes.roundedBox,
+        colors = textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
+        singleLine = singleLine,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        modifier = modifier.fillMaxWidth(),
+    )
 }
 
 @Preview
@@ -62,30 +62,31 @@ fun RoundedCornersPasswordTextField(
     keyboardActions: KeyboardActions = KeyboardActions(),
     onValueChange: (String) -> Unit = {},
 ) {
-  var passwordShown by remember { mutableStateOf(false) }
-  TextField(
-      value = value,
-      label = label,
-      onValueChange = onValueChange,
-      textStyle = MaterialTheme.typography.body1,
-      shape = AppTheme.shapes.roundedBox,
-      colors = textFieldColors(
-          focusedIndicatorColor = Color.Transparent,
-          unfocusedIndicatorColor = Color.Transparent,
-      ),
-      visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
-      singleLine = singleLine,
-      keyboardActions = keyboardActions,
-      keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Password),
-      trailingIcon = {
-        IconToggleButton(checked = passwordShown, onCheckedChange = { passwordShown = !passwordShown }) {
-          Icon(
-              painter =
-              painterResource(id = if (!passwordShown) R.drawable.ic_show_password else R.drawable.ic_hide_password),
-              contentDescription = null,
-          )
-        }
-      },
-      modifier = modifier.fillMaxWidth(),
-  )
+    var passwordShown by remember { mutableStateOf(false) }
+    TextField(
+        value = value,
+        label = label,
+        onValueChange = onValueChange,
+        textStyle = MaterialTheme.typography.body1,
+        shape = AppTheme.shapes.roundedBox,
+        colors = textFieldColors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
+        visualTransformation = if (!passwordShown) PasswordVisualTransformation() else VisualTransformation.None,
+        singleLine = singleLine,
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Password),
+        trailingIcon = {
+            IconToggleButton(checked = passwordShown, onCheckedChange = { passwordShown = !passwordShown }) {
+                Icon(
+                    painter = painterResource(
+                        id = if (!passwordShown) R.drawable.ic_show_password else R.drawable.ic_hide_password
+                    ),
+                    contentDescription = null,
+                )
+            }
+        },
+        modifier = modifier.fillMaxWidth(),
+    )
 }

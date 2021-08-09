@@ -13,7 +13,8 @@ buildscript {
         classpath libs.gp.detekt
         classpath libs.gp.firebaseCrashlytics
         classpath libs.gp.googleServices
-        classpath libs.gp.kotlin
+        classpath libs.gp.kotlin.gradle
+        classpath libs.gp.kotlin.serialization
         classpath libs.gp.snapshotPublisher
     }
 }

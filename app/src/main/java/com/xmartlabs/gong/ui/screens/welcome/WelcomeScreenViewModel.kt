@@ -5,6 +5,7 @@ import com.xmartlabs.gong.data.model.Location
 import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.device.common.getDataOrNull
+import com.xmartlabs.gong.device.extensions.mapToProcessResult
 import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
@@ -18,28 +19,29 @@ class WelcomeScreenViewModel(
     getLocationUseCase: GetLocationUseCase,
     loadUserUseCase: LoadUserUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
-  init {
-    viewModelScope.launch {
-      getLocationUseCase(Unit)
-          .collect { updateLocation(it) }
+    init {
+        viewModelScope.launch {
+            getLocationUseCase(Unit)
+                .mapToProcessResult()
+                .collect { updateLocation(it) }
+        }
+        viewModelScope.launch {
+            loadUserUseCase.invokeAsFlow(Unit)
+                .collect { updateUserInfo(it) }
+        }
     }
-    viewModelScope.launch {
-      loadUserUseCase.invokeAsFlow(Unit)
-          .collect { updateUserInfo(it) }
-    }
-  }
 
-  private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
-    userProcessState.getDataOrNull()?.let { user ->
-      setState { copy(userName = user.name) }
+    private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
+        userProcessState.getDataOrNull()?.let { user ->
+            setState { copy(userName = user.name) }
+        }
     }
-  }
 
-  private suspend fun updateLocation(locationProcessState: ProcessState<Location>) {
-    locationProcessState.getDataOrNull()?.let { location ->
-      setState { copy(location = location) }
+    private suspend fun updateLocation(locationProcessState: ProcessState<Location>) {
+        locationProcessState.getDataOrNull()?.let { location ->
+            setState { copy(location = location) }
+        }
     }
-  }
 
-  override suspend fun processAction(action: WelcomeUiAction) {}
+    override suspend fun processAction(action: WelcomeUiAction) {}
 }

@@ -10,9 +10,9 @@ import org.koin.dsl.module
  * Created by mirland on 25/04/20.
  */
 object ViewModelDiModule {
-  val viewModels = module {
-    viewModel { SignInScreenViewModel(get()) }
-    viewModel { SplashScreenViewModel(get()) }
-    viewModel { WelcomeScreenViewModel(get(), get()) }
-  }
+    val viewModels = module {
+        viewModel { SignInScreenViewModel(get()) }
+        viewModel { SplashScreenViewModel(get()) }
+        viewModel { WelcomeScreenViewModel(get(), get()) }
+    }
 }

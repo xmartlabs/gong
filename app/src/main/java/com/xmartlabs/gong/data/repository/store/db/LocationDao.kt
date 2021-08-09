@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface LocationDao {
-  @Query("SELECT * FROM location ORDER BY timestamp DESC LIMIT 1")
-  fun getLastLocation(): Flow<Location?>
+    @Query("SELECT * FROM location ORDER BY timestamp DESC LIMIT 1")
+    fun getLastLocation(): Flow<Location?>
 
-  @Insert
-  fun insert(location: Location)
+    @Insert
+    fun insert(location: Location)
 }
