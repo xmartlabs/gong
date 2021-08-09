@@ -2,7 +2,7 @@
 
 androidGradle = "7.0.0"
 androidSwissKnife = "44f27ec213"
-androidX-datastore = "1.0.0-alpha06"
+androidX-datastore = "1.0.0"
 androidX-room = "2.3.0"
 androidX-testEspresso = "3.4.0"
 androidX-testJunit = "1.1.3"
