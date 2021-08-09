@@ -1,4 +1,3 @@
-apply from: rootProject.file('versions.gradle')
 apply plugin: "com.github.ben-manes.versions"
 
 def isNonStable = { String version ->

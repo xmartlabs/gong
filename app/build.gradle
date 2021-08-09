@@ -1,11 +1,3 @@
-buildscript {
-    addRepos(repositories)
-    dependencies {
-        classpath buildscriptDeps.firebaseCrashlyticsPlugin
-        classpath buildscriptDeps.snapshotPublisher
-    }
-}
-
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -127,53 +119,32 @@ android {
         ]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion versions.compose
+        kotlinCompilerExtensionVersion libs.versions.compose.core.get()
     }
 }
 
 dependencies {
-    androidTestImplementation deps.androidX.test.junit
-    androidTestImplementation deps.androidX.test.espresso
+    androidTestImplementation libs.bundles.androidXTest
 
-    debugImplementation deps.leakcanary
-    debugImplementation deps.logger.flipper.core
-    debugImplementation deps.logger.flipper.network
-    debugImplementation deps.logger.soloader
-    debugImplementation deps.logger.stetho
-    debugImplementation deps.okhttp3.loggingIntercepror
-    debugImplementation deps.okhttp3.ok2CurlInterceptor
-    debugImplementation deps.okhttp3.stetho
+    debugImplementation libs.leakcanary
+    debugImplementation libs.bundles.networking.debug
+    debugImplementation libs.bundles.flipper
 
-    implementation deps.androidSwissKnife.core
-    implementation deps.androidX.room.coreKtx
-    implementation deps.androidX.dataStore
-    implementation deps.coil
-    implementation deps.compose.compiler
-    implementation deps.compose.constraintLayout
-    implementation deps.compose.foundation
-    implementation deps.compose.navigation
-    implementation deps.compose.material
-    implementation deps.compose.runtime
-    implementation deps.compose.tooling
-    implementation deps.compose.ui
-    implementation deps.compose.viewModel
-    implementation deps.firebase.crashlytics
-    implementation deps.koin.compose
-    implementation deps.kotlin.core
-    implementation deps.kotlin.coroutines.core
-    implementation deps.kotlin.serialization
-    implementation deps.okIo
-    implementation deps.okhttp3.core
-    implementation deps.okhttp3.loggingIntercepror
-    implementation deps.okhttp3.ok2CurlInterceptor
-    implementation deps.okhttp3.urlconnection
-    implementation deps.once
-    implementation deps.retrofit2.core
-    implementation deps.retrofit2.kotlinSerializer
-    implementation deps.store
-    implementation deps.timber
+    implementation libs.androidX.room.core
+    implementation libs.androidX.dataStore
+    implementation libs.coil
+    implementation libs.once
+    implementation libs.firebase.crashlytics
+    implementation libs.koin.compose
+    implementation libs.timber
+    implementation libs.store
 
-    kapt deps.androidX.room.compiler
+    implementation libs.bundles.androidSwissKnife
+    implementation libs.bundles.compose
+    implementation libs.bundles.kotlin
+    implementation libs.bundles.networking.core
 
-    testImplementation deps.junit
+    kapt libs.androidX.room.compiler
+
+    testImplementation libs.junit
 }

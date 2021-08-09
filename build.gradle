@@ -1,33 +1,45 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath libs.gp.androidGradle
+        classpath libs.gp.dependencyUpdates
+        classpath libs.gp.detekt
+        classpath libs.gp.firebaseCrashlytics
+        classpath libs.gp.googleServices
+        classpath libs.gp.kotlin.gradle
+        classpath libs.gp.kotlin.serialization
+        classpath libs.gp.snapshotPublisher
+    }
+}
+
 ext {
     // App version
     versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
     name = "Gong"
     configPropertiesFile = file('config.properties') // All configurations are saved here
     secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
+
+    def androidVersions = [:]
+    androidVersions.minSdk = 21
+    androidVersions.compileSdk = 30
+    androidVersions.buildTools = '30.0.2'
+    androidVersions.targetSdk = 30
+    ext.androidVersions = androidVersions
 }
 
-buildscript {
-    apply from: 'versions.gradle'
-    addRepos(repositories)
-    dependencies {
-        classpath buildscriptDeps.androidGradle
-        classpath buildscriptDeps.dependencyUpdates
-        classpath buildscriptDeps.detekt
-        classpath buildscriptDeps.googleServices
-        classpath buildscriptDeps.kotlin
-        classpath buildscriptDeps.kotlinSerialization
-    }
-}
-
-apply from: rootProject.file('versions.gradle')
 apply from: rootProject.file('scripts/dependency_updates.gradle')
 apply from: rootProject.file('scripts/stop_ship_check_xmls.gradle.kts')
 apply plugin: "io.gitlab.arturbosch.detekt"
 
 dependencies {
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$versions.detekt"
+    detektPlugins libs.detekt.formatting
 }
 
 detekt {
@@ -35,12 +47,16 @@ detekt {
     config = files("$rootDir/.detekt/detekt-config.yml")
     input = files("app/src")
     parallel = true
-    toolVersion = "$versions.detekt"
+    toolVersion = libs.versions.detekt.get()
 }
 
 allprojects {
-    apply from: rootProject.file('versions.gradle')
-    addRepos(repositories)
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+    }
 }
 
 task clean(type: Delete) {
