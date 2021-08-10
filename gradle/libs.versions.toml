@@ -6,11 +6,12 @@ androidX-datastore = "1.0.0"
 androidX-room = "2.3.0"
 androidX-testEspresso = "3.4.0"
 androidX-testJunit = "1.1.3"
+accompanist = "0.16.1"
 coil = "1.3.2"
 compose-constraintLayout = "1.0.0-beta02"
 compose-core = "1.0.1"
 compose-material = "1.0.1"
-compose-navigation = "2.4.0-alpha04"
+compose-navigation = "2.4.0-alpha06"
 compose-viewModel = "1.0.0-alpha07"
 dependencyUpdates = "0.38.0"
 detekt = "1.17.1"
@@ -39,6 +40,9 @@ timber = "4.7.1"
 [libraries]
 
 swissKnife-core = { module = "com.github.xmartlabs.AndroidSwissKnife:swissknife-core", version.ref = "androidSwissKnife" }
+
+accompanist-systemuicontroller = { module =  "com.google.accompanist:accompanist-systemuicontroller" , version.ref = "accompanist" }
+accompanist-insets = { module =  "com.google.accompanist:accompanist-insets" , version.ref = "accompanist" }
 
 androidX-dataStore = { module = "androidx.datastore:datastore-preferences", version.ref = "androidX-datastore" }
 androidX-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidX-room" }
@@ -104,6 +108,7 @@ gp-snapshotPublisher = { module = "com.github.xmartlabs:android-snapshot-publish
 
 [bundles]
 
+accompanist = ["accompanist-systemuicontroller", "accompanist-insets"]
 androidSwissKnife = ["swissKnife-core"]
 androidXTest = ["androidX-test-espresso", "androidX-test-junit"]
 compose = ["compose-compiler", "compose-constraintLayout", "compose-foundation", "compose-material",

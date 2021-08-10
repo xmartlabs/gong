@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.insets.statusBarsPadding
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.toShortString
 import com.xmartlabs.gong.ui.theme.AppTheme
@@ -84,8 +85,10 @@ fun WelcomePreviewDark() {
 }
 
 @Composable
-fun AppTopBar() {
-    TopAppBar(
-        title = { Text(text = stringResource(id = R.string.app_name)) },
-    )
+fun AppTopBar(modifier: Modifier = Modifier) {
+    Column(modifier = modifier.statusBarsPadding()) {
+        TopAppBar(
+            title = { Text(text = stringResource(id = R.string.app_name)) },
+        )
+    }
 }

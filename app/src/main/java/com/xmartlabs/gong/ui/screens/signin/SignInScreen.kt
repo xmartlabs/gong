@@ -32,8 +32,6 @@ import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.composables.RoundedCornersPasswordTextField
 import com.xmartlabs.gong.ui.composables.RoundedCornersTextField
 import com.xmartlabs.gong.ui.theme.AppTheme
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.getViewModel
 import java.util.Locale
 
@@ -41,23 +39,9 @@ import java.util.Locale
 fun SignInScreen(navController: NavHostController) {
     val viewModel: SignInScreenViewModel = getViewModel()
     val state by viewModel.state.collectAsState()
-    val context = LocalContext.current
-    // We only want the event stream to be attached once
-    // even if there are multiple re-compositions
-    LaunchedEffect(null) {
-        viewModel.oneShotEvents
-            .onEach { event ->
-                when (event) {
-                    SignInViewModelEvent.NavigateToDashboard ->
-                        navController.navigate(Screens.WELCOME) {
-                            popUpTo(Screens.SIGN_IN) { inclusive = true }
-                        }
-                    is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
-                }
-            }
-            .collect()
-    }
+    val event: SignInViewModelEvent? by viewModel.oneShotEvents.collectAsState(initial = null)
 
+    SignInEvents(navController, event)
     SignInContent(
         user = state.userName,
         password = state.password,
@@ -65,6 +49,25 @@ fun SignInScreen(navController: NavHostController) {
         onPasswordEdited = { viewModel.submitAction(SignInUiAction.ChangePassword(it)) },
         onSignInButtonClicked = { viewModel.submitAction(SignInUiAction.SignIn) }
     )
+}
+
+@Composable
+private fun SignInEvents(
+    navController: NavHostController,
+    event: SignInViewModelEvent?,
+    context: Context = LocalContext.current,
+) {
+    // We only want the event stream to be attached once
+    // even if there are multiple re-compositions
+    LaunchedEffect(event) {
+        when (event) {
+            SignInViewModelEvent.NavigateToDashboard ->
+                navController.navigate(Screens.WELCOME) {
+                    popUpTo(Screens.SIGN_IN) { inclusive = true }
+                }
+            is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
+        }
+    }
 }
 
 private fun showSignInError(throwable: Throwable, context: Context) {
