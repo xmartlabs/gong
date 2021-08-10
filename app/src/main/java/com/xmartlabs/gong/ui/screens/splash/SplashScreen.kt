@@ -16,8 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.xmartlabs.gong.R
-import com.xmartlabs.gong.device.common.getDataOrNull
-import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.Screens
 import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
@@ -25,21 +23,27 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun SplashScreen(navController: NavHostController) {
     val viewModel: SplashScreenViewModel = getViewModel()
-    val sessionTypeResult by viewModel.currentSessionTypeStateFlow.collectAsState()
+    val event: SplashViewModelEvent? by viewModel.oneShotEvents.collectAsState(initial = null)
+    SplashEvents(navController, event)
+    SplashContent()
+}
 
-    LaunchedEffect(navController, sessionTypeResult.getDataOrNull()) {
-        when (sessionTypeResult.getDataOrNull()) {
-            SessionType.LOGGED ->
-                navController.navigate(Screens.WELCOME) {
-                    popUpTo(Screens.SPLASH) { inclusive = true }
-                }
-            SessionType.NOT_LOGGED ->
-                navController.navigate(Screens.SIGN_IN) {
-                    popUpTo(Screens.SPLASH) { inclusive = true }
-                }
+@Composable
+private fun SplashEvents(
+    navController: NavHostController,
+    event: SplashViewModelEvent?,
+) {
+    LaunchedEffect(navController, event) {
+        when (event) {
+            SplashViewModelEvent.NavigateToDashboard -> navController.navigate(Screens.WELCOME) {
+                popUpTo(Screens.SPLASH) { inclusive = true }
+            }
+            SplashViewModelEvent.NavigateToSignIn -> navController.navigate(Screens.SIGN_IN) {
+                popUpTo(Screens.SPLASH) { inclusive = true }
+            }
+            null -> Unit
         }
     }
-    SplashContent()
 }
 
 @Composable
