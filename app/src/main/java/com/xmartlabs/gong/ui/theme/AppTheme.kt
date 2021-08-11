@@ -5,7 +5,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 object AppTheme {
     val dims: AppDims
@@ -69,6 +72,19 @@ fun AppTheme(
     shapes: AppShapes = appShapes(),
     content: @Composable () -> Unit,
 ) {
+    val systemUiController = rememberSystemUiController()
+    val primaryColorDark = AppTheme.colors.primaryVariant
+    val useDarkIcons = AppTheme.colors.isLight
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = useDarkIcons
+        )
+        systemUiController.setStatusBarColor(
+            color = primaryColorDark,
+        )
+    }
+
     CompositionLocalProvider(
         LocalAppColors provides colors,
         LocalAppDims provides dims,

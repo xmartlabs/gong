@@ -139,6 +139,7 @@ dependencies {
     implementation libs.timber
     implementation libs.store
 
+    implementation libs.bundles.accompanist
     implementation libs.bundles.androidSwissKnife
     implementation libs.bundles.compose
     implementation libs.bundles.kotlin

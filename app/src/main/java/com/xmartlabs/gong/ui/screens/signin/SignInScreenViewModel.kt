@@ -10,11 +10,7 @@ import com.xmartlabs.gong.ui.common.BaseViewModel
  */
 class SignInScreenViewModel(
     private val signInUseCase: SignInUseCase,
-) : BaseViewModel<
-        SignInUiAction,
-        SignInViewModelEvent,
-        SignInViewState
-        >(SignInViewState()) {
+) : BaseViewModel<SignInUiAction, SignInViewModelEvent, SignInViewState>(SignInViewState()) {
 
     override suspend fun processAction(action: SignInUiAction) = when (action) {
         SignInUiAction.SignIn -> signIn()
