@@ -1,5 +1,9 @@
 name: Run lints and compile
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
   lint_dev_checks:
     runs-on: ubuntu-latest
