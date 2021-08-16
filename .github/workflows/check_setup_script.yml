@@ -1,5 +1,9 @@
 name: Setup script validation
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
   setup_validation:
     runs-on: ubuntu-latest
