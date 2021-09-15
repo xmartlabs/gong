@@ -6,13 +6,5 @@
 
     <item android:drawable="@color/pink" />
 
-    <item>
-
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/xl_logo"
-            />
-
-    </item>
 
 </layer-list>

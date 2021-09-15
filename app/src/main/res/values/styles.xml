@@ -1,11 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Material.NoActionBar" />
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/splash</item>
+    </style>
 
-    <style name="AppTheme.Launcher" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_launch_screen</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+    <style name="AppTheme.Launcher" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@drawable/bg_launch_screen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/xl_logo</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
 </resources>

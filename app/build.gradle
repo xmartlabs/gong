@@ -130,6 +130,7 @@ dependencies {
     debugImplementation libs.bundles.networking.debug
     debugImplementation libs.bundles.flipper
 
+    implementation libs.androidX.core.splashscreen
     implementation libs.androidX.room.core
     implementation libs.androidX.dataStore
     implementation libs.coil

@@ -50,9 +50,7 @@ abstract class AppBase : Application() {
                 detectLeakedClosableObjects()
                 detectLeakedRegistrationObjects()
                 detectLeakedSqlLiteObjects()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    detectCleartextNetwork()
-                }
+                detectCleartextNetwork()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     detectContentUriWithoutPermission()
                 }
