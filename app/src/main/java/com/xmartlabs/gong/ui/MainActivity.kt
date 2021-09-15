@@ -22,8 +22,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.time.Duration
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        private val SPLASH_ANIMATION_TIME = Duration.milliseconds(300)
+    }
+
     private val viewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +37,7 @@ class MainActivity : ComponentActivity() {
         val splashWasDisplayed = savedInstanceState != null
         if (!splashWasDisplayed) {
             installSplashScreen()
-                .setOnExitAnimationListener { splashScreenViewProvider -> handleActivityState(splashScreenViewProvider) }
+                .setOnExitAnimationListener(this::handleActivityState)
         } else {
             setTheme(R.style.AppTheme)
             handleActivityState(null)
@@ -50,7 +55,7 @@ class MainActivity : ComponentActivity() {
                         // Get icon instance and start a fade out animation
                         splashScreenViewProvider.iconView
                             .animate()
-                            .setDuration(300)
+                            .setDuration(SPLASH_ANIMATION_TIME.inWholeMilliseconds)
                             .alpha(0f)
                             .withEndAction {
                                 splashScreenViewProvider.remove()
