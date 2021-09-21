@@ -1,7 +1,7 @@
 package com.xmartlabs.gong.device.di
 
 import com.xmartlabs.gong.ui.screens.signin.SignInScreenViewModel
-import com.xmartlabs.gong.ui.screens.splash.SplashScreenViewModel
+import com.xmartlabs.gong.ui.MainActivityViewModel
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -12,7 +12,7 @@ import org.koin.dsl.module
 object ViewModelDiModule {
     val viewModels = module {
         viewModel { SignInScreenViewModel(get()) }
-        viewModel { SplashScreenViewModel(get()) }
+        viewModel { MainActivityViewModel(get()) }
         viewModel { WelcomeScreenViewModel(get(), get()) }
     }
 }
