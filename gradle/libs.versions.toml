@@ -1,6 +1,6 @@
 [versions]
 
-androidGradle = "7.0.1"
+androidGradle = "7.0.2"
 androidSwissKnife = "44f27ec213"
 androidX-core-splashscreen = "1.0.0-alpha01"
 androidX-datastore = "1.0.0"
@@ -14,7 +14,7 @@ compose-core = "1.0.2"
 compose-navigation = "2.4.0-alpha09"
 compose-viewModel = "1.0.0-alpha07"
 dependencyUpdates = "0.39.0"
-detekt = "1.18.0"
+detekt = "1.18.1"
 firebaseCrashlytics = "18.2.1"
 firebaseCrashlyticsPlugin = "2.7.1"
 flipper = "0.104.0"
