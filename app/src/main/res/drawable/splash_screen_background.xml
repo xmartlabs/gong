@@ -4,7 +4,7 @@
     android:opacity="opaque"
     >
 
-    <item android:drawable="@color/pink" />
+    <item android:drawable="@color/ic_xl_launcher_background" />
 
 
 </layer-list>
