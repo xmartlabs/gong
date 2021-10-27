@@ -6,8 +6,8 @@
     </style>
 
     <style name="AppTheme.Launcher" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@drawable/bg_launch_screen</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/xl_logo</item>
+        <item name="windowSplashScreenBackground">@drawable/splash_screen_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen_icon</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
