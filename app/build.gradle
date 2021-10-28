@@ -4,7 +4,7 @@ plugins {
     id "kotlin-parcelize"
     id "kotlin-kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
-    id "com.starter.easylauncher" version "4.1.1"
+    alias(libs.plugins.easyLauncher)
 }
 
 apply from: rootProject.file('scripts/versioning.gradle')
@@ -66,7 +66,6 @@ android {
         debug {
             minifyEnabled getEnvVariable('MINIFY_CODE', false) as Boolean
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable true
         }
     }
 
