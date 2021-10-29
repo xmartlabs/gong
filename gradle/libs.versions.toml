@@ -15,6 +15,7 @@ compose-navigation = "2.4.0-beta01"
 compose-viewModel = "2.4.0"
 dependencyUpdates = "0.39.0"
 detekt = "1.18.1"
+easyLauncher = "4.1.1"
 firebaseCrashlytics = "18.2.3"
 firebaseCrashlyticsPlugin = "2.7.1"
 flipper = "0.110.0"
@@ -115,3 +116,6 @@ flipper = ["flipper-core", "flipper-leakCanary", "flipper-network", "soloader"]
 kotlin = ["kotlin-core", "kotlin-serialization", "kotlin-coroutines"]
 networking-core = ["okhttp3-core", "okhttp3-urlConnection", "okIo", "retrofit2-core", "retrofit2-jsonSerializer"]
 networking-debug = ["okhttp3-logginInterceptor", "okhttp3-ok2CurlInterceptor"]
+
+[plugins]
+easyLauncher = { id = "com.starter.easylauncher",  version.ref = "easyLauncher" }
