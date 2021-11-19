@@ -5,7 +5,7 @@ TEST_MODE_ARG="TEST_MODE"
 BASE_PROJECT_PAKAGE_NAME="com.xmartlabs.gong"
 BASE_PROJECT_NAME="gong"
 GIT_BASE_PROJECT_URL="https://github.com/xmartlabs/gong.git"
-GIT_BRANCH="main-v2"
+GIT_BRANCH="" # If it's empty, the project default branch is used
 TEMPORAL_FOLDER="/tmp/gong"
 SCRIPT_NAME="gong_setup.sh"
 

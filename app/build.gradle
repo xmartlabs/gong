@@ -4,6 +4,7 @@ plugins {
     id "kotlin-parcelize"
     id "kotlin-kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
+    alias(libs.plugins.easyLauncher)
 }
 
 apply from: rootProject.file('scripts/versioning.gradle')
@@ -90,22 +91,18 @@ android {
     lintOptions {
         lintConfig file("lint.xml")
         disable "ObsoleteLintCustomCheck"
-        // Timber linter doesn't work with AGP 7.0.0-alpha13 https://github.com/JakeWharton/timber/issues/408
-        disable "LogNotTimber", "StringFormatInTimber", "ThrowableNotAtBeginning", "BinaryOperationInTimber",
-                "TimberArgCount", "TimberArgTypes", "TimberTagLength", "TimberExceptionLogging"
         fatal 'StopShip'
         warningsAsErrors true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        useIR = true
         languageVersion = "1.5"
-        jvmTarget = '1.8'
+        jvmTarget = '11'
         freeCompilerArgs += [
                 "-XXLanguage:+InlineClasses",
                 "-Xallow-result-return-type",
