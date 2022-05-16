@@ -2,7 +2,7 @@
 
 androidGradle = "7.0.3"
 androidSwissKnife = "44f27ec213"
-androidX-core-splashscreen = "1.0.0-alpha02"
+androidX-core-splashscreen = "1.0.0-beta02"
 androidX-datastore = "1.0.0"
 androidX-room = "2.4.1"
 androidX-testEspresso = "3.4.0"
