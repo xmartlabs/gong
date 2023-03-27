@@ -3,6 +3,7 @@ package com.xmartlabs.gong.ui.screens.welcome
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -47,10 +48,10 @@ fun WelcomeContent(
 ) {
     Scaffold(
         topBar = { AppTopBar() },
-    ) {
+    ) { padding ->
         Column(
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(padding)
         ) {
             Text(
                 text = "Hi $userName",
