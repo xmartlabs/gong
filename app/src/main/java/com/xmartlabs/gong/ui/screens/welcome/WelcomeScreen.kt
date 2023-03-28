@@ -35,6 +35,7 @@ import coil.compose.rememberImagePainter
 import com.google.accompanist.insets.statusBarsPadding
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.Project
+import com.xmartlabs.gong.ui.theme.AppTheme
 import org.koin.androidx.compose.getViewModel
 
 /**
@@ -104,7 +105,7 @@ fun ViewContent(padding: PaddingValues, projects: List<Project>) {
                         ) {
                             Column(Modifier.fillMaxWidth()) {
                                 // TITLE
-                                Text(text = project.name, style = MaterialTheme.typography.h6)
+                                Text(text = project.name, style = AppTheme.typography.h6)
                             }
                         }
 
@@ -116,7 +117,7 @@ fun ViewContent(padding: PaddingValues, projects: List<Project>) {
                                     text = project.description,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis,
-                                    style = MaterialTheme.typography.body2,
+                                    style = AppTheme.typography.body2,
                                 )
                             }
                         }
