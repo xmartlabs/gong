@@ -13,6 +13,6 @@ object ViewModelDiModule {
     val viewModels = module {
         viewModel { SignInScreenViewModel(get()) }
         viewModel { MainActivityViewModel(get()) }
-        viewModel { WelcomeScreenViewModel(get(), get()) }
+        viewModel { WelcomeScreenViewModel(get()) }
     }
 }
