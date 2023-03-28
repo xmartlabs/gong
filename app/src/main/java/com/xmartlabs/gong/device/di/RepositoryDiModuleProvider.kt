@@ -6,12 +6,12 @@ import com.xmartlabs.gong.Config
 import com.xmartlabs.gong.data.model.service.settings.AppSettings
 import com.xmartlabs.gong.data.repository.auth.UserLocalSource
 import com.xmartlabs.gong.data.repository.auth.UserRemoteSource
-import com.xmartlabs.gong.data.repository.location.LocationLocalSource
-import com.xmartlabs.gong.data.repository.location.LocationRemoteSource
+import com.xmartlabs.gong.data.repository.project.ProjectLocalSource
+import com.xmartlabs.gong.data.repository.project.ProjectRemoteSource
 import com.xmartlabs.gong.data.repository.session.SessionLocalSource
 import com.xmartlabs.gong.data.repository.store.datastorage.JsonDataStoreEntitySerializer
 import com.xmartlabs.gong.data.repository.store.db.AppDatabase
-import com.xmartlabs.gong.domain.repository.LocationRepository
+import com.xmartlabs.gong.domain.repository.ProjectRepository
 import com.xmartlabs.gong.domain.repository.SessionRepository
 import com.xmartlabs.gong.domain.repository.UserRepository
 import org.koin.dsl.module
@@ -33,14 +33,14 @@ object RepositoryDiModuleProvider {
         single { get<AppDatabase>().locationDao() }
     }
     val sources = module {
-        single { LocationRemoteSource(get()) }
-        single { LocationLocalSource(get()) }
+        single { ProjectRemoteSource(get()) }
+        single { ProjectLocalSource(get()) }
         single { UserLocalSource() }
         single { UserRemoteSource() }
         single { SessionLocalSource(get()) }
     }
     val repositories = module {
-        single { LocationRepository(get(), get()) }
+        single { ProjectRepository(get(), get()) }
         single { UserRepository(get(), get(), get()) }
         single { SessionRepository(get()) }
     }

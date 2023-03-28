@@ -1,6 +1,6 @@
 package com.xmartlabs.gong.device.di
 
-import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
+import com.xmartlabs.gong.domain.usecase.GetProjectsUseCase
 import com.xmartlabs.gong.domain.usecase.GetSessionTypeUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
@@ -12,7 +12,7 @@ import org.koin.dsl.module
  */
 object UseCaseDiModule {
     val useCases = module {
-        factory { GetLocationUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { GetProjectsUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { GetSessionTypeUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { LoadUserUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { SignInUseCase(get(), get(DEFAULT_DISPATCHER)) }

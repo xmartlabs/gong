@@ -1,7 +1,7 @@
 package com.xmartlabs.gong.ui.screens.welcome
 
 import androidx.compose.runtime.Immutable
-import com.xmartlabs.gong.data.model.Location
+import com.xmartlabs.gong.data.model.Project
 
 /**
  * Created by mirland on 22/4/21.
@@ -12,6 +12,5 @@ sealed class WelcomeUiAction
 
 @Immutable
 data class WelcomeViewState(
-    val userName: String = "",
-    val location: Location? = null,
+    val projects: List<Project> = listOf(),
 )

@@ -1,27 +1,28 @@
 package com.xmartlabs.gong.ui.screens.welcome
 
 import androidx.lifecycle.viewModelScope
-import com.xmartlabs.gong.data.model.Location
+import com.xmartlabs.gong.data.model.Project
 import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.device.common.getDataOrNull
 import com.xmartlabs.gong.device.extensions.mapToProcessResult
-import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
+import com.xmartlabs.gong.domain.usecase.GetProjectsUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * Created by mirland on 25/04/20.
  */
 class WelcomeScreenViewModel(
-    getLocationUseCase: GetLocationUseCase,
+    getProjectsUseCase: GetProjectsUseCase,
     loadUserUseCase: LoadUserUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
     init {
         viewModelScope.launch {
-            getLocationUseCase(Unit)
+            getProjectsUseCase(Unit)
                 .mapToProcessResult()
                 .collect { updateLocation(it) }
         }
@@ -32,14 +33,16 @@ class WelcomeScreenViewModel(
     }
 
     private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
-        userProcessState.getDataOrNull()?.let { user ->
-            setState { copy(userName = user.name) }
-        }
+//        userProcessState.getDataOrNull()?.let { user ->
+//            setState { copy(userName = user.name) }
+//        }
     }
 
-    private suspend fun updateLocation(locationProcessState: ProcessState<Location>) {
-        locationProcessState.getDataOrNull()?.let { location ->
-            setState { copy(location = location) }
+    private suspend fun updateLocation(projectProcessState: ProcessState<List<Project>>) {
+        projectProcessState.getDataOrNull()?.let { projects->
+
+            Timber.e(projects.toString())
+            setState { copy(projects = projects) }
         }
     }
 
