@@ -11,14 +11,12 @@ import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /**
  * Created by mirland on 25/04/20.
  */
 class WelcomeScreenViewModel(
     getProjectsUseCase: GetProjectsUseCase,
-    loadUserUseCase: LoadUserUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
     init {
         viewModelScope.launch {
@@ -26,22 +24,10 @@ class WelcomeScreenViewModel(
                 .mapToProcessResult()
                 .collect { updateLocation(it) }
         }
-        viewModelScope.launch {
-            loadUserUseCase.invokeAsFlow(Unit)
-                .collect { updateUserInfo(it) }
-        }
-    }
-
-    private suspend fun updateUserInfo(userProcessState: ProcessState<User?>) {
-//        userProcessState.getDataOrNull()?.let { user ->
-//            setState { copy(userName = user.name) }
-//        }
     }
 
     private suspend fun updateLocation(projectProcessState: ProcessState<List<Project>>) {
         projectProcessState.getDataOrNull()?.let { projects->
-
-            Timber.e(projects.toString())
             setState { copy(projects = projects) }
         }
     }

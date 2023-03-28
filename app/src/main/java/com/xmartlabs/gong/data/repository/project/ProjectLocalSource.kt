@@ -7,7 +7,7 @@ import com.xmartlabs.gong.data.repository.store.db.LocationDao
  * Created by Pablo on 24/03/23.
  */
 class ProjectLocalSource(private val locationDao: LocationDao) {
-    fun getLocation() = locationDao.getLastLocation()
+    fun getProjects() = locationDao.getProjects()
 
-    fun saveLocation(project: Project) = locationDao.insert(project)
+    fun saveProjects(projects: List<Project>) = locationDao.insert(projects)
 }

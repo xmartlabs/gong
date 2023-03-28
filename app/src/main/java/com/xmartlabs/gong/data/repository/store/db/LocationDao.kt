@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM project")
-    fun getLastLocation(): Flow<List<Project>>
+    fun getProjects(): Flow<List<Project>>
 
     @Insert
-    fun insert(project: Project)
+    fun insert(projects: List<Project>)
 }

@@ -9,7 +9,6 @@ import com.xmartlabs.gong.data.model.Project
 import com.xmartlabs.gong.data.repository.project.ProjectLocalSource
 import com.xmartlabs.gong.data.repository.project.ProjectRemoteSource
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 
 /**
  * Created by mirland on 28/04/20.
@@ -21,16 +20,12 @@ class ProjectRepository(
     private val projectStore = StoreBuilder
         .from(
             fetcher = Fetcher.of<Unit, List<Project>> {
-                Timber.d("Project is requested")
-                val a = projectRemoteSource.getProjects()
-                Timber.d("Project is requested")
-                Timber.d("Project is requested")
-a
+                projectRemoteSource.getProjects()
             },
-//            sourceOfTruth = SourceOfTruth.of(
-//                reader = { projectLocalSource.getProjects() },
-//                writer = { _, value -> projectLocalSource.replaceProjects(value) },
-//            )
+            sourceOfTruth = SourceOfTruth.of(
+                reader = { projectLocalSource.getProjects() },
+                writer = { _, value -> projectLocalSource.saveProjects(value) },
+            )
         )
         .build()
 
