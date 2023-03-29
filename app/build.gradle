@@ -102,18 +102,18 @@ android {
     }
 
     kotlinOptions {
-        languageVersion = "1.5"
+        languageVersion = "1.8"
         jvmTarget = '11'
         freeCompilerArgs += [
                 "-XXLanguage:+InlineClasses",
                 "-Xallow-result-return-type",
                 "-Xopt-in=kotlin.RequiresOptIn",
-                "-Xuse-experimental=kotlin.contracts.ExperimentalContracts",
-                "-Xuse-experimental=kotlin.Experimental",
-                "-Xuse-experimental=kotlin.time.ExperimentalTime",
-                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-                "-Xuse-experimental=kotlin.ExperimentalStdlibApi",
+                "-opt-in=kotlin.contracts.ExperimentalContracts",
+                "-opt-in=kotlin.Experimental",
+                "-opt-in=kotlin.time.ExperimentalTime",
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-opt-in=kotlin.ExperimentalStdlibApi",
         ]
     }
     composeOptions {
@@ -137,9 +137,6 @@ dependencies {
     implementation libs.koin.compose
     implementation libs.timber
     implementation libs.store
-
-    //noinspection GradleDependency
-    implementation("io.coil-kt:coil-compose:1.3.1")
 
     implementation libs.bundles.accompanist
     implementation libs.bundles.androidSwissKnife

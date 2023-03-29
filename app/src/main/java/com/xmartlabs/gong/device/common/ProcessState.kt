@@ -1,5 +1,6 @@
 package com.xmartlabs.gong.device.common
 
+import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
@@ -42,6 +43,7 @@ fun <T> ProcessResult<T>.asProcessState(): ProcessState<T> = when (this) {
 
 fun <T> ProcessState<T>.getDataOrNull() = (this as? ProcessState.Success<T>)?.data
 
+@OptIn(ExperimentalContracts::class)
 inline fun <T> ProcessResult<T>.onFailure(action: (exception: Throwable) -> Unit): ProcessResult<T> {
     contract {
         callsInPlace(action, InvocationKind.AT_MOST_ONCE)

@@ -12,21 +12,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.screens.signin.SignInScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 import com.xmartlabs.gong.ui.theme.AppTheme
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 class MainActivity : ComponentActivity() {
     companion object {
-        private val SPLASH_ANIMATION_TIME = Duration.milliseconds(300)
+        private val SPLASH_ANIMATION_TIME = 300.milliseconds
     }
 
     private val viewModel: MainActivityViewModel by viewModel()
@@ -70,10 +68,8 @@ class MainActivity : ComponentActivity() {
         // This app draws behind the system bars, so we want to handle fitting system windows
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            ProvideWindowInsets {
-                AppTheme {
-                    AppNavigationManager(sessionType)
-                }
+            AppTheme {
+                AppNavigationManager(sessionType)
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -24,14 +25,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import com.google.accompanist.insets.statusBarsPadding
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.Project
 import com.xmartlabs.gong.ui.theme.AppTheme
@@ -86,9 +89,16 @@ private fun ProjectComposable(project: Project) {
             .fillMaxSize(),
         onClick = { uriHandler.openUri(project.url) },
     ) {
+        val painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(project.imageUrl)
+                .crossfade(true)
+                .build(),
+            contentScale = ContentScale.FillHeight
+        )
         Column {
             Image(
-                rememberImagePainter(project.imageUrl),
+                painter,
                 contentDescription = null,
                 Modifier
                     .fillMaxSize()

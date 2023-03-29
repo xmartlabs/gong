@@ -37,7 +37,7 @@ abstract class AppBase : Application() {
     }
 
     private fun setupStrictMode() {
-        if (Config.DEBUG) {
+        if (false) {
             val builder = StrictMode.ThreadPolicy.Builder()
                 .detectDiskReads()
                 .detectDiskWrites()

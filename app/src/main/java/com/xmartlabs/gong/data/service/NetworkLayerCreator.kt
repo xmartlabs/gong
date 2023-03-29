@@ -9,17 +9,17 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Created by mirland on 28/04/20.
  */
 object NetworkLayerCreator {
     @SuppressWarnings("MagicNumber")
-    private val HTTP_CONNECT_TIMEOUT = Duration.seconds(20)
+    private val HTTP_CONNECT_TIMEOUT = 20.seconds
 
     @SuppressWarnings("MagicNumber")
-    private val HTTP_READ_TIMEOUT = Duration.seconds(20)
+    private val HTTP_READ_TIMEOUT = 20.seconds
     private val JSON_MEDIA_TYPE = "application/json".toMediaType()
 
     fun createOkHttpClientBuilder(

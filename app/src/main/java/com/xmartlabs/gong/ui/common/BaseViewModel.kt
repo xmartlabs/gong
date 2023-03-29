@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -80,8 +79,8 @@ abstract class BaseViewModel<Action, OneShotEvent, State>(initialState: State) :
         launch { this@BaseViewModel.withState(block) }
     }
 
-    protected inline fun <T> Flow<ProcessState<T>>.watchProcessState(
-        crossinline action: suspend (ProcessState<T>) -> Unit,
+    protected fun <T> Flow<ProcessState<T>>.watchProcessState(
+        action: suspend (ProcessState<T>) -> Unit,
     ) = viewModelScope.launch {
         collect(action)
     }

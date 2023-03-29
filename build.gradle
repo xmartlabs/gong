@@ -28,9 +28,9 @@ ext {
 
     def androidVersions = [:]
     androidVersions.minSdk = 23
-    androidVersions.compileSdk = 31
-    androidVersions.buildTools = '31.0.0'
-    androidVersions.targetSdk = 31
+    androidVersions.compileSdk = 33
+    androidVersions.buildTools = '33.0.1'
+    androidVersions.targetSdk = 33
     ext.androidVersions = androidVersions
 }
 

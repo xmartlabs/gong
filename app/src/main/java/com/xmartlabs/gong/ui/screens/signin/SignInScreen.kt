@@ -66,6 +66,7 @@ private fun SignInEvents(
                     popUpTo(Screens.SIGN_IN) { inclusive = true }
                 }
             is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
+            null -> {}
         }
     }
 }
