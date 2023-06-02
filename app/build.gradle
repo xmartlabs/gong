@@ -28,6 +28,7 @@ if (CRASHLYTICS_ENABLED) {
 android {
     compileSdkVersion androidVersions.compileSdk
     buildToolsVersion androidVersions.buildTools
+    namespace "com.xmartlabs.gong"
 
     defaultConfig {
         applicationId "com.xmartlabs.gong"
@@ -44,6 +45,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig true
         compose true
     }
 
@@ -97,13 +99,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_19
+        targetCompatibility JavaVersion.VERSION_19
     }
 
     kotlinOptions {
         languageVersion = "1.8"
-        jvmTarget = '11'
+        jvmTarget = '19'
         freeCompilerArgs += [
                 "-XXLanguage:+InlineClasses",
                 "-Xallow-result-return-type",
@@ -117,7 +119,7 @@ android {
         ]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.core.get()
+        kotlinCompilerExtensionVersion libs.versions.compose.compiler.get()
     }
 }
 
