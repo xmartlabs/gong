@@ -32,8 +32,8 @@ android {
 
     defaultConfig {
         applicationId "com.xmartlabs.gong"
-        minSdkVersion androidVersions.minSdk
-        targetSdkVersion androidVersions.targetSdk
+        minSdk androidVersions.minSdk
+        targetSdk androidVersions.targetSdk
         versionCode 1
         versionName ""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
