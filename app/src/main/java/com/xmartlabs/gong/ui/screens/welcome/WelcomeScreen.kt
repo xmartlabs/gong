@@ -137,7 +137,8 @@ private fun WelcomeContentPreview() = WelcomeContent(
             name = "Gong",
             description = "Xmartlabs' Android Base Project Template",
             url = "https://github.com/xmartlabs/gong",
-            imageUrl = "https://kytmgsnkaxgrjgckdmnv.supabase.co/storage/v1/object/public/images/banner_gong.png?t=2022-08-31T18%3A44%3A53.317Z",
+            imageUrl = "https://kytmgsnkaxgrjgckdmnv.supabase.co/storage/v1/object/public/images/banner_gong.png?t=" +
+                    "2022-08-31T18%3A44%3A53.317Z",
             language = "kotlin",
         )
     )
