@@ -5,7 +5,6 @@ import com.xmartlabs.gong.data.service.NetworkLayerCreator
 import com.xmartlabs.gong.data.service.ProjectServiceApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

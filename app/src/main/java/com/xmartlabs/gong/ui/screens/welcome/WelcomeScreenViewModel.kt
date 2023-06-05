@@ -2,14 +2,11 @@ package com.xmartlabs.gong.ui.screens.welcome
 
 import androidx.lifecycle.viewModelScope
 import com.xmartlabs.gong.data.model.Project
-import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.device.common.ProcessState
 import com.xmartlabs.gong.device.common.getDataOrNull
 import com.xmartlabs.gong.device.extensions.mapToProcessResult
 import com.xmartlabs.gong.domain.usecase.GetProjectsUseCase
-import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -27,7 +24,7 @@ class WelcomeScreenViewModel(
     }
 
     private suspend fun updateLocation(projectProcessState: ProcessState<List<Project>>) {
-        projectProcessState.getDataOrNull()?.let { projects->
+        projectProcessState.getDataOrNull()?.let { projects ->
             setState { copy(projects = projects) }
         }
     }
