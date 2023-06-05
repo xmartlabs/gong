@@ -1,5 +1,6 @@
 package com.xmartlabs.gong.ui.screens.signin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
@@ -109,6 +110,7 @@ fun SignInDarkPreview() {
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalComposeUiApi::class)
 @Suppress("LongMethod")
 @Composable
