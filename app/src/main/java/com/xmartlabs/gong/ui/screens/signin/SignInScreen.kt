@@ -1,8 +1,9 @@
 package com.xmartlabs.gong.ui.screens.signin
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
@@ -66,6 +68,7 @@ private fun SignInEvents(
                 navController.navigate(Screens.WELCOME) {
                     popUpTo(Screens.SIGN_IN) { inclusive = true }
                 }
+
             is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
             null -> {}
         }
@@ -110,7 +113,6 @@ fun SignInDarkPreview() {
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalComposeUiApi::class)
 @Suppress("LongMethod")
 @Composable
@@ -124,11 +126,16 @@ fun SignInContent(
     val focusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Scaffold {
+    Scaffold { padding ->
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(start = 15.dp, end = 15.dp)
+                .padding(
+                    start = padding.calculateStartPadding(LayoutDirection.Ltr) + 15.dp,
+                    end = padding.calculateEndPadding(LayoutDirection.Ltr) + 15.dp,
+                    bottom = padding.calculateBottomPadding(),
+                    top = padding.calculateTopPadding(),
+                )
         ) {
             val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton) = createRefs()
             Text(
