@@ -3,6 +3,7 @@ package com.xmartlabs.gong
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.moczul.ok2curl.CurlInterceptor
+import com.moczul.ok2curl.logger.Logger
 import com.xmartlabs.gong.device.di.NetworkLoggingInterceptorInjector
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -20,10 +21,11 @@ object NetworkDebugInterceptors {
     fun createFlipperInterceptor(networkFlipperPlugin: NetworkFlipperPlugin): Interceptor =
         FlipperOkhttpInterceptor(networkFlipperPlugin)
 
-    fun createCurlInterceptor() = CurlInterceptor { message ->
-        Timber.tag(OK_2_CURL_INTERCEPTOR_LOGGER_TAG)
-            .d(message.sanitize())
-    }
+    fun createCurlInterceptor() = CurlInterceptor(object : Logger {
+        override fun log(message: String) {
+            Timber.tag(OK_2_CURL_INTERCEPTOR_LOGGER_TAG).d(message.sanitize())
+        }
+    })
 
     fun createOkHttpInterceptor() = HttpLoggingInterceptor { message ->
         Timber.tag(OK_HTTP_INTERCEPTOR_LOGGER_TAG)

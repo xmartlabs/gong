@@ -27,9 +27,9 @@ ext {
     secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
 
     def androidVersions = [:]
-    androidVersions.minSdk = 23
+    androidVersions.minSdk = 30
     androidVersions.compileSdk = 33
-    androidVersions.buildTools = '33.0.1'
+    androidVersions.buildTools = '33.0.2'
     androidVersions.targetSdk = 33
     ext.androidVersions = androidVersions
 }
