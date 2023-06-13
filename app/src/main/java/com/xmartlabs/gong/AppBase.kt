@@ -1,7 +1,6 @@
 package com.xmartlabs.gong
 
 import android.app.Application
-import android.os.Build
 import android.os.StrictMode
 import coil.Coil
 import coil.ImageLoader
@@ -51,9 +50,7 @@ abstract class AppBase : Application() {
                 detectLeakedRegistrationObjects()
                 detectLeakedSqlLiteObjects()
                 detectCleartextNetwork()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    detectContentUriWithoutPermission()
-                }
+                detectContentUriWithoutPermission()
                 penaltyLog()
             }.build())
         }

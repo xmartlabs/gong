@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.xmartlabs.gong.BuildConfig
 import com.xmartlabs.gong.R
 import com.xmartlabs.gong.data.model.Project
 import com.xmartlabs.gong.ui.theme.AppTheme
@@ -134,7 +135,7 @@ private fun WelcomeContentPreview() = WelcomeContent(
     listOf(
         Project(
             id = 1,
-            name = "Gong",
+            name = BuildConfig.APP_NAME,
             description = "Xmartlabs' Android Base Project Template",
             url = "https://github.com/xmartlabs/gong",
             imageUrl = "https://kytmgsnkaxgrjgckdmnv.supabase.co/storage/v1/object/public/images/banner_gong.png?t=" +
