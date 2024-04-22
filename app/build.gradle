@@ -4,6 +4,7 @@ plugins {
     id "kotlin-parcelize"
     id "kotlin-kapt"
     id "org.jetbrains.kotlin.plugin.serialization"
+    id 'com.google.devtools.ksp'
     alias(libs.plugins.easyLauncher)
 }
 
@@ -68,8 +69,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    flavorDimensions "env"
+    flavorDimensions = ["env"]
     productFlavors {
         dev {
             buildConfigField 'String', 'API_BASE_URL', getEnvVariable('API_DEV_SERVER_URL')
@@ -85,38 +85,37 @@ android {
     }
 
     packagingOptions {
-        exclude 'META-INF/LICENSE' // will not include LICENSE file
+        resources {
+            excludes += ['META-INF/LICENSE']
+        }
     }
 
-    lintOptions {
-        lintConfig file("lint.xml")
-        disable "ObsoleteLintCustomCheck"
-        fatal 'StopShip'
-        warningsAsErrors true
-    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        languageVersion = "1.5"
-        jvmTarget = '11'
+        languageVersion = "1.9"
+        jvmTarget = '17'
         freeCompilerArgs += [
-                "-XXLanguage:+InlineClasses",
                 "-Xallow-result-return-type",
-                "-Xopt-in=kotlin.RequiresOptIn",
-                "-Xuse-experimental=kotlin.contracts.ExperimentalContracts",
-                "-Xuse-experimental=kotlin.Experimental",
-                "-Xuse-experimental=kotlin.time.ExperimentalTime",
-                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-                "-Xuse-experimental=kotlin.ExperimentalStdlibApi",
+                "-opt-in=kotlin.RequiresOptIn",
+                "-opt-in=kotlin.time.ExperimentalTime",
+                "-opt-in=kotlin.time.ExperimentalTime",
+                "-opt-in=kotlin.contracts.ExperimentalContracts",
         ]
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.core.get()
+        kotlinCompilerExtensionVersion = "1.5.11"
+    }
+    namespace 'com.xmartlabs.gong'
+    lint {
+        disable 'ObsoleteLintCustomCheck'
+        fatal 'StopShip'
+        lintConfig file('lint.xml')
+        warningsAsErrors true
     }
 }
 
@@ -143,7 +142,7 @@ dependencies {
     implementation libs.bundles.kotlin
     implementation libs.bundles.networking.core
 
-    kapt libs.androidX.room.compiler
+    ksp libs.androidX.room.compiler
 
     testImplementation libs.junit
 }

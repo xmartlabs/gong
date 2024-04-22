@@ -23,10 +23,12 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class MainActivity : ComponentActivity() {
     companion object {
-        private val SPLASH_ANIMATION_TIME = Duration.milliseconds(300)
+        private val SPLASH_ANIMATION_TIME = 300.toDuration(DurationUnit.MILLISECONDS)
     }
 
     private val viewModel: MainActivityViewModel by viewModel()
@@ -88,7 +90,7 @@ fun AppNavigationManager(sessionType: SessionType) {
             SignInScreen(navController = navigationController)
         }
         composable(Screens.WELCOME) {
-            WelcomeScreen()
+            WelcomeScreen(navController = navigationController)
         }
     }
 }

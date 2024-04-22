@@ -26,6 +26,7 @@ class SignInScreenViewModel(
                     when (state) {
                         is ProcessState.Failure -> sendOneShotEvent(SignInViewModelEvent.SignInError(state.exception))
                         is ProcessState.Success -> sendOneShotEvent(SignInViewModelEvent.NavigateToDashboard)
+                        ProcessState.Loading -> Unit
                     }
                 }
         }
