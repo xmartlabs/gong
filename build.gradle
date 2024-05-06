@@ -19,8 +19,8 @@ buildscript {
     }
 }
 
-plugins{
-    id 'com.google.devtools.ksp' version '1.9.23-1.0.20' apply false
+plugins {
+    id 'com.google.devtools.ksp' version libs.versions.ksp apply false
 }
 
 ext {
