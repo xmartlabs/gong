@@ -18,11 +18,9 @@ import com.xmartlabs.gong.domain.usecase.SessionType
 import com.xmartlabs.gong.ui.screens.signin.SignInScreen
 import com.xmartlabs.gong.ui.screens.welcome.WelcomeScreen
 import com.xmartlabs.gong.ui.theme.AppTheme
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 

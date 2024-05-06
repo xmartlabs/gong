@@ -10,8 +10,6 @@ import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.domain.usecase.SignOutUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
-import com.xmartlabs.gong.ui.screens.signin.SignInViewModelEvent
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**

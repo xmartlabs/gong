@@ -1,6 +1,5 @@
 package com.xmartlabs.gong.domain.usecase
 
-import com.xmartlabs.gong.data.model.User
 import com.xmartlabs.gong.domain.repository.UserRepository
 import com.xmartlabs.gong.domain.usecase.common.CoroutineUseCase
 import kotlinx.coroutines.CoroutineDispatcher
