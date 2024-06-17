@@ -1,5 +1,5 @@
 plugins {
-    id "com.android.application"
+    id 'com.android.application'
     id "kotlin-android"
     id "kotlin-parcelize"
     id "kotlin-kapt"
@@ -21,9 +21,6 @@ if (getEnvVariable('KEYSTORE_FILE') != null) {
 
 // TODO: Setup Crashlytics
 def CRASHLYTICS_ENABLED = false
-if (CRASHLYTICS_ENABLED) {
-    apply plugin: 'com.google.firebase.crashlytics'
-}
 
 
 android {
@@ -45,6 +42,7 @@ android {
 
     buildFeatures {
         compose true
+        buildConfig = true
     }
 
     signingConfigs {
@@ -102,8 +100,6 @@ android {
         freeCompilerArgs += [
                 "-Xallow-result-return-type",
                 "-opt-in=kotlin.RequiresOptIn",
-                "-opt-in=kotlin.time.ExperimentalTime",
-                "-opt-in=kotlin.time.ExperimentalTime",
                 "-opt-in=kotlin.contracts.ExperimentalContracts",
         ]
     }
@@ -131,6 +127,7 @@ dependencies {
     implementation libs.androidX.dataStore
     implementation libs.coil
     implementation libs.once
+    implementation platform(libs.firebase.bom)
     implementation libs.firebase.crashlytics
     implementation libs.koin.compose
     implementation libs.timber

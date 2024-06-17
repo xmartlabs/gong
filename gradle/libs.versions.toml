@@ -1,6 +1,6 @@
 [versions]
 
-androidGradle = "8.3.2"
+androidGradle = "8.4.0"
 androidSwissKnife = "44f27ec213"
 androidX-core-splashscreen = "1.1.0-rc01"
 androidX-datastore = "1.1.1"
@@ -17,7 +17,7 @@ compose-viewModel = "2.7.0"
 dependencyUpdates = "0.41.0"
 detekt = "1.19.0"
 easyLauncher = "6.3.0"
-firebaseCrashlytics = "19.0.0"
+firebaseBom = "33.0.0"
 firebaseCrashlyticsPlugin = "3.0.0"
 flipper = "0.131.1"
 googleServices = "4.4.1"
@@ -76,7 +76,9 @@ flipper-leakCanary = { module = "com.facebook.flipper:flipper-leakcanary2-plugin
 flipper-network = { module = "com.facebook.flipper:flipper-network-plugin", version.ref = "flipper" }
 soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
 
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebaseCrashlytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
