@@ -109,9 +109,9 @@ android {
     namespace 'com.xmartlabs.gong'
     lint {
         disable 'ObsoleteLintCustomCheck'
+        disable 'AndroidGradlePluginVersion'
         fatal 'StopShip'
         lintConfig file('lint.xml')
-        baseline file("lint-baseline.xml")
         warningsAsErrors true
     }
 }
