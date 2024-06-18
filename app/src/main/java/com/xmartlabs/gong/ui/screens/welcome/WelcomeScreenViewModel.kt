@@ -8,8 +8,8 @@ import com.xmartlabs.gong.device.common.getDataOrNull
 import com.xmartlabs.gong.device.extensions.mapToProcessResult
 import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
+import com.xmartlabs.gong.domain.usecase.SignOutUseCase
 import com.xmartlabs.gong.ui.common.BaseViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 class WelcomeScreenViewModel(
     getLocationUseCase: GetLocationUseCase,
     loadUserUseCase: LoadUserUseCase,
+    val signOutUseCase: SignOutUseCase,
 ) : BaseViewModel<WelcomeUiAction, WelcomeViewModelEvent, WelcomeViewState>(WelcomeViewState()) {
     init {
         viewModelScope.launch {
@@ -43,5 +44,17 @@ class WelcomeScreenViewModel(
         }
     }
 
-    override suspend fun processAction(action: WelcomeUiAction) {}
+    override suspend fun processAction(action: WelcomeUiAction) {
+        viewModelScope.launchWithState {
+            when (action) {
+                WelcomeUiAction.Logout -> signOutUseCase.invokeAsFlow(Unit).watchProcessState {
+                    when (it) {
+                        is ProcessState.Failure -> sendOneShotEvent(WelcomeViewModelEvent.SignOutError(it.exception))
+                        is ProcessState.Success -> sendOneShotEvent(WelcomeViewModelEvent.NavigateToSignIn)
+                        ProcessState.Loading -> Unit
+                    }
+                }
+            }
+        }
+    }
 }

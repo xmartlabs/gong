@@ -4,6 +4,7 @@ import com.xmartlabs.gong.domain.usecase.GetLocationUseCase
 import com.xmartlabs.gong.domain.usecase.GetSessionTypeUseCase
 import com.xmartlabs.gong.domain.usecase.LoadUserUseCase
 import com.xmartlabs.gong.domain.usecase.SignInUseCase
+import com.xmartlabs.gong.domain.usecase.SignOutUseCase
 import com.xmartlabs.gong.domain.usecase.TimeTrackerUseCase
 import org.koin.dsl.module
 
@@ -15,6 +16,7 @@ object UseCaseDiModule {
         factory { GetLocationUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { GetSessionTypeUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { LoadUserUseCase(get(), get(DEFAULT_DISPATCHER)) }
+        factory { SignOutUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { SignInUseCase(get(), get(DEFAULT_DISPATCHER)) }
         factory { TimeTrackerUseCase(get(DEFAULT_DISPATCHER)) }
     }

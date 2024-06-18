@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gong</string>
+    <string name="logout">Logout</string>
 </resources>

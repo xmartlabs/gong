@@ -23,4 +23,8 @@ class UserLocalSource {
         delay(30)
         return requireNotNull(localUsers[userId])
     }
+
+    fun deleteUser(user: User) {
+        localUsers.remove(user.id)
+    }
 }

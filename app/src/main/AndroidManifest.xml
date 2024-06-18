@@ -2,9 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.xmartlabs.gong"
     >
-
     <!--  TODO: Remove networkSecurityConfig -->
     <application
         android:allowBackup="false"
@@ -14,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="n"
+        android:fullBackupContent="false"
+        tools:targetApi="34"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         >
 
         <!-- Enabled in the application -->
