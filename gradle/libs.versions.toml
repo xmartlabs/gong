@@ -35,7 +35,7 @@ retrofit2-core = "2.9.0"
 retrofit2-jsonSerializer = "0.8.0"
 snapshotPublisher = "2.4.0"
 soloader = "0.10.3"
-store = "4.0.4-KT15"
+store = "4.0.5"
 timber = "5.0.1"
 ksp = "1.9.23-1.0.20"
 
