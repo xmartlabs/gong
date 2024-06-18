@@ -3,6 +3,7 @@ package com.xmartlabs.gong.domain.repository
 import com.xmartlabs.gong.data.repository.auth.UserLocalSource
 import com.xmartlabs.gong.data.repository.auth.UserRemoteSource
 import com.xmartlabs.gong.data.repository.session.SessionLocalSource
+import kotlinx.coroutines.flow.first
 
 /**
  * Created by mirland on 25/04/20.
@@ -20,6 +21,12 @@ class UserRepository(
                 sessionLocalSource.setSession(response.user, response.token)
                 response.user
             }
+
+    suspend fun signOut(): Unit =
+        sessionLocalSource.getSessionUser().first()
+            ?.let { response ->
+                userLocalSource.deleteUser(response)
+            } ?: Unit
 
     fun getCurrentUser() = sessionLocalSource.getSessionUser()
 

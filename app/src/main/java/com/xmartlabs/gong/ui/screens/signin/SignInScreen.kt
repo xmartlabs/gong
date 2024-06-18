@@ -66,6 +66,7 @@ private fun SignInEvents(
                     popUpTo(Screens.SIGN_IN) { inclusive = true }
                 }
             is SignInViewModelEvent.SignInError -> showSignInError(event.throwable, context)
+            else -> Unit
         }
     }
 }
@@ -125,6 +126,7 @@ fun SignInContent(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .padding(start = 15.dp, end = 15.dp)
         ) {
             val (welcomeText, signInText, userIdEditText, passwordEditText, signInButton) = createRefs()

@@ -6,9 +6,14 @@ import com.xmartlabs.gong.data.model.Location
 /**
  * Created by mirland on 22/4/21.
  */
-sealed class WelcomeViewModelEvent
+sealed class WelcomeViewModelEvent {
+    data object NavigateToSignIn : WelcomeViewModelEvent()
+    class SignOutError(val throwable: Throwable) : WelcomeViewModelEvent()
+}
 
-sealed class WelcomeUiAction
+sealed class WelcomeUiAction {
+    data object Logout : WelcomeUiAction()
+}
 
 @Immutable
 data class WelcomeViewState(

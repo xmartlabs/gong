@@ -2,9 +2,9 @@
 
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
         maven { url "https://jitpack.io" }
     }
     dependencies {
@@ -19,20 +19,26 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.google.devtools.ksp' version libs.versions.ksp apply false
+}
+
 ext {
     // App version
     versionName = '0.0.1' // X.Y.Z; X = Major, Y = minor, Z = Patch level
+    moduleName = "Gong"
     name = "Gong"
     configPropertiesFile = file('config.properties') // All configurations are saved here
     secretsPropertiesFile = file('secrets/keys.properties') // All secrets are saved here
 
     def androidVersions = [:]
     androidVersions.minSdk = 23
-    androidVersions.compileSdk = 31
-    androidVersions.buildTools = '31.0.0'
-    androidVersions.targetSdk = 31
+    androidVersions.compileSdk = 34
+    androidVersions.buildTools = '34.0.0'
+    androidVersions.targetSdk = 34
     ext.androidVersions = androidVersions
 }
+
 
 apply from: rootProject.file('scripts/dependency_updates.gradle')
 apply from: rootProject.file('scripts/stop_ship_check_xmls.gradle.kts')
