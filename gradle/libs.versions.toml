@@ -10,17 +10,17 @@ androidX-testJunit = "1.1.5"
 accompanist = "0.20.3"
 coil = "1.4.0"
 compose-constraintLayout = "1.0.1"
-compose-core = "1.6.7"
-compose-compiler = "1.5.13"
+compose-core = "1.6.8"
+compose-compiler = "1.5.14"
 compose-navigation = "2.7.7"
-compose-viewModel = "2.7.0"
+compose-viewModel = "2.8.2"
 dependencyUpdates = "0.41.0"
 detekt = "1.19.0"
 easyLauncher = "6.3.0"
-firebaseBom = "33.0.0"
-firebaseCrashlyticsPlugin = "3.0.0"
+firebaseBom = "33.1.0"
+firebaseCrashlyticsPlugin = "3.0.1"
 flipper = "0.131.1"
-googleServices = "4.4.1"
+googleServices = "4.4.2"
 junit = "4.13.2"
 koin = "3.1.5"
 kotlin-core = "1.9.23"
@@ -76,8 +76,9 @@ flipper-leakCanary = { module = "com.facebook.flipper:flipper-leakcanary2-plugin
 flipper-network = { module = "com.facebook.flipper:flipper-network-plugin", version.ref = "flipper" }
 soloader = { module = "com.facebook.soloader:soloader", version.ref = "soloader" }
 
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 
 
 junit = { module = "junit:junit", version.ref = "junit" }

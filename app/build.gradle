@@ -111,6 +111,7 @@ android {
         disable 'ObsoleteLintCustomCheck'
         fatal 'StopShip'
         lintConfig file('lint.xml')
+        baseline file("lint-baseline.xml")
         warningsAsErrors true
     }
 }
@@ -128,6 +129,7 @@ dependencies {
     implementation libs.coil
     implementation libs.once
     implementation platform(libs.firebase.bom)
+    implementation libs.firebase.analytics
     implementation libs.firebase.crashlytics
     implementation libs.koin.compose
     implementation libs.timber
